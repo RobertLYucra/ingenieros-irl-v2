@@ -1,0 +1,369 @@
+/* Trayectoria Page Styles */
+
+/* Reuse internal hero if global, or redefine */
+.internal-hero {
+    position: relative;
+    height: 50vh;
+    height: 50vh;
+    background: linear-gradient(135deg, var(--secondary-color), #34495e);
+    /* Distinct gradient */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    margin-top: -80px;
+    padding-top: 80px;
+
+    .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.4);
+    }
+
+    .content-wrapper {
+        position: relative;
+        z-index: 2;
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+    }
+}
+
+.project-stats-section {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #eee;
+    padding: 2rem 0;
+
+    .stats-flex {
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        gap: 2rem;
+    }
+
+    .p-stat {
+        text-align: center;
+
+        .value {
+            display: block;
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary-color);
+        }
+
+        .label {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-secondary-color);
+        }
+    }
+}
+
+.gallery-section {
+    .gallery-filters {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+        margin-bottom: 3rem;
+
+        .filter-btn {
+            background: none;
+            border: 1px solid #ddd;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-family: var(--primary-font);
+            font-weight: 500;
+            color: var(--text-secondary-color);
+            transition: all 0.3s ease;
+
+            &:hover,
+            &.active {
+                background-color: var(--primary-color);
+                color: white;
+                border-color: var(--primary-color);
+            }
+        }
+    }
+
+    .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 2rem;
+    }
+
+    .project-card {
+        background: white;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        transition: transform 0.3s ease;
+        cursor: pointer;
+        /* Indicate clickable */
+
+        &:hover {
+            transform: translateY(-5px);
+
+            .card-image .card-overlay {
+                opacity: 1;
+            }
+        }
+
+        .card-image {
+            position: relative;
+            height: 250px;
+            background-color: #e0e0e0;
+
+            .placeholder-img {
+                width: 100%;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 4rem;
+            }
+
+            .card-badge {
+                position: absolute;
+                top: 15px;
+                left: 15px;
+                background-color: rgba(255, 255, 255, 0.9);
+                padding: 4px 12px;
+                border-radius: 4px;
+                font-size: 0.8rem;
+                font-weight: 600;
+                color: var(--text-primary-color);
+                z-index: 2;
+            }
+
+            .card-overlay {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.5);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                opacity: 0;
+                transition: opacity 0.3s ease;
+
+                .view-btn {
+                    background: white;
+                    border: none;
+                    width: 50px;
+                    height: 50px;
+                    border-radius: 50%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 1.5rem;
+                    cursor: pointer;
+                    color: var(--primary-color);
+                    transition: transform 0.2s ease;
+
+                    &:hover {
+                        transform: scale(1.1);
+                    }
+                }
+            }
+        }
+
+        .card-info {
+            padding: 1.5rem;
+
+            h3 {
+                font-size: 1.2rem;
+                font-weight: 700;
+                margin-bottom: 0.5rem;
+                color: var(--text-primary-color);
+            }
+
+            .meta-row {
+                display: flex;
+                justify-content: space-between;
+                color: var(--text-secondary-color);
+                font-size: 0.9rem;
+
+                .location {
+                    display: flex;
+                    align-items: center;
+                    gap: 5px;
+                }
+            }
+        }
+    }
+}
+
+/* Modal Styles */
+.project-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.project-modal-content {
+    background: white;
+    width: 100%;
+    max-width: 900px;
+    max-height: 90vh;
+    border-radius: 12px;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    animation: slideUp 0.3s ease;
+
+    .close-modal-btn {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background: rgba(0, 0, 0, 0.5);
+        border: none;
+        color: white;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        cursor: pointer;
+        z-index: 10;
+        transition: background 0.3s ease;
+
+        &:hover {
+            background: rgba(0, 0, 0, 0.8);
+        }
+    }
+
+    .modal-header-image {
+        position: relative;
+        height: 400px;
+        background-color: #f0f0f0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        @media (max-width: 768px) {
+            height: 250px;
+        }
+
+        .placeholder-img-large {
+            font-size: 8rem;
+        }
+
+        .category-tag {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 4px;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+    }
+
+    .modal-body {
+        padding: 3rem;
+
+        @media (max-width: 768px) {
+            padding: 1.5rem;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: var(--text-primary-color);
+            line-height: 1.2;
+
+            @media (max-width: 768px) {
+                font-size: 1.8rem;
+            }
+        }
+
+        .modal-meta {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 2.5rem;
+            flex-wrap: wrap;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid #eee;
+
+            .meta-item {
+                display: flex;
+                align-items: center;
+                gap: 0.8rem;
+                font-size: 1.1rem;
+                color: var(--text-secondary-color);
+
+                ion-icon {
+                    color: var(--primary-color);
+                    font-size: 1.3rem;
+                }
+            }
+        }
+
+        .modal-description {
+            h3 {
+                font-size: 1.5rem;
+                margin-bottom: 1rem;
+                color: var(--text-primary-color);
+            }
+
+            p {
+                line-height: 1.8;
+                color: var(--text-secondary-color);
+                font-size: 1.1rem;
+            }
+        }
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

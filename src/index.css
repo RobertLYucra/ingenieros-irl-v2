@@ -1,0 +1,55 @@
+/* index.css */
+@import "tailwindcss";
+
+:root {
+  /* Minimalist Color Palette */
+  --primary-color: #f42534; /* Accent color from logo */
+  --secondary-color: #0f1058; /* Dark blue */
+  --text-primary-color: #1a1a1a; /* Dark gray for text on light bg */
+  --text-secondary-color: #4a4a4a; /* Medium gray */
+  --bg-color: #ffffff; /* Clean white background */
+  --bg-secondary-color: #f8f9fa; /* Light gray for sections/cards */
+  --navbar-scrolled-bg: rgba(255, 255, 255, 0.95);
+
+  --font-size-base: 16px;
+  --primary-font: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: var(--primary-font);
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-primary-color);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Estilo de la barra de scroll */
+::-webkit-scrollbar {
+  width: 10px; /* Ancho de la barra */
+  height: 10px; /* Altura de la barra (horizontal) */
+}
+
+/* Color del fondo de la barra (más oscuro que el body) */
+::-webkit-scrollbar-track {
+  background: #101f3b; /* Ajuste para mayor contraste con el body */
+  border-radius: 10px;
+}
+
+/* Color y estilo del "thumb" (manija) */
+::-webkit-scrollbar-thumb {
+  background: #15284b; /* Un tono oscuro intermedio */
+  border-radius: 10px;
+}
+
+/* Cambiar el color del "thumb" al pasar el mouse */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--secondary-color); /* Usamos el color de acento */
+}

@@ -1,0 +1,538 @@
+.logo {
+    width: 280px;
+    /* Increased from 180px to fix visibility */
+    max-width: 100%;
+    height: auto;
+    /* Slightly smaller for elegance */
+    transition: 0.3s ease;
+    display: block;
+}
+
+.prueba-div {
+    display: flex;
+    align-items: center;
+}
+
+/* Main Nav Layout */
+.main-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1400px;
+    /* Increased from 1200px for more space */
+    margin: 0 auto;
+    padding: 0 40px;
+    /* More side padding */
+    width: 100%;
+
+    .menu {
+        display: none;
+        cursor: pointer;
+        background: none;
+        border: none;
+        padding: 5px;
+        color: white;
+        transition: color 0.3s ease;
+
+        &:hover {
+            color: var(--primary-color);
+        }
+    }
+
+    .close-button {
+        display: none;
+    }
+}
+
+/* Navigation Links */
+.links {
+    display: flex;
+    gap: 30px;
+    /* Modern spacing using gap */
+    margin-right: 0;
+    transition: 0.5s ease;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    /* Ensure no bullets */
+
+    .etiquetas {
+        margin: 0;
+        /* Remove old margins */
+        font-family: var(--primary-font);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        /* Modern Typography */
+        font-weight: 500;
+        letter-spacing: 0.5px;
+        font-size: 0.95rem;
+
+        a {
+            color: inherit;
+            text-decoration: none;
+            position: relative;
+            padding: 5px 0;
+            color: rgba(255, 255, 255, 0.9);
+            /* Slightly soft white */
+            transition: color 0.3s ease;
+
+            &::before {
+                content: '';
+                position: absolute;
+                width: 0;
+                height: 2px;
+                background-color: var(--primary-color);
+                /* Use primary color for underline */
+                bottom: 0;
+                left: 0;
+                transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+
+            &:hover {
+                color: white;
+
+                &::before {
+                    width: 100%;
+                }
+            }
+        }
+
+        .icon {
+            display: none;
+            /* Hide arrow icons in desktop for cleaner look */
+        }
+    }
+}
+
+/* Contact Button */
+.right {
+    display: flex;
+    height: auto;
+    align-items: center;
+    justify-content: flex-end;
+    /* Align right */
+    gap: 30px;
+    /* Force space between menu and button */
+
+    /* Hide mobile elements on desktop */
+    .mobile-contact-container {
+        display: none;
+    }
+
+    .contacto {
+        color: var(--text-primary-color);
+        text-decoration: none;
+        font-family: var(--primary-font);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+
+        /* Pill Button Style */
+        background-color: transparent;
+        border: 2px solid var(--primary-color);
+        padding: 6px 18px;
+        /* Further reduced padding */
+        border-radius: 50px;
+        font-weight: 700;
+        font-size: 0.8rem;
+        /* Smaller, cleaner font */
+        letter-spacing: 0.5px;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 4px 15px rgba(244, 37, 52, 0.3);
+        /* Subtle glow */
+
+        &:hover {
+            background-color: transparent;
+            color: var(--primary-color);
+            /* Invert on hover if bg is dark, or keep filled */
+            /* Or simply darken: */
+            background-color: #d11f2d;
+            border-color: #d11f2d;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(244, 37, 52, 0.4);
+        }
+    }
+}
+
+
+/* Backdrop con transición suave - solo móvil */
+.backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    z-index: 999;
+    /* Below nav but above content */
+    pointer-events: none;
+
+    &.show {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+    }
+}
+
+
+/* Wrapper Nav Styles */
+nav {
+    background-color: transparent;
+    width: 100%;
+    padding: 20px 0;
+    /* More breathing room */
+    position: fixed;
+    top: 0;
+    transition: all 0.4s ease;
+    z-index: 1000;
+    /* Ensure it stays on top */
+
+    /* Gradient overlay for better text readability on hero images */
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0) 100%);
+}
+
+/* Navbar Scrolled State */
+nav.scrolled {
+    background: var(--navbar-scrolled-bg, rgba(255, 255, 255, 0.98));
+    padding: 15px 0;
+    /* Compact on scroll */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    backdrop-filter: blur(10px);
+
+    .logo {
+        filter: none;
+        /* Reset filter if needed, or invert check */
+        /* Assuming logo is white text, we might need a dark version or filter */
+        /* If logo is image: */
+        /* filter: invert(1) brightness(0.2); Simple way to make white logo dark */
+    }
+
+    .links .etiquetas a {
+        color: var(--text-primary-color);
+
+        &:hover {
+            color: var(--primary-color);
+        }
+    }
+
+    .main-nav .menu {
+        color: var(--text-primary-color);
+    }
+
+    /* Keep button consistent or adjust? */
+    /* Button stands out nicely against white already */
+}
+
+@media screen and (max-width: 1400px) {
+    .links {
+        .etiquetas {
+            font-size: 14px;
+            margin: 10px;
+        }
+    }
+
+    .logo {
+        width: 200px;
+    }
+
+    .contacto {
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width: 1152px) {
+    .links {
+        .etiquetas {
+            font-size: 12px;
+        }
+    }
+
+    .contacto {
+        font-size: 12px;
+    }
+
+    .logo {
+        width: 180px;
+    }
+}
+
+@media screen and (max-width: 1006px) {
+    .main-nav {
+        .menu {
+            display: flex;
+            display: flex;
+            margin-right: 0;
+            margin-left: 8px;
+            /* Tighter spacing */
+
+            .menu-icon {
+                color: inherit;
+                /* Inherit from parent (white or dark) */
+                font-size: 2rem;
+                transition: transform 0.3s ease;
+            }
+        }
+
+        .logo {
+            z-index: 11;
+        }
+
+        .nav-ul {
+            display: none;
+        }
+    }
+}
+
+@media screen and (max-width: 1005px) {
+    .navbar.open {
+        background-color: var(--bg-color);
+        /* Use white bg on mobile menu open */
+    }
+
+    .main-nav {
+        .nav-ul {
+            display: block;
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 80%;
+            max-width: 400px;
+            height: 100vh;
+            background-color: var(--bg-color);
+            z-index: 9;
+            transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+            box-shadow: -2px 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-ul__panel {
+            padding-top: 80px;
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: opacity 0.3s ease 0.1s, transform 0.3s ease 0.1s;
+            position: relative;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+
+            &.open {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            /* Botón cerrar dentro del panel */
+            .close-button {
+                display: flex;
+                position: absolute;
+                top: 20px;
+                right: 20px;
+                background: none;
+                border: none;
+                cursor: pointer;
+                padding: 8px;
+                z-index: 10;
+
+                .close-icon {
+                    color: var(--text-primary-color);
+                    font-size: 2rem;
+                    transition: transform 0.3s ease, color 0.3s ease;
+                }
+
+                &:hover .close-icon {
+                    //transform: rotate(-90deg);
+                    color: var(--secondary-color);
+                }
+            }
+        }
+
+        /* Cuando está abierto, desliza hacia adentro */
+        .nav-ul.open {
+            right: 0;
+        }
+
+        .links {
+            display: flex;
+            flex-direction: column;
+            padding: 0 30px;
+            margin: 0;
+            align-items: flex-start;
+            width: 100%;
+            justify-content: flex-start;
+
+            .etiquetas {
+                text-align: start;
+                display: flex;
+                width: 100%;
+                justify-content: space-between;
+                padding: 15px 0;
+                margin: 0;
+                border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+                opacity: 0;
+                transform: translateX(20px);
+                color: var(--text-primary-color);
+                /* Dark text on mobile menu */
+
+                /* Retraso escalonado para cada item */
+                &:nth-child(1) {
+                    animation: slideInRight 0.3s ease 0.05s forwards;
+                }
+
+                &:nth-child(2) {
+                    animation: slideInRight 0.3s ease 0.10s forwards;
+                }
+
+                &:nth-child(3) {
+                    animation: slideInRight 0.3s ease 0.15s forwards;
+                }
+
+                &:nth-child(4) {
+                    animation: slideInRight 0.3s ease 0.20s forwards;
+                }
+
+                &:nth-child(5) {
+                    animation: slideInRight 0.3s ease 0.25s forwards;
+                }
+
+                &:nth-child(6) {
+                    animation: slideInRight 0.3s ease 0.30s forwards;
+                }
+
+                a {
+                    font-size: 18px;
+                    color: inherit;
+                    text-decoration: none;
+
+                    &::before {
+                        display: none;
+                    }
+                }
+
+                .icon {
+                    color: var(--secondary-color);
+                    font-size: 18px;
+                    display: block;
+                    transition: transform 0.3s ease;
+                }
+
+                &:hover .icon {
+                    transform: translateX(5px);
+                }
+            }
+        }
+    }
+
+    /* Hide desktop contact button in mobile menu context if needed, 
+           but strictly we should hide it in the header .right section */
+    .right {
+        gap: 10px;
+        /* Compress gap for mobile */
+
+        .contacto {
+            display: flex;
+            /* Show it */
+            padding: 4px 12px;
+            /* Smaller padding for mobile */
+            font-size: 0.7rem;
+            /* Smaller font */
+        }
+    }
+
+    .mobile-contact-container {
+        display: block;
+        /* Show on mobile */
+        padding: 20px 30px;
+        width: 100%;
+        margin-top: auto;
+        /* opacity: 0; animation: fadeIn 0.5s ease 0.4s forwards; REMOVED for visibility */
+
+        .mobile-contacto-btn {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            padding: 15px;
+            background-color: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1rem;
+            letter-spacing: 1px;
+            box-shadow: 0 10px 20px rgba(244, 37, 52, 0.3);
+            transition: transform 0.3s ease;
+
+            &:hover {
+                transform: translateY(-2px);
+                background-color: #d11f2d;
+            }
+        }
+    }
+}
+
+/* Close .main-nav */
+
+
+/* Close @media */
+
+
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+/* Animación para los items del menú */
+@keyframes slideInRight {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Reset de la animación cuando se cierra */
+/* Reset de la animación removed to fix desktop visibility */
+
+/* removed extra brace */
+
+@media screen and (max-width: 600px) {
+    .logo {
+        width: 150px;
+    }
+
+    .main-nav {
+        padding: 0 20px;
+        /* Symmetrical padding */
+
+        .nav-ul {
+            width: 85%;
+        }
+
+        .nav-ul__panel {
+            padding-top: 70px;
+        }
+
+        .links {
+            padding: 0 20px;
+
+            .etiquetas {
+                padding: 12px 0;
+
+                a {
+                    font-size: 16px;
+                }
+
+                .icon {
+                    font-size: 16px;
+                }
+            }
+        }
+    }
+}

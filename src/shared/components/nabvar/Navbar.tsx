@@ -1,7 +1,15 @@
 import { IonIcon } from "@ionic/react";
 import Logo from "../../../assets/logo.png";
 import "./Navbar.scss";
-import { arrowForward, menuOutline, closeOutline } from "ionicons/icons";
+import {
+  arrowForward,
+  menuOutline,
+  closeOutline,
+  logoFacebook,
+  logoInstagram,
+  logoLinkedin,
+  mailOutline,
+} from "ionicons/icons";
 import { useState, useEffect } from "react";
 
 const Navbar = () => {
@@ -92,6 +100,38 @@ const Navbar = () => {
                     </li>
                   ))}
                 </ul>
+
+                {/* Content to fill empty space */}
+                <div className="mobile-extra-content">
+                  <p className="extra-title">Síguenos</p>
+                  <div className="social-row">
+                    <a
+                      href="https://facebook.com"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      <IonIcon icon={logoFacebook} />
+                    </a>
+                    <a
+                      href="https://instagram.com"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      <IonIcon icon={logoInstagram} />
+                    </a>
+                    <a
+                      href="https://linkedin.com"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      <IonIcon icon={logoLinkedin} />
+                    </a>
+                  </div>
+                  <div className="contact-row">
+                    <IonIcon icon={mailOutline} />
+                    <span>contacto@yr-ingenieros.com</span>
+                  </div>
+                </div>
 
                 <div className="mobile-contact-container">
                   <a

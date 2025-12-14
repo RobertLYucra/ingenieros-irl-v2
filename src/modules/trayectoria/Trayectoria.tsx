@@ -9,15 +9,25 @@ import {
 } from "ionicons/icons";
 import "./Trayectoria.scss";
 
+interface Project {
+  id: number;
+  title: string;
+  category: string;
+  location: string;
+  year: string;
+  image_placeholder: string;
+  description: string;
+}
+
 const Trayectoria = () => {
   useEffect(() => {
     document.title = "Trayectoria - YR INGENIEROS E.I.R.L.";
   }, []);
 
   const [activeCategory, setActiveCategory] = useState("Todos");
-  const [selectedProject, setSelectedProject] = useState(null);
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
-  const projects = [
+  const projects: Project[] = [
     {
       id: 1,
       title: "Edificio Multifamiliar Residencial",
@@ -94,7 +104,7 @@ const Trayectoria = () => {
       ? projects
       : projects.filter((project) => project.category === activeCategory);
 
-  const openModal = (project) => {
+  const openModal = (project: Project) => {
     setSelectedProject(project);
     document.body.style.overflow = "hidden"; // Prevent scrolling
   };

@@ -1,9 +1,25 @@
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    transition: all 0.4s ease;
+    background: transparent;
+    padding: 1rem 0;
+
+    &.scrolled {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        padding: 0.5rem 0;
+    }
+}
+
 .logo {
-    width: 280px;
-    /* Increased from 180px to fix visibility */
+    width: 200px;
     max-width: 100%;
     height: auto;
-    /* Slightly smaller for elegance */
     transition: 0.3s ease;
     display: block;
 }
@@ -18,12 +34,11 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 1400px;
     /* Increased from 1200px for more space */
     margin: 0 auto;
     padding: 0 40px;
     /* More side padding */
-    width: 100%;
+    width: 95%;
 
     .menu {
         display: none;
@@ -79,8 +94,7 @@
             text-decoration: none;
             position: relative;
             padding: 5px 0;
-            color: rgba(255, 255, 255, 0.9);
-            /* Slightly soft white */
+            color: rgba(255, 255, 255, 0.95); /* White on transparent bg */
             transition: color 0.3s ease;
 
             &::before {
@@ -89,7 +103,6 @@
                 width: 0;
                 height: 2px;
                 background-color: var(--primary-color);
-                /* Use primary color for underline */
                 bottom: 0;
                 left: 0;
                 transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -106,8 +119,16 @@
 
         .icon {
             display: none;
-            /* Hide arrow icons in desktop for cleaner look */
         }
+    }
+}
+
+/* Color override when navbar is scrolled (white background) */
+.navbar.scrolled .links .etiquetas a {
+    color: var(--text-primary-color);
+    
+    &:hover {
+        color: var(--primary-color);
     }
 }
 
@@ -117,17 +138,14 @@
     height: auto;
     align-items: center;
     justify-content: flex-end;
-    /* Align right */
     gap: 30px;
-    /* Force space between menu and button */
 
-    /* Hide mobile elements on desktop */
     .mobile-contact-container {
         display: none;
     }
 
     .contacto {
-        color: var(--primary-color);
+        color: white;
         text-decoration: none;
         font-family: var(--primary-font);
         display: flex;
@@ -135,29 +153,21 @@
         align-items: center;
         cursor: pointer;
 
-        /* Pill Button Style */
-        background-color: transparent;
-        border: 2px solid var(--primary-color);
-        padding: 10px 28px;
-        border-radius: 5px;
-        /* Further reduced padding */
+        /* Solid Premium Red Button */
+        background: var(--primary-gradient);
+        border: none;
+        padding: 12px 30px;
+        border-radius: 8px;
         font-weight: 700;
-        font-size: 0.8rem;
-        /* Smaller, cleaner font */
+        font-size: 0.9rem;
         letter-spacing: 0.5px;
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        box-shadow: 0 4px 15px rgba(244, 37, 52, 0.3);
-        /* Subtle glow */
+        box-shadow: 0 4px 15px rgba(190, 21, 34, 0.3);
 
         &:hover {
-            background-color: transparent;
-            color: var(--primary-color);
-            /* Invert on hover if bg is dark, or keep filled */
-            /* Or simply darken: */
-            background-color: #d11f2d;
-            border-color: #d11f2d;
-            color: white;
-            box-shadow: 0 6px 20px rgba(244, 37, 52, 0.4);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(190, 21, 34, 0.4);
+            filter: brightness(1.1);
         }
     }
 }

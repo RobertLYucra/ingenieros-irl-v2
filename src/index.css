@@ -1,20 +1,31 @@
 /* index.css */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import "tailwindcss";
 
 :root {
-  /* Minimalist Color Palette */
-  --primary-color: #f42534; /* Accent color from logo */
-  --secondary-color: #0f1058; /* Dark blue */
-  --text-primary-color: #1a1a1a; /* Dark gray for text on light bg */
-  --text-secondary-color: #4a4a4a; /* Medium gray */
-  --bg-color: #ffffff; /* Clean white background */
-  --bg-secondary-color: #f8f9fa; /* Light gray for sections/cards */
-  --navbar-scrolled-bg: rgba(255, 255, 255, 0.95);
+  /* Premium Minimalist Color Palette (Based on YR Ingenieros Brand) */
+  --primary-color: #be1522; /* Brand Red */
+  /* Mantiene un toque cálido/naranja vibrante que se funde con tu rojo corporativo */
+  --primary-gradient: linear-gradient(135deg, #ff4e50 0%, #be1522 100%);
+  --secondary-color: #0b132b; /* Deep Dark blue (Premium look) */
+  --secondary-gradient: linear-gradient(135deg, #1c2541 0%, #0b132b 100%);
+  --text-primary-color: #1c1c1e; /* Dark gray for text on light bg */
+  --text-secondary-color: #6e6e73; /* Medium gray */
+  --bg-color: #fbfbfd; /* Clean Apple-like white background */
+  --bg-secondary-color: #f2f2f7; /* Light gray for sections/cards */
+  --navbar-scrolled-bg: rgba(251, 251, 253, 0.85);
+  --card-bg: rgba(255, 255, 255, 0.9);
+
+  /* Glassmorphism */
+  --glass-border: rgba(255, 255, 255, 0.2);
+  --glass-shadow: 0 8px 32px 0 rgba(11, 19, 43, 0.05);
+  --premium-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.1);
+  --premium-shadow-hover: 0 20px 50px -15px rgba(0, 0, 0, 0.15);
 
   --font-size-base: 16px;
-  --primary-font: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
-    "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+  --primary-font:
+    "Poppins", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+    "Droid Sans", "Helvetica Neue", sans-serif;
 
   margin: 0;
   padding: 0;
@@ -52,4 +63,53 @@ html {
 /* Cambiar el color del "thumb" al pasar el mouse */
 ::-webkit-scrollbar-thumb:hover {
   background: var(--secondary-color); /* Usamos el color de acento */
+}
+
+/* Page Hero for Subpages */
+.page-hero {
+  background-color: var(--secondary-color);
+  background-size: cover;
+  background-position: center;
+  padding: 160px 0 80px;
+  position: relative;
+  text-align: center;
+  color: white;
+  margin-bottom: -50px;
+}
+
+.page-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(11, 19, 43, 0.55); /* Lighter dark overlay */
+  backdrop-filter: blur(3px); /* Less blur */
+  z-index: 0;
+}
+
+.page-hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 30px 30px;
+  opacity: 0.5;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.page-hero .content-wrapper {
+  position: relative;
+  z-index: 2;
+}
+
+.page-hero .section-title {
+  color: white;
+  margin-bottom: 1rem;
+}
+
+.page-hero .section-description {
+  color: rgba(255, 255, 255, 0.8);
+  max-width: 800px;
+  margin: 0 auto;
 }

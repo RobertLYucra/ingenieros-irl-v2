@@ -1,196 +1,157 @@
-/* Services Page Styles */
-
-/* Reuse internal hero from Nosotros page if globally available, otherwise redefine or import */
-.internal-hero {
-    /* Assuming styles are similar, but specific to this page if needed */
-    /* If avoiding duplication, these should be in App.scss, but redundant here for safety/isolation */
+.servicios-header {
+    height: 400px;
+    background: url('../../shared/images/ai-generated/project_1.png') center/cover;
     position: relative;
-    height: 50vh;
-    background: linear-gradient(135deg, var(--secondary-color), #2c3e50);
-    /* Different gradient for Services using secondary color */
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
+}
+
+.servicios-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(11, 19, 43, 0.7);
+    backdrop-filter: blur(2px);
+}
+
+.servicios-header .content-wrapper {
+    position: relative;
+    z-index: 2;
+    margin-top: 0;
+}
+
+.header-title {
+    font-size: 3.5rem;
     color: white;
-    margin-top: -80px;
-    padding-top: 80px;
-
-    .overlay {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.4);
-    }
-
-    .content-wrapper {
-        position: relative;
-        z-index: 2;
-
-        h1 {
-            font-size: 3.5rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-        }
-
-        p {
-            font-size: 1.2rem;
-            opacity: 0.9;
-        }
-    }
+    font-weight: 800;
+    margin-bottom: 1rem;
+    letter-spacing: -1px;
 }
 
-.services-list {
-    .services-grid-layout {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-        gap: 3rem;
-
-        @media (max-width: 768px) {
-            grid-template-columns: 1fr;
-        }
-    }
-
-    .service-detail-card {
-        background: white;
-        border-radius: 12px;
-        overflow: hidden;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-        transition: transform 0.3s ease;
-        /* minimalist: removed border */
-
-        &:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            /* minimalist: removed border-color change */
-
-            .card-header {
-                /* minimalist: removed strong background change, maybe just subtle or keep consistent */
-                background-color: #f0f0f0;
-            }
-        }
-
-        .card-header {
-            padding: 2rem;
-            background-color: #f8f9fa;
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-            transition: background-color 0.3s ease, color 0.3s ease;
-
-            .icon-wrapper {
-                width: 60px;
-                height: 60px;
-                background: white;
-                border-radius: 50%;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                font-size: 1.8rem;
-                color: var(--primary-color);
-                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-                transition: background 0.3s ease, color 0.3s ease;
-            }
-
-            h3 {
-                font-size: 1.4rem;
-                font-weight: 700;
-                margin: 0;
-            }
-        }
-
-        .card-body {
-            padding: 2rem;
-
-            p {
-                color: var(--text-secondary-color);
-                margin-bottom: 1.5rem;
-                line-height: 1.6;
-            }
-
-            .service-items {
-                list-style: none;
-                padding: 0;
-
-                li {
-                    position: relative;
-                    padding-left: 20px;
-                    margin-bottom: 0.8rem;
-                    color: var(--text-primary-color);
-                    font-size: 0.95rem;
-
-                    &::before {
-                        content: '•';
-                        color: var(--primary-color);
-                        font-weight: bold;
-                        position: absolute;
-                        left: 0;
-                    }
-                }
-            }
-        }
-    }
+.header-subtitle {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.25rem;
+    max-width: 700px;
+    margin: 0 auto;
 }
 
-.methodology-section {
-    text-align: center;
+/* Lista de Servicios */
+.servicios-lista {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+}
 
-    .methodology-steps {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-top: 4rem;
-        position: relative;
+.servicio-detalle-card {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    padding: 3rem !important;
+    align-items: center;
+}
 
-        @media (max-width: 900px) {
-            flex-direction: column;
-            gap: 3rem;
-        }
+.servicio-detalle-card.reverse {
+    direction: rtl;
+}
 
-        .step {
-            flex: 1;
-            padding: 0 1rem;
-            position: relative;
-            z-index: 2;
+.servicio-detalle-card.reverse > * {
+    direction: ltr;
+}
 
-            .step-number {
-                display: block;
-                font-size: 4rem;
-                font-weight: 900;
-                color: rgba(0, 0, 0, 0.1);
-                /* Very subtle number background */
-                margin-bottom: -1.5rem;
-                position: relative;
-                z-index: -1;
-            }
+.servicio-img-wrapper {
+    position: relative;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+}
 
-            h4 {
-                font-size: 1.3rem;
-                font-weight: 700;
-                margin-bottom: 1rem;
-                color: var(--primary-color);
-            }
+.servicio-img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    aspect-ratio: 4/3;
+}
 
-            p {
-                color: var(--text-secondary-color);
-                font-size: 0.95rem;
-            }
-        }
+.servicio-icon-large {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 60px;
+    height: 60px;
+    background: var(--card-bg);
+    backdrop-filter: blur(5px);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
 
-        .step-connector {
-            flex: 1;
-            height: 2px;
-            background: #ddd;
-            position: relative;
-            top: 20px;
-            /* Align with middle of content roughly */
+.servicio-detalle-card.reverse .servicio-icon-large {
+    left: auto;
+    right: 20px;
+}
 
-            @media (max-width: 900px) {
-                display: none;
-                /* Hide connector lines on mobile */
-            }
-        }
+.servicio-texto h2 {
+    font-size: 2.2rem;
+    color: var(--secondary-color);
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+}
+
+.title-underline {
+    width: 60px;
+    height: 4px;
+    background: var(--primary-gradient);
+    border-radius: 2px;
+    margin-bottom: 1.5rem;
+}
+
+.servicio-desc-corta {
+    font-size: 1.2rem;
+    color: var(--text-primary-color);
+    font-weight: 500;
+    margin-bottom: 1rem;
+}
+
+.servicio-desc-larga {
+    font-size: 1.05rem;
+    color: var(--text-secondary-color);
+    line-height: 1.7;
+    margin-bottom: 2rem;
+}
+
+.servicio-bullets {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.servicio-bullets li {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: var(--text-secondary-color);
+}
+
+.bullet-check {
+    color: var(--primary-color);
+    font-weight: 800;
+}
+
+@media (max-width: 900px) {
+    .servicio-detalle-card {
+        grid-template-columns: 1fr;
+        padding: 2rem !important;
+        gap: 2rem;
+    }
+    
+    .servicio-detalle-card.reverse {
+        direction: ltr;
     }
 }

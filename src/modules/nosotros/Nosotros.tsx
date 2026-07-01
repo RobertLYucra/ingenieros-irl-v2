@@ -1,137 +1,65 @@
-import { IonIcon } from "@ionic/react";
-import {
-  bulbOutline,
-  eyeOutline,
-  diamondOutline,
-  ribbonOutline,
-  constructOutline,
-} from "ionicons/icons";
-import "./Nosotros.scss";
 import { useEffect } from "react";
+import "./Nosotros.scss";
+import { IconMision, IconVision } from "../../shared/components/icons/Icons";
+import BannerImg from "../../shared/images/ai-generated/project_3.png";
 
 const Nosotros = () => {
   useEffect(() => {
-    document.title = "Nosotros - YR INGENIEROS E.I.R.L.";
+    document.title = "Quiénes Somos - YR INGENIEROS E.I.R.L.";
   }, []);
 
   return (
-    <div className="page-container nosotros-page">
-      {/* Internal Hero */}
-      <section className="internal-hero">
-        <div className="overlay"></div>
+    <div className="page-container bg-light">
+      <div className="page-hero" style={{ backgroundImage: `url(${BannerImg})` }}>
         <div className="content-wrapper">
-          <h1>Quiénes Somos</h1>
-          <p>
-            Más de 18 años construyendo confianza y seguridad estructural en el
-            Perú.
+          <h1 className="section-title">Sobre Nosotros</h1>
+          <p className="section-description">
+            Más de 18 años construyendo el futuro con bases sólidas.
           </p>
         </div>
-      </section>
+      </div>
 
-      {/* Our Story / Intro */}
-      <section className="story-section section-padding">
-        <div className="content-wrapper story-grid">
-          <div className="story-text">
-            <span className="subtitle">Nuestra Historia</span>
-            <h2 className="section-title text-left">
-              Experiencia que Construye Futuro
-            </h2>
+      <div className="content-wrapper section-padding">
+        <div className="historia-section premium-card">
+          <div className="historia-texto">
+            <h2>Nuestra Historia</h2>
+            <div className="title-underline"></div>
             <p>
-              YR INGENIEROS E.I.R.L. nació con la visión de elevar los
-              estándares de la ingeniería estructural en el país. Contamos con
-              un equipo de profesionales altamente capacitados con amplia
-              experiencia tanto en la ejecución como en el desarrollo de
-              proyectos complejos.
+              <strong>YR INGENIEROS E.I.R.L.</strong> nació con la visión de transformar la ingeniería civil en el país a través de diseños innovadores, seguros y eficientes. Desde nuestros inicios, nos hemos consolidado como una empresa líder en el rubro del diseño estructural, supervisión y ejecución de obras civiles, comerciales e industriales.
             </p>
             <p>
-              Nuestra especialización abarca el Análisis y Diseño en Concreto
-              Armado, Acero, Albañilería Confinada y Muros de Ductilidad
-              Limitada, brindando soluciones que equilibran seguridad,
-              funcionalidad y economía.
+              A lo largo de más de 18 años, hemos superado retos complejos, adoptando nuevas tecnologías como la metodología BIM y garantizando siempre la máxima satisfacción de nuestros clientes institucionales y privados.
             </p>
           </div>
-          <div className="story-visual">
-            <div className="visual-placeholder">
-              <span>18+ Años de Trayectoria</span>
+          <div className="historia-stats">
+            <div className="stat-circle">
+              <span className="stat-num">+50</span>
+              <span className="stat-text">Proyectos Entregados</span>
+            </div>
+            <div className="stat-circle primary">
+              <span className="stat-num">18</span>
+              <span className="stat-text">Años de Trayectoria</span>
             </div>
           </div>
         </div>
-      </section>
 
-      {/* Mission / Vision / Values */}
-      <section className="mvv-section section-padding bg-light">
-        <div className="content-wrapper">
-          <div className="cards-grid">
-            <div className="mvv-card">
-              <div className="icon-box">
-                <IonIcon icon={bulbOutline} />
-              </div>
-              <h3>Misión</h3>
-              <p>
-                Proveer soluciones de ingeniería e infraestructura de
-                excelencia, superando las expectativas técnicas y de servicio de
-                nuestros clientes, garantizando seguridad y sostenibilidad.
-              </p>
-            </div>
-            <div className="mvv-card featured">
-              <div className="icon-box">
-                <IonIcon icon={eyeOutline} />
-              </div>
-              <h3>Visión</h3>
-              <p>
-                Ser reconocidos como la compañía líder y más confiable en
-                servicios de ingeniería estructural e infraestructura del país,
-                referente de calidad e innovación.
-              </p>
-            </div>
-            <div className="mvv-card">
-              <div className="icon-box">
-                <IonIcon icon={diamondOutline} />
-              </div>
-              <h3>Valores</h3>
-              <ul className="values-list">
-                <li>
-                  <strong>Compromiso:</strong> Con la seguridad y el cliente.
-                </li>
-                <li>
-                  <strong>Honestidad:</strong> Transparencia total.
-                </li>
-                <li>
-                  <strong>Excelencia:</strong> Calidad sin compromisos.
-                </li>
-                <li>
-                  <strong>Vocación:</strong> Pasión por la ingeniería.
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Certifications & Standards */}
-      <section className="certifications-section section-padding">
-        <div className="content-wrapper">
-          <div className="cert-header">
-            <h2 className="section-title">Estándares de Calidad</h2>
-            <p className="section-description">
-              Nos regimos por las normativas más exigentes y estándares
-              internacionales.
+        <div className="mision-vision-grid mt-5">
+          <div className="mv-card premium-card">
+            <div className="mv-icon"><IconMision size={48} /></div>
+            <h3>Misión</h3>
+            <p>
+              Brindar servicios de ingeniería y construcción de la más alta calidad, priorizando la seguridad estructural, la innovación y el cumplimiento riguroso de normativas y plazos, generando valor sostenido para nuestros clientes y la sociedad.
             </p>
           </div>
-          <div className="certs-grid">
-            <div className="cert-item">
-              <IonIcon icon={ribbonOutline} className="cert-icon" />
-              <h4>ISO 9001</h4>
-              <p>Gestión de Calidad</p>
-            </div>
-            <div className="cert-item">
-              <IonIcon icon={constructOutline} className="cert-icon" />
-              <h4>Normativa RNE</h4>
-              <p>Cumplimiento Estricto</p>
-            </div>
+          <div className="mv-card premium-card">
+            <div className="mv-icon"><IconVision size={48} /></div>
+            <h3>Visión</h3>
+            <p>
+              Ser la empresa peruana referente en soluciones integrales de ingeniería civil y estructural a nivel nacional, reconocida por nuestra excelencia técnica, vanguardia tecnológica y compromiso con el desarrollo sostenible del país.
+            </p>
           </div>
         </div>
-      </section>
+      </div>
     </div>
   );
 };

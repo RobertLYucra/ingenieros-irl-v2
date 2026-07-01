@@ -1,6 +1,38 @@
 import { useEffect } from "react";
+import { motion, type Variants } from "framer-motion";
 import "./Inicio.scss";
-import PortadaVideo from "../../assets/portada-video.mp4";
+import HeroImage from "../../shared/images/ai-generated/hero_bg.png";
+import { serviciosMock } from "../../shared/data/servicios";
+import { IconCheck } from "../../shared/components/icons/Icons";
+
+// Animation Variants
+const fadeInUp: Variants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
+};
+
+const staggerContainer: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2
+    }
+  }
+};
+
+const zoomInfinite: Variants = {
+  hidden: { scale: 1 },
+  visible: { 
+    scale: 1.15, 
+    transition: { 
+      duration: 30, 
+      ease: "linear", 
+      repeat: Infinity,
+      repeatType: "reverse"
+    } 
+  }
+};
 
 const Inicio = () => {
   useEffect(() => {
@@ -10,141 +42,214 @@ const Inicio = () => {
   return (
     <div className="inicio-container">
       {/* Hero Section */}
-      <section className="hero-section">
-        <video
-          src={PortadaVideo}
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="hero-video"
-        ></video>
+      <section className="hero-section" style={{ overflow: 'hidden' }}>
+        <motion.div 
+          className="hero-bg-animated"
+          variants={zoomInfinite}
+          initial="hidden"
+          animate="visible"
+          style={{ 
+            backgroundImage: `url(${HeroImage})`,
+            position: 'absolute',
+            inset: 0,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            zIndex: 0
+          }}
+        />
         <div className="hero-overlay"></div>
-        <div className="hero-content">
-          <h1 className="hero-title">YR INGENIEROS E.I.R.L.</h1>
-          <p className="hero-subtitle">
-            Diseño Estructural - Supervisión - Gestión - Construcción
-          </p>
-          <div className="hero-actions">
-            <a href="/servicios" className="hero-btn btn-primary">
+        <div className="architectural-grid"></div>
+
+        {/* Social Sidebar */}
+        <motion.div variants={fadeInUp} className="hero-socials" initial="hidden" animate="visible">
+          <a href="#" title="Facebook">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+          </a>
+          <a href="#" title="LinkedIn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+          </a>
+          <a href="#" title="Mail">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+          </a>
+          <div className="social-line"></div>
+        </motion.div>
+
+        {/* Scroll Indicator */}
+        <motion.div variants={fadeInUp} className="scroll-indicator" initial="hidden" animate="visible">
+          <div className="mouse">
+            <div className="wheel"></div>
+          </div>
+          <span>Explorar</span>
+        </motion.div>
+
+        {/* Floating Trust Badge */}
+        <motion.div variants={fadeInUp} className="hero-trust-badge" initial="hidden" animate="visible">
+          <div className="trust-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ width: '20px', height: '20px' }}><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><polyline points="9 12 12 15 16 9"></polyline></svg>
+          </div>
+          <div className="trust-text">
+            <strong>Calidad ISO</strong>
+            <span>Estándares Globales</span>
+          </div>
+        </motion.div>
+
+        <motion.div 
+          className="hero-content"
+          variants={staggerContainer}
+          initial="hidden"
+          animate="visible"
+        >
+          <motion.div variants={fadeInUp} className="hero-badge" style={{ display: 'inline-flex', gap: '8px', alignItems: 'center' }}>
+            Diseño Estructural <span style={{ color: 'var(--primary-color)' }}>•</span> Supervisión <span style={{ color: 'var(--primary-color)' }}>•</span> Gestión <span style={{ color: 'var(--primary-color)' }}>•</span> Construcción
+          </motion.div>
+          <motion.h1 variants={fadeInUp} className="hero-title">YR INGENIEROS E.I.R.L.</motion.h1>
+          <motion.p variants={fadeInUp} className="hero-subtitle">
+            "Diseñamos tu sueño y construimos tu futuro"
+          </motion.p>
+          <motion.div variants={fadeInUp} className="hero-actions">
+            <a href="/servicios" className="btn-primary">
               Nuestros Servicios
             </a>
-            <a href="/contacto" className="hero-btn btn-secondary">
-              Contáctanos
+            <a href="/proyectos" className="btn-secondary" style={{ color: 'white', borderColor: 'rgba(255,255,255,0.5)' }}>
+              Ver Proyectos
             </a>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </section>
 
-      {/* Stats Bar */}
+      {/* Stats Bar Premium */}
       <section className="stats-bar">
-        <div className="content-wrapper stats-grid">
-          <div className="stat-item">
+        <motion.div 
+          className="content-wrapper stats-grid"
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+        >
+          <motion.div variants={fadeInUp} className="stat-item">
             <span className="stat-number">18+</span>
             <span className="stat-label">Años de Experiencia</span>
-          </div>
-          <div className="stat-item">
+          </motion.div>
+          <motion.div variants={fadeInUp} className="stat-item">
             <span className="stat-number">ISO</span>
             <span className="stat-label">Calidad Certificada</span>
-          </div>
-          <div className="stat-item">
+          </motion.div>
+          <motion.div variants={fadeInUp} className="stat-item">
             <span className="stat-number">100%</span>
             <span className="stat-label">Proyectos Exitosos</span>
-          </div>
-          <div className="stat-item">
+          </motion.div>
+          <motion.div variants={fadeInUp} className="stat-item">
             <span className="stat-number">+50</span>
             <span className="stat-label">Obras Ejecutadas</span>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </section>
 
       {/* Services Highlight */}
       <section className="services-highlight section-padding">
         <div className="content-wrapper">
-          <div className="section-header">
-            <h2 className="section-title">
-              Soluciones Integrales en Ingeniería
-            </h2>
+          <motion.div 
+            initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp}
+          >
+            <h2 className="section-title">Soluciones Integrales</h2>
             <p className="section-description">
               Abarcamos todas las etapas de tu proyecto, desde la concepción
-              estructural hasta la ejecución y supervisión.
+              estructural hasta la ejecución y supervisión con los más altos estándares.
             </p>
-          </div>
+          </motion.div>
 
-          <div className="services-grid">
-            <div className="service-card">
-              <div className="card-icon">🏗️</div>
-              <h3>Diseño Estructural</h3>
-              <p>
-                Análisis y diseño sismorresistente con normativa vigente para
-                edificaciones seguras.
-              </p>
-            </div>
-            <div className="service-card">
-              <div className="card-icon">👷</div>
-              <h3>Supervisión de Obra</h3>
-              <p>
-                Control de calidad, costos y plazos para garantizar el éxito de
-                la construcción.
-              </p>
-            </div>
-            <div className="service-card">
-              <div className="card-icon">🏢</div>
-              <h3>Construcción y Gestión</h3>
-              <p>
-                Ejecución de proyectos de infraestructura y edificaciones con
-                altos estándares.
-              </p>
-            </div>
-          </div>
-          <div className="center-btn">
-            <a href="/servicios" className="btn-link">
-              Ver todos los servicios &rarr;
+          <motion.div 
+            className="services-grid"
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+          >
+            {serviciosMock.slice(0, 3).map((servicio) => (
+              <motion.div variants={fadeInUp} className="premium-card service-card" key={servicio.id}>
+                <div className="card-image-wrapper">
+                  <img src={servicio.imagen} alt={servicio.titulo} className="service-img" />
+                  <div className="card-icon">{servicio.icono}</div>
+                </div>
+                <div className="card-content">
+                  <h3>{servicio.titulo}</h3>
+                  <p>{servicio.descripcionCorta}</p>
+                  <a href="/servicios" className="service-link">Leer más &rarr;</a>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+          <motion.div 
+            initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp}
+            className="center-btn" style={{ marginTop: '3rem', textAlign: 'center' }}
+          >
+            <a href="/servicios" className="btn-primary">
+              Ver todos los servicios
             </a>
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* Why Choose Us (BIM/Tech) */}
       <section className="why-us section-padding bg-light">
         <div className="content-wrapper why-us-container">
-          <div className="why-text">
-            <h2 className="section-title text-left">Innovación y Tecnología</h2>
+          <motion.div 
+            className="why-text"
+            initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp}
+          >
+            <h2 className="section-title text-left" style={{ left: '0', transform: 'none' }}>Innovación y Tecnología</h2>
             <p>
               Implementamos metodología BIM (Building Information Modeling) para
               optimizar el diseño, reducir conflictos en obra y asegurar la
               eficiencia de recursos.
             </p>
             <ul className="benefits-list">
-              <li>Modelado 3D de alta precisión.</li>
-              <li>Detección temprana de interferencias.</li>
-              <li>Optimización de costos y cronogramas.</li>
+              <li>
+                <span className="check-icon"><IconCheck size={16} /></span> Modelado 3D de alta precisión.
+              </li>
+              <li>
+                <span className="check-icon"><IconCheck size={16} /></span> Detección temprana de interferencias.
+              </li>
+              <li>
+                <span className="check-icon"><IconCheck size={16} /></span> Optimización de costos y cronogramas.
+              </li>
             </ul>
-          </div>
-          <div className="why-visual">
-            <div className="tech-placeholder">
-              <span>BIM MODELING</span>
+          </motion.div>
+          <motion.div 
+            className="why-visual"
+            initial={{ opacity: 0, x: 50 }} 
+            whileInView={{ opacity: 1, x: 0 }} 
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            <div className="tech-placeholder premium-card">
+              <div className="bim-overlay"></div>
+              <span>BIM MODELING EXPERTISE</span>
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* CTA Section */}
       <section className="cta-section">
         <div className="cta-overlay"></div>
-        <div className="content-wrapper cta-content">
-          <h2>¿Listo para iniciar tu próximo proyecto?</h2>
+        <motion.div 
+          className="content-wrapper cta-content"
+          initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp}
+        >
+          <h2>¿Listo para iniciar tu próximo gran proyecto?</h2>
           <p>
             Confía en la experiencia de YR Ingenieros para materializar tu
-            visión con seguridad y eficiencia.
+            visión con seguridad, innovación y eficiencia.
           </p>
-          <a href="/contacto" className="cta-btn">
-            Solicitar Cotización
+          <a href="/contacto" className="btn-primary cta-btn">
+            Solicitar Cotización Ahora
           </a>
-        </div>
+        </motion.div>
       </section>
     </div>
   );
 };
 
 export default Inicio;
+

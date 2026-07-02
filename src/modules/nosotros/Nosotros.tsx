@@ -1,14 +1,14 @@
 import { useEffect } from "react";
 import "./Nosotros.scss";
 import { IconMision, IconVision, IconShieldCheck, IconConstruccion, IconDisenoEstructural, IconSupervision } from "../../shared/components/icons/Icons";
-import HeroBg from "../../shared/images/ai-generated/project_3.png";
+import HeroBg from "../../shared/images/ai-generated/project_3.webp";
 import HistoriaMainImg from "../../shared/images/servicios/supervicion.webp";
 import HistoriaImg2 from "../../shared/images/servicios/diseño-estructural.webp";
 
 import PageHero from "../../shared/components/page-hero/PageHero";
-import Team1 from "../../shared/images/ai-generated/team_1.png";
-import Team2 from "../../shared/images/ai-generated/team_2.png";
-import Team3 from "../../shared/images/ai-generated/team_3.png";
+import Team1 from "../../shared/images/ai-generated/team_1.webp";
+import Team2 from "../../shared/images/ai-generated/team_2.webp";
+import Team3 from "../../shared/images/ai-generated/team_3.webp";
 
 const Nosotros = () => {
   useEffect(() => {

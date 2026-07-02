@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence, type Variants } from "framer-motion";
 import "./Inicio.scss";
-import HeroImage from "../../shared/images/ai-generated/hero_bg.png";
-import TechImg from "../../shared/images/ai-generated/bim1.jpg";
+import HeroImage from "../../shared/images/ai-generated/hero_bg.webp";
+import TechImg from "../../shared/images/ai-generated/bim1.webp";
 
 import { serviciosMock } from "../../shared/data/servicios";
 import { IconCheck } from "../../shared/components/icons/Icons";

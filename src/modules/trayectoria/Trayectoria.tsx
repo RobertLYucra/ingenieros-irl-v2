@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import "./Trayectoria.scss";
 import { proyectosMock } from "../../shared/data/proyectos";
 import type { Proyecto } from "../../shared/data/proyectos";
-import BannerImg from "../../shared/images/ai-generated/hero_bg.png";
+import BannerImg from "../../shared/images/ai-generated/hero_bg.webp";
 import PageHero from "../../shared/components/page-hero/PageHero";
 
 const Trayectoria = () => {
@@ -10,7 +10,7 @@ const Trayectoria = () => {
   const [proyectos, setProyectos] = useState<Proyecto[]>(proyectosMock);
   const [visibleCount, setVisibleCount] = useState<number>(4);
   const [proyectoSeleccionado, setProyectoSeleccionado] = useState<Proyecto | null>(null);
-  const [activeMedia, setActiveMedia] = useState<{ url: string, tipoMedia: 'imagen' | 'video' } | null>(null);
+  const [activeMedia, setActiveMedia] = useState<{ url: string, tipoMedia: 'imagen' | 'video' | 'vimeo' } | null>(null);
 
   useEffect(() => {
     document.title = "Proyectos - YR INGENIEROS E.I.R.L.";

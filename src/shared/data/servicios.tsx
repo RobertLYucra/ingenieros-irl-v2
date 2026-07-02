@@ -1,5 +1,5 @@
 import React from 'react';
-import Service1 from '../images/ai-generated/service_1.png';
+import Service1 from '../images/ai-generated/service_1.webp';
 import DiseñoEstructural from '../images/servicios/diseño.webp';
 import Supervisión from '../images/servicios/supervicion.webp';
 import Construccion from '../images/servicios/construcción.webp';

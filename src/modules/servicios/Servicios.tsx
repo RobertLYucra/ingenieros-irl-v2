@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import "./Servicios.scss";
 import { serviciosMock } from "../../shared/data/servicios";
 import { IconCheck } from "../../shared/components/icons/Icons";
-import BannerImg from "../../shared/images/ai-generated/project_1.png";
+import BannerImg from "../../shared/images/ai-generated/project_1.webp";
 
 import PageHero from "../../shared/components/page-hero/PageHero";
 

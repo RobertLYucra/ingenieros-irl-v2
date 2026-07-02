@@ -1,6 +1,6 @@
-import Team1 from '../images/ai-generated/team_1.png';
-import Team2 from '../images/ai-generated/team_2.png';
-import Team3 from '../images/ai-generated/team_3.png';
+import Team1 from '../images/ai-generated/team_1.webp';
+import Team2 from '../images/ai-generated/team_2.webp';
+import Team3 from '../images/ai-generated/team_3.webp';
 
 export interface MiembroEquipo {
   id: string;

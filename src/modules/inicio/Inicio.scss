@@ -50,11 +50,11 @@
       gap: 12px;
       align-items: center;
       margin-bottom: 1.5rem;
-      background: rgba(255,255,255,0.1);
+      background: rgba(255, 255, 255, 0.1);
       padding: 10px 24px;
       border-radius: 30px;
       backdrop-filter: blur(10px);
-      border: 1px solid rgba(255,255,255,0.1);
+      border: 1px solid rgba(255, 255, 255, 0.1);
 
       .hero-badge-text {
         font-weight: 600;
@@ -116,7 +116,9 @@
         font-weight: 600;
         font-size: 1.1rem;
         cursor: pointer;
-        transition: transform 0.2s ease, background-color 0.3s ease;
+        transition:
+          transform 0.2s ease,
+          background-color 0.3s ease;
         text-decoration: none;
         display: inline-block;
         text-align: center;
@@ -193,7 +195,7 @@
       opacity: 0.9;
       text-transform: uppercase;
       letter-spacing: 1px;
-      
+
       @media (max-width: 768px) {
         font-size: 0.85rem;
       }
@@ -224,7 +226,9 @@
     flex-direction: column;
     justify-content: flex-end;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    transition:
+      transform 0.4s ease,
+      box-shadow 0.4s ease;
     border: none;
     background: transparent;
 
@@ -237,7 +241,12 @@
       }
 
       .card-image-wrapper .card-overlay {
-        background: linear-gradient(to top, rgba(11, 19, 43, 0.98) 0%, rgba(11, 19, 43, 0.7) 50%, rgba(11, 19, 43, 0.3) 100%);
+        background: linear-gradient(
+          to top,
+          rgba(11, 19, 43, 0.98) 0%,
+          rgba(11, 19, 43, 0.7) 50%,
+          rgba(11, 19, 43, 0.3) 100%
+        );
       }
 
       .hover-reveal {
@@ -265,7 +274,12 @@
       .card-overlay {
         position: absolute;
         inset: 0;
-        background: linear-gradient(to top, rgba(11, 19, 43, 0.95) 0%, rgba(11, 19, 43, 0.2) 60%, transparent 100%);
+        background: linear-gradient(
+          to top,
+          rgba(11, 19, 43, 0.95) 0%,
+          rgba(11, 19, 43, 0.2) 60%,
+          transparent 100%
+        );
         transition: background 0.4s ease;
       }
     }
@@ -290,8 +304,8 @@
         box-shadow: 0 10px 20px rgba(190, 21, 34, 0.3);
 
         svg {
-            width: 30px;
-            height: 30px;
+          width: 30px;
+          height: 30px;
         }
       }
 
@@ -324,8 +338,10 @@
           gap: 8px;
           border-bottom: 2px solid var(--primary-color);
           padding-bottom: 4px;
-          transition: gap 0.3s ease, color 0.3s;
-          
+          transition:
+            gap 0.3s ease,
+            color 0.3s;
+
           &:hover {
             color: var(--primary-color);
             gap: 12px;
@@ -359,11 +375,15 @@
   overflow: hidden;
 
   &::before {
-    content: '';
+    content: "";
     position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-                      linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
     background-size: 50px 50px;
     pointer-events: none;
   }
@@ -389,7 +409,7 @@
       margin-bottom: 0.5rem;
       color: white;
     }
-    
+
     .title-underline-left {
       width: 80px;
       height: 4px;
@@ -400,7 +420,7 @@
 
     p {
       font-size: 1.15rem;
-      color: rgba(255,255,255,0.85);
+      color: rgba(255, 255, 255, 0.85);
       line-height: 1.8;
       margin-bottom: 2.5rem;
     }
@@ -416,15 +436,17 @@
         display: flex;
         align-items: center;
         gap: 1rem;
-        background: rgba(255,255,255,0.03);
+        background: rgba(255, 255, 255, 0.03);
         padding: 1rem 1.5rem;
         border-radius: 12px;
-        border: 1px solid rgba(255,255,255,0.05);
-        transition: transform 0.3s ease, background 0.3s ease;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        transition:
+          transform 0.3s ease,
+          background 0.3s ease;
 
         &:hover {
           transform: translateX(10px);
-          background: rgba(255,255,255,0.06);
+          background: rgba(255, 255, 255, 0.06);
         }
 
         .check-glass {
@@ -452,14 +474,14 @@
   .why-visual {
     flex: 1;
     width: 100%;
-    
+
     .tech-image-container {
       position: relative;
       border-radius: 20px;
       padding: 10px;
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.1);
-      
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+
       .tech-glow {
         position: absolute;
         top: 50%;
@@ -467,18 +489,22 @@
         transform: translate(-50%, -50%);
         width: 120%;
         height: 120%;
-        background: radial-gradient(circle, rgba(190,21,34,0.15) 0%, transparent 70%);
+        background: radial-gradient(
+          circle,
+          rgba(190, 21, 34, 0.15) 0%,
+          transparent 70%
+        );
         z-index: -1;
       }
-      
+
       .tech-img {
         width: 100%;
         height: auto;
         border-radius: 12px;
         display: block;
-        box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
       }
-      
+
       .tech-glass-badge {
         position: absolute;
         bottom: -20px;
@@ -488,11 +514,11 @@
         -webkit-backdrop-filter: blur(12px);
         padding: 1.5rem 2rem;
         border-radius: 16px;
-        border: 1px solid rgba(255,255,255,0.15);
+        border: 1px solid rgba(255, 255, 255, 0.15);
         display: flex;
         flex-direction: column;
         align-items: center;
-        box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
 
         @media (max-width: 768px) {
           bottom: -10px;
@@ -504,14 +530,14 @@
           right: 0px;
           border-radius: 12px;
         }
-        
+
         .badge-title {
           font-size: 2.2rem;
           font-weight: 900;
           color: var(--primary-color);
           line-height: 1;
         }
-        
+
         .badge-subtitle {
           font-size: 0.85rem;
           font-weight: 600;
@@ -528,7 +554,7 @@
 .cta-section {
   position: relative;
   padding: 8rem 1rem;
-  background-image: url('../../shared/images/ai-generated/hero_bg.png');
+  background-image: url("../../shared/images/ai-generated/hero_bg.png");
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -538,7 +564,11 @@
   .cta-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(135deg, rgba(22, 40, 76, 0.95) 0%, rgba(11, 19, 43, 0.85) 100%);
+    background: linear-gradient(
+      135deg,
+      rgba(22, 40, 76, 0.95) 0%,
+      rgba(11, 19, 43, 0.85) 100%
+    );
     z-index: 1;
   }
 

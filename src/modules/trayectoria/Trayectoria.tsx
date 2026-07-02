@@ -10,6 +10,7 @@ const Trayectoria = () => {
   const [proyectos, setProyectos] = useState<Proyecto[]>(proyectosMock);
   const [visibleCount, setVisibleCount] = useState<number>(4);
   const [proyectoSeleccionado, setProyectoSeleccionado] = useState<Proyecto | null>(null);
+  const [activeMedia, setActiveMedia] = useState<{ url: string, tipoMedia: 'imagen' | 'video' } | null>(null);
 
   useEffect(() => {
     document.title = "Proyectos - YR INGENIEROS E.I.R.L.";
@@ -65,10 +66,24 @@ const Trayectoria = () => {
         {/* Galería de Proyectos */}
         <div className="proyectos-grid">
           {proyectos.slice(0, visibleCount).map(proyecto => (
-            <div className="proyecto-card" key={proyecto.id} onClick={() => setProyectoSeleccionado(proyecto)}>
+            <div className="proyecto-card" key={proyecto.id} onClick={() => {
+                setProyectoSeleccionado(proyecto);
+                setActiveMedia({ url: proyecto.imagen, tipoMedia: proyecto.tipoMedia || 'imagen' });
+              }}>
               
               <div className="proyecto-img-container">
-                <img src={proyecto.imagen} alt={proyecto.titulo} className="proyecto-img" />
+                {proyecto.tipoMedia === 'video' ? (
+                  <video src={proyecto.imagen} className="proyecto-img" autoPlay muted loop playsInline />
+                ) : proyecto.tipoMedia === 'vimeo' ? (
+                  <iframe 
+                    src={`https://player.vimeo.com/video/${proyecto.imagen}?background=1&autoplay=1&loop=1&byline=0&title=0`} 
+                    className="proyecto-img" 
+                    allow="autoplay; fullscreen" 
+                    style={{ pointerEvents: 'none', border: 'none' }}
+                  />
+                ) : (
+                  <img src={proyecto.imagen} alt={proyecto.titulo} className="proyecto-img" />
+                )}
                 <span className="badge-categoria">{proyecto.categoria}</span>
                 <div className="proyecto-overlay">
                   <span>Ver Proyecto</span>
@@ -114,12 +129,45 @@ const Trayectoria = () => {
 
       {/* Modal de Proyecto */}
       {proyectoSeleccionado && (
-        <div className="proyecto-modal-overlay" onClick={() => setProyectoSeleccionado(null)}>
+        <div className="proyecto-modal-overlay" onClick={() => { setProyectoSeleccionado(null); setActiveMedia(null); }}>
           <div className="proyecto-modal-content" onClick={e => e.stopPropagation()}>
-            <button className="modal-close" onClick={() => setProyectoSeleccionado(null)}>×</button>
+            <button className="modal-close" onClick={() => { setProyectoSeleccionado(null); setActiveMedia(null); }}>×</button>
             
             <div className="modal-img-col">
-               <img src={proyectoSeleccionado.imagen} alt={proyectoSeleccionado.titulo} />
+               {activeMedia?.tipoMedia === 'video' ? (
+                 <video src={activeMedia.url} controls autoPlay className="modal-video" key={activeMedia.url} />
+               ) : activeMedia?.tipoMedia === 'vimeo' ? (
+                 <iframe 
+                   src={`https://player.vimeo.com/video/${activeMedia.url}?autoplay=1`} 
+                   className="modal-video" 
+                   allow="autoplay; fullscreen" 
+                   style={{ border: 'none' }}
+                   key={activeMedia.url}
+                 />
+               ) : (
+                 <img src={activeMedia?.url || ''} alt={proyectoSeleccionado.titulo} key={activeMedia?.url || 'img'} />
+               )}
+               
+               {proyectoSeleccionado.galeria && (
+                 <div className="modal-galeria">
+                   {proyectoSeleccionado.galeria.map((item, idx) => (
+                     <div 
+                       key={idx} 
+                       className={`modal-thumbnail ${activeMedia?.url === item.url ? 'active' : ''}`}
+                       onClick={() => setActiveMedia(item)}
+                     >
+                       {item.tipoMedia === 'video' ? (
+                         <video src={item.url} />
+                       ) : item.tipoMedia === 'vimeo' ? (
+                         <iframe src={`https://player.vimeo.com/video/${item.url}?background=1`} style={{ pointerEvents: 'none', width: '100%', height: '100%', border: 'none' }} />
+                       ) : (
+                         <img src={item.url} alt={`miniatura ${idx}`} />
+                       )}
+                       {(item.tipoMedia === 'video' || item.tipoMedia === 'vimeo') && <div className="video-icon-overlay">▶</div>}
+                     </div>
+                   ))}
+                 </div>
+               )}
                <div className="modal-badge-categoria">{proyectoSeleccionado.categoria}</div>
             </div>
             

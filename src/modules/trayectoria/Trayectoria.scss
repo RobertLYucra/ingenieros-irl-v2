@@ -64,12 +64,14 @@
     height: 300px; /* Un poco más alto al haber solo 2 columnas */
     overflow: hidden;
     border-bottom: 1px solid rgba(0, 0, 0, 0.05); /* Separación entre foto y contenido */
+    background-color: #f8f9fa;
 }
 
 .proyecto-img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
+    padding: 2.5rem 1rem 1rem; /* Margen superior para que el badge no tape el texto */
     transition: transform 0.5s ease;
 }
 
@@ -293,12 +295,17 @@
 .modal-img-col {
     width: 55%;
     position: relative;
+    background-color: #f8f9fa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.modal-img-col img {
+.modal-img-col img, .modal-img-col video, .modal-img-col iframe {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
+    padding: 3.5rem 1.5rem 1.5rem; /* Margen para que el badge de categoría no tape el texto de la imagen */
 }
 
 .modal-badge-categoria {
@@ -410,4 +417,62 @@
         height: 60%;
         padding: 2rem;
     }
+}
+
+/* Modal Galería (Miniaturas) */
+.modal-galeria {
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    padding: 0 20px;
+    z-index: 10;
+}
+
+.modal-thumbnail {
+    width: 70px;
+    height: 50px;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+    position: relative;
+    background: #fff;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+.modal-thumbnail img, .modal-thumbnail video, .modal-thumbnail iframe {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.modal-thumbnail.active {
+    border-color: var(--primary-color);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(190, 21, 34, 0.3);
+}
+
+.modal-thumbnail:hover {
+    transform: translateY(-3px);
+}
+
+.video-icon-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0,0,0,0.5);
+    color: white;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 10px;
 }

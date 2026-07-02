@@ -1,6 +1,6 @@
 import Team1 from '../images/ai-generated/team_1.png';
 import Team2 from '../images/ai-generated/team_2.png';
-import Team3 from '../images/ai-generated/service_2.png'; // Reusing for a third member
+import Team3 from '../images/ai-generated/team_3.png';
 
 export interface MiembroEquipo {
   id: string;
@@ -14,23 +14,31 @@ export interface MiembroEquipo {
 export const equipoMock: MiembroEquipo[] = [
   {
     id: 'e1',
-    nombre: 'Ing. Carlos Yucra',
+    nombre: 'Romulo Yucra Rodas',
     cargo: 'Gerente General',
-    descripcion: 'Ingeniero Civil con más de 18 años de experiencia en la dirección y gestión de megaproyectos de infraestructura a nivel nacional. Especialista en optimización de procesos constructivos y liderazgo corporativo.',
+    descripcion: 'Ingeniero Civil con maestría en Ingeniería Estructural y más de 10 años de experiencia. Especialista en diseño sismorresistente y experto en la gestión y construcción de megaproyectos de infraestructura.',
     imagen: Team1,
+    linkedin: 'https://www.linkedin.com/in/romulo-yucra-rodas/'
   },
   {
     id: 'e2',
-    nombre: 'Ing. Valeria Romero',
-    cargo: 'Jefa de Proyectos Estructurales',
-    descripcion: 'Especialista en diseño sismorresistente con maestría en Ingeniería Estructural. Ha liderado el diseño de más de 30 edificaciones corporativas e industriales implementando metodología BIM avanzada.',
+    nombre: 'Sosimo Yucra Rodas',
+    cargo: 'Ingeniero de Proyectos',
+    descripcion: 'Profesional destacado con sólida experiencia en la coordinación, supervisión y control de calidad integral de proyectos de ingeniería civil.',
     imagen: Team2,
   },
   {
     id: 'e3',
-    nombre: 'Ing. Luis Fernández',
-    cargo: 'Director de Supervisión y Obras',
-    descripcion: 'Experto en control de calidad, programación y gestión de riesgos en obra. Coordina equipos multidisciplinarios en campo asegurando el cumplimiento estricto de los estándares de seguridad (SST).',
+    nombre: 'Wiliam Yucra Rodas',
+    cargo: 'Ingeniero Especialista',
+    descripcion: 'Especialista en planificación, gestión y ejecución de obras civiles, asegurando el cumplimiento estricto de los estándares técnicos y plazos.',
     imagen: Team3,
+  },
+  {
+    id: 'e4',
+    nombre: 'Elias Yucra Rodas',
+    cargo: 'Ingeniero Estructural',
+    descripcion: 'Profesional enfocado en el análisis, modelamiento y desarrollo de soluciones estructurales seguras y eficientes para edificaciones complejas.',
+    imagen: Team1,
   }
 ];

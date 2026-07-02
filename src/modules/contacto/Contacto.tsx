@@ -9,6 +9,9 @@ import {
 } from "ionicons/icons";
 import { useEffect } from "react";
 
+import PageHero from "../../shared/components/page-hero/PageHero";
+import BannerImg from "../../shared/images/trabajos/IMG_1445.webp";
+
 const Contacto = () => {
   useEffect(() => {
     document.title = "Contáctanos - YR INGENIEROS E.I.R.L.";
@@ -22,17 +25,11 @@ const Contacto = () => {
 
   return (
     <div className="page-container contact-page">
-      {/* Internal Hero */}
-      <section className="internal-hero">
-        <div className="overlay"></div>
-        <div className="content-wrapper">
-          <h1>Contáctanos</h1>
-          <p>
-            Estamos listos para hacer realidad su próximo proyecto de
-            construcción
-          </p>
-        </div>
-      </section>
+      <PageHero 
+        title="Contáctanos"
+        subtitle="Estamos listos para hacer realidad su próximo proyecto de construcción. Póngase en contacto con nuestro equipo."
+        bgImage={BannerImg}
+      />
 
       {/* Contact Grid */}
       <section className="contact-content section-padding">

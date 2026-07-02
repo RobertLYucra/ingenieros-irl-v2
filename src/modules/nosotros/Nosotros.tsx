@@ -1,8 +1,9 @@
 import { useEffect } from "react";
 import "./Nosotros.scss";
 import { IconMision, IconVision, IconShieldCheck, IconConstruccion, IconDisenoEstructural, IconSupervision } from "../../shared/components/icons/Icons";
-import BannerImg from "../../shared/images/ai-generated/project_3.png";
-import HistoriaImg2 from "../../shared/images/ai-generated/project_2.png";
+import HeroBg from "../../shared/images/ai-generated/project_3.png";
+import HistoriaMainImg from "../../shared/images/servicios/supervicion.webp";
+import HistoriaImg2 from "../../shared/images/servicios/diseño-estructural.webp";
 
 import PageHero from "../../shared/components/page-hero/PageHero";
 import Team1 from "../../shared/images/ai-generated/team_1.png";
@@ -19,7 +20,7 @@ const Nosotros = () => {
       <PageHero 
         title="Sobre Nosotros" 
         subtitle="Más de 9 años construyendo el futuro con bases sólidas y visión innovadora."
-        bgImage={BannerImg} 
+        bgImage={HeroBg} 
       />
 
       {/* Historia Section (Rediseñada) */}
@@ -27,7 +28,7 @@ const Nosotros = () => {
         <div className="historia-section">
           <div className="historia-image-collage">
             <div className="img-main-wrapper">
-              <img src={BannerImg} alt="Nuestro Equipo" className="historia-img main-img" />
+              <img src={HistoriaMainImg} alt="Nuestro Equipo" className="historia-img main-img" />
               <div className="years-badge-float">
                 <span className="years-num">9+</span>
                 <span className="years-text">Años de<br/>Experiencia</span>
@@ -176,6 +177,12 @@ const Nosotros = () => {
                 <span>Gerente General</span>
               </div>
             </div>
+          </div>
+          
+          <div className="center-btn" style={{ marginTop: '3rem', textAlign: 'center' }}>
+            <a href="/equipo" className="btn-primary">
+              Conoce a nuestro equipo completo
+            </a>
           </div>
         </div>
       </section>

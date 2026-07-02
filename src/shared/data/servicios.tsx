@@ -17,25 +17,33 @@ export const serviciosMock: Servicio[] = [
   {
     id: 's1',
     titulo: 'Diseño Estructural',
-    descripcionCorta: 'Análisis y diseño sismorresistente con normativa vigente para edificaciones seguras.',
-    descripcionLarga: 'Ofrecemos soluciones avanzadas en diseño estructural, empleando software de última generación para modelado y cálculo de estructuras en concreto armado, acero y albañilería. Garantizamos la seguridad y eficiencia económica de cada proyecto bajo estrictas normativas nacionales e internacionales.',
+    descripcionCorta: 'Estructuración, Análisis, Diseño, Dibujo y Memoria de cálculo.',
+    descripcionLarga: 'Nuestra empresa busca lograr la estructura de edificaciones que no fallen en su vida útil. Para ello ofrecemos cumplir con los siguientes elementos de Diseño Estructural: Estructuración, Análisis, Diseño, Dibujo y Memoria de cálculo.',
     imagen: Service1,
     icono: <IconDisenoEstructural size={32} />,
   },
   {
     id: 's2',
-    titulo: 'Supervisión de Obra',
-    descripcionCorta: 'Control de calidad, costos y plazos para garantizar el éxito de la construcción.',
-    descripcionLarga: 'Nuestro equipo de supervisión vela celosamente por los intereses del cliente, realizando un riguroso control técnico, económico y administrativo. Aseguramos que la obra se ejecute exactamente según los planos y especificaciones, previniendo sobrecostos y retrasos.',
+    titulo: 'Supervisión',
+    descripcionCorta: 'Trabajo eficiente y de calidad sin ignorar ningún detalle.',
+    descripcionLarga: 'Supervisión es una parte importante durante una actividad, lo cual ayuda para un trabajo eficiente y de calidad, nosotros nos encargamos sin ignorar ningún detalle.',
     imagen: Service2,
     icono: <IconSupervision size={32} />,
   },
   {
     id: 's3',
-    titulo: 'Construcción y Gestión',
-    descripcionCorta: 'Ejecución de proyectos de infraestructura y edificaciones con altos estándares.',
-    descripcionLarga: 'Llevamos a cabo la construcción integral de obras civiles, comerciales e industriales. Aplicamos metodologías ágiles de gestión (Lean Construction, PMI) para optimizar recursos, mantener una comunicación transparente y entregar proyectos sobresalientes dentro del cronograma.',
+    titulo: 'Gestión',
+    descripcionCorta: 'Planificación, coordinación y control total del proceso de construcción.',
+    descripcionLarga: 'Nos encargamos de la gestión del proyecto desde el principio hasta el final, lo cual incluye la Planificación, coordinación y control total del proceso de construcción.',
     imagen: Service3,
+    icono: <IconConstruccion size={32} />,
+  },
+  {
+    id: 's4',
+    titulo: 'Construcción',
+    descripcionCorta: 'Construcción de edificios y carreteras con la máxima calidad posible.',
+    descripcionLarga: 'Somos una empresa que uno de sus servicios es la construcción de todo tipo de edificios, carreteras, caminos, etc. Para cada una de ellas verificamos que nuestros resultados tengan la máxima calidad posible.',
+    imagen: Service1, // Reusing image since we only have 3 imported right now
     icono: <IconConstruccion size={32} />,
   }
 ];

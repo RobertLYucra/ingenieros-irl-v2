@@ -3,6 +3,8 @@ import "./Equipo.scss";
 import { equipoMock } from "../../shared/data/equipo";
 import BannerImg from "../../shared/images/ai-generated/service_2.png";
 
+import PageHero from "../../shared/components/page-hero/PageHero";
+
 const Equipo = () => {
   useEffect(() => {
     document.title = "Nuestro Equipo - YR INGENIEROS E.I.R.L.";
@@ -10,15 +12,11 @@ const Equipo = () => {
 
   return (
     <div className="page-container bg-light">
-      <div className="page-hero" style={{ backgroundImage: `url(${BannerImg})` }}>
-        <div className="content-wrapper">
-          <h1 className="section-title">Nuestros Profesionales</h1>
-          <p className="section-description">
-            Contamos con un equipo multidisciplinario de ingenieros y especialistas
-            altamente capacitados y comprometidos con la excelencia en cada proyecto.
-          </p>
-        </div>
-      </div>
+      <PageHero 
+        title="Nuestros Profesionales"
+        subtitle="Contamos con un equipo multidisciplinario de ingenieros y especialistas altamente capacitados y comprometidos con la excelencia en cada proyecto."
+        bgImage={BannerImg}
+      />
       <div className="content-wrapper section-padding">
 
         <div className="equipo-grid">

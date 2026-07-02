@@ -1,5 +1,5 @@
 /* index.css */
-@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
 @import "tailwindcss";
 
 :root {
@@ -7,9 +7,9 @@
   --primary-color: #be1522; /* Brand Red */
   /* Mantiene un toque cálido/naranja vibrante que se funde con tu rojo corporativo */
   --primary-gradient: linear-gradient(135deg, #ff4e50 0%, #be1522 100%);
-  --secondary-color: #0b132b; /* Deep Dark blue (Premium look) */
-  --secondary-gradient: linear-gradient(135deg, #1c2541 0%, #0b132b 100%);
-  --text-primary-color: #1c1c1e; /* Dark gray for text on light bg */
+  --secondary-color: #16284c; /* Deep Dark blue requested by user */
+  --secondary-gradient: linear-gradient(135deg, #1f3764 0%, #16284c 100%);
+  --text-primary-color: #16284c; /* Deep Dark blue for text on light bg */
   --text-secondary-color: #6e6e73; /* Medium gray */
   --bg-color: #fbfbfd; /* Clean Apple-like white background */
   --bg-secondary-color: #f2f2f7; /* Light gray for sections/cards */
@@ -18,9 +18,9 @@
 
   /* Glassmorphism */
   --glass-border: rgba(255, 255, 255, 0.2);
-  --glass-shadow: 0 8px 32px 0 rgba(11, 19, 43, 0.05);
-  --premium-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.1);
-  --premium-shadow-hover: 0 20px 50px -15px rgba(0, 0, 0, 0.15);
+  --glass-shadow: 0 8px 32px 0 rgba(22, 40, 76, 0.05);
+  --premium-shadow: 0 10px 40px -10px rgba(22, 40, 76, 0.1);
+  --premium-shadow-hover: 0 20px 50px -15px rgba(22, 40, 76, 0.15);
 
   --font-size-base: 16px;
   --primary-font:
@@ -30,7 +30,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: var(--primary-font);
+  font-family: var(--primary-font) !important;
 }
 
 body {
@@ -50,66 +50,24 @@ html {
 
 /* Color del fondo de la barra (más oscuro que el body) */
 ::-webkit-scrollbar-track {
-  background: #101f3b; /* Ajuste para mayor contraste con el body */
+  background: #0f1c35; /* Ajuste para mayor contraste con el body */
   border-radius: 10px;
 }
 
 /* Color y estilo del "thumb" (manija) */
 ::-webkit-scrollbar-thumb {
-  background: #15284b; /* Un tono oscuro intermedio */
+  background: #16284c; /* Un tono oscuro intermedio */
   border-radius: 10px;
 }
 
 /* Cambiar el color del "thumb" al pasar el mouse */
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--secondary-color); /* Usamos el color de acento */
+  background: var(--primary-color);
 }
 
-/* Page Hero for Subpages */
-.page-hero {
-  background-color: var(--secondary-color);
-  background-size: cover;
-  background-position: center;
-  padding: 160px 0 80px;
-  position: relative;
-  text-align: center;
-  color: white;
-  margin-bottom: -50px;
-}
-
-.page-hero::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: rgba(11, 19, 43, 0.55); /* Lighter dark overlay */
-  backdrop-filter: blur(3px); /* Less blur */
-  z-index: 0;
-}
-
-.page-hero::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
-                    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
-  background-size: 30px 30px;
-  opacity: 0.5;
-  pointer-events: none;
-  z-index: 1;
-}
-
-.page-hero .content-wrapper {
-  position: relative;
-  z-index: 2;
-}
-
-.page-hero .section-title {
-  color: white;
-  margin-bottom: 1rem;
-}
-
-.page-hero .section-description {
-  color: rgba(255, 255, 255, 0.8);
-  max-width: 800px;
+/* Base Utility Classes */
+.content-wrapper {
+  max-width: 1200px;
   margin: 0 auto;
+  padding: 0 2rem;
 }

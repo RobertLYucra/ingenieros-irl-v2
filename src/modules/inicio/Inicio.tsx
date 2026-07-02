@@ -1,7 +1,8 @@
-import { useEffect } from "react";
-import { motion, type Variants } from "framer-motion";
+import { useEffect, useState } from "react";
+import { motion, AnimatePresence, type Variants } from "framer-motion";
 import "./Inicio.scss";
 import HeroImage from "../../shared/images/ai-generated/hero_bg.png";
+import TechImg from "../../shared/images/ai-generated/project_3.png";
 import { serviciosMock } from "../../shared/data/servicios";
 import { IconCheck } from "../../shared/components/icons/Icons";
 
@@ -35,9 +36,19 @@ const zoomInfinite: Variants = {
 };
 
 const Inicio = () => {
+  const [currentServiceIndex, setCurrentServiceIndex] = useState(0);
+  const servicesList = ["Diseño Estructural", "Supervisión", "Gestión", "Construcción"];
+
   useEffect(() => {
     document.title = "Inicio - YR INGENIEROS E.I.R.L.";
-  }, []);
+    
+    // Rotating text interval
+    const interval = setInterval(() => {
+      setCurrentServiceIndex((prev) => (prev + 1) % servicesList.length);
+    }, 2500);
+    
+    return () => clearInterval(interval);
+  }, [servicesList.length]);
 
   return (
     <div className="inicio-container">
@@ -99,18 +110,32 @@ const Inicio = () => {
           initial="hidden"
           animate="visible"
         >
-          <motion.div variants={fadeInUp} className="hero-badge" style={{ display: 'inline-flex', gap: '8px', alignItems: 'center' }}>
-            Diseño Estructural <span style={{ color: 'var(--primary-color)' }}>•</span> Supervisión <span style={{ color: 'var(--primary-color)' }}>•</span> Gestión <span style={{ color: 'var(--primary-color)' }}>•</span> Construcción
+          <motion.div variants={fadeInUp} className="hero-badge">
+            <span style={{ color: 'var(--primary-color)' }}>•</span>
+            <AnimatePresence mode="wait">
+              <motion.span
+                key={currentServiceIndex}
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -15 }}
+                transition={{ duration: 0.3 }}
+                className="hero-badge-text"
+              >
+                {servicesList[currentServiceIndex].toUpperCase()}
+              </motion.span>
+            </AnimatePresence>
           </motion.div>
-          <motion.h1 variants={fadeInUp} className="hero-title">YR INGENIEROS E.I.R.L.</motion.h1>
+          <motion.h1 variants={fadeInUp} className="hero-title">
+            YR INGENIEROS E.I.R.L.
+          </motion.h1>
           <motion.p variants={fadeInUp} className="hero-subtitle">
-            "Diseñamos tu sueño y construimos tu futuro"
+            Especialistas en diseño, supervisión y gestión de proyectos con 9 años de experiencia a nivel nacional. Diseñamos tu sueño y construimos tu futuro.
           </motion.p>
           <motion.div variants={fadeInUp} className="hero-actions">
-            <a href="/servicios" className="btn-primary">
+            <a href="/servicios" className="btn-primary hero-btn">
               Nuestros Servicios
             </a>
-            <a href="/proyectos" className="btn-secondary" style={{ color: 'white', borderColor: 'rgba(255,255,255,0.5)' }}>
+            <a href="/proyectos" className="btn-secondary hero-btn">
               Ver Proyectos
             </a>
           </motion.div>
@@ -166,15 +191,18 @@ const Inicio = () => {
             viewport={{ once: true, margin: "-100px" }}
           >
             {serviciosMock.slice(0, 3).map((servicio) => (
-              <motion.div variants={fadeInUp} className="premium-card service-card" key={servicio.id}>
+              <motion.div variants={fadeInUp} className="premium-card service-card poster-card" key={servicio.id}>
                 <div className="card-image-wrapper">
                   <img src={servicio.imagen} alt={servicio.titulo} className="service-img" />
-                  <div className="card-icon">{servicio.icono}</div>
+                  <div className="card-overlay"></div>
                 </div>
                 <div className="card-content">
+                  <div className="card-icon">{servicio.icono}</div>
                   <h3>{servicio.titulo}</h3>
-                  <p>{servicio.descripcionCorta}</p>
-                  <a href="/servicios" className="service-link">Leer más &rarr;</a>
+                  <div className="hover-reveal">
+                    <p>{servicio.descripcionCorta}</p>
+                    <a href="/servicios" className="service-link">Leer más &rarr;</a>
+                  </div>
                 </div>
               </motion.div>
             ))}
@@ -191,40 +219,49 @@ const Inicio = () => {
       </section>
 
       {/* Why Choose Us (BIM/Tech) */}
-      <section className="why-us section-padding bg-light">
+      <section className="why-us section-padding">
         <div className="content-wrapper why-us-container">
           <motion.div 
             className="why-text"
             initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp}
           >
             <h2 className="section-title text-left" style={{ left: '0', transform: 'none' }}>Innovación y Tecnología</h2>
+            <div className="title-underline-left"></div>
             <p>
               Implementamos metodología BIM (Building Information Modeling) para
               optimizar el diseño, reducir conflictos en obra y asegurar la
-              eficiencia de recursos.
+              eficiencia de recursos, llevando tu proyecto al futuro de la ingeniería.
             </p>
             <ul className="benefits-list">
               <li>
-                <span className="check-icon"><IconCheck size={16} /></span> Modelado 3D de alta precisión.
+                <div className="check-glass"><IconCheck size={18} /></div>
+                <span>Modelado 3D de alta precisión.</span>
               </li>
               <li>
-                <span className="check-icon"><IconCheck size={16} /></span> Detección temprana de interferencias.
+                <div className="check-glass"><IconCheck size={18} /></div>
+                <span>Detección temprana de interferencias.</span>
               </li>
               <li>
-                <span className="check-icon"><IconCheck size={16} /></span> Optimización de costos y cronogramas.
+                <div className="check-glass"><IconCheck size={18} /></div>
+                <span>Optimización de costos y cronogramas reales.</span>
               </li>
             </ul>
           </motion.div>
+          
           <motion.div 
             className="why-visual"
-            initial={{ opacity: 0, x: 50 }} 
-            whileInView={{ opacity: 1, x: 0 }} 
-            transition={{ duration: 0.8 }}
+            initial={{ opacity: 0, scale: 0.9 }} 
+            whileInView={{ opacity: 1, scale: 1 }} 
+            transition={{ duration: 0.8, ease: "easeOut" }}
             viewport={{ once: true }}
           >
-            <div className="tech-placeholder premium-card">
-              <div className="bim-overlay"></div>
-              <span>BIM MODELING EXPERTISE</span>
+            <div className="tech-image-container">
+              <div className="tech-glow"></div>
+              <img src={TechImg} alt="Metodología BIM" className="tech-img" />
+              <div className="tech-glass-badge">
+                <span className="badge-title">BIM</span>
+                <span className="badge-subtitle">CERTIFIED</span>
+              </div>
             </div>
           </motion.div>
         </div>

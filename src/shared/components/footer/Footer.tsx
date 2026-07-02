@@ -87,7 +87,7 @@ const Footer = () => {
           <div className="footer-contact-section">
             <h3>Contacto</h3>
             <div className="contact-info">
-              <p>Jr. Manuel Villavicencio 1711, Lince</p>
+              <p>Av. Francisco de Cuéllar #600</p>
               <p>Lima, Perú</p>
               <p className="phone">
                 <a

@@ -53,9 +53,9 @@ const Contacto = () => {
                   <div className="info-text">
                     <h4>Oficina Principal</h4>
                     <p>
-                      Jr. Manuel Villavicencio 1711
+                      Av. Francisco de Cuéllar #600
                       <br />
-                      Lince, Lima, Perú
+                      Lima, Perú
                     </p>
                   </div>
                 </div>

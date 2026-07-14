@@ -191,7 +191,7 @@ const Inicio = () => {
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
           >
-            {serviciosMock.slice(0, 3).map((servicio) => (
+            {serviciosMock.slice(0, 4).map((servicio) => (
               <motion.div variants={fadeInUp} className="premium-card service-card poster-card" key={servicio.id}>
                 <div className="card-image-wrapper">
                   <img src={servicio.imagen} alt={servicio.titulo} className="service-img" />

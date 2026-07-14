@@ -12,6 +12,85 @@
   margin-bottom: 1.5rem;
 }
 
+/* Services Index */
+.servicios-index {
+  background: white;
+  padding: 3rem;
+  border-radius: 20px;
+  box-shadow: 0 15px 40px rgba(22, 40, 76, 0.05);
+  margin-bottom: 2rem;
+  text-align: center;
+
+  .index-title {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--secondary-color);
+    margin-bottom: 2rem;
+  }
+
+  .index-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+
+    .index-card {
+      background: #f8f9fa;
+      border: 1px solid #e1e5eb;
+      border-radius: 12px;
+      padding: 1.5rem 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: inherit;
+
+      .index-icon {
+        color: var(--primary-color);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        svg {
+          width: 32px;
+          height: 32px;
+        }
+      }
+
+      .index-name {
+        font-weight: 600;
+        color: var(--text-primary-color);
+        font-size: 1.05rem;
+        line-height: 1.4;
+      }
+
+      &:hover {
+        transform: translateY(-5px);
+        background: white;
+        box-shadow: 0 10px 25px rgba(22, 40, 76, 0.1);
+        border-color: rgba(190, 21, 34, 0.3);
+
+        .index-icon {
+          transform: scale(1.1);
+        }
+
+        .index-name {
+          color: var(--primary-color);
+        }
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    padding: 2rem 1.5rem;
+
+    .index-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+}
+
 /* Lista de Servicios */
 .servicios-lista {
   display: flex;
@@ -34,13 +113,18 @@
 
   /* Separador visual elegante entre servicios */
   &:not(:last-child)::after {
-    content: '';
+    content: "";
     position: absolute;
     bottom: -4rem; /* Mitad del gap de 8rem */
     left: 5%;
     right: 5%;
     height: 2px; /* Más grueso y notorio */
-    background: linear-gradient(90deg, transparent, rgba(22, 40, 76, 0.25), transparent);
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(22, 40, 76, 0.25),
+      transparent
+    );
   }
 
   &.reverse {
@@ -112,6 +196,36 @@
       transition: transform 0.5s ease;
     }
 
+    .vimeo-crop-container {
+      width: 100%;
+      height: 100%;
+      aspect-ratio: 4/3; /* Mantenemos la tarjeta uniforme con las demás */
+      border-radius: 12px;
+      overflow: hidden;
+      position: relative;
+      display: block;
+      box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.05);
+      background: #fff;
+    }
+
+    .vimeo-crop-iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+      pointer-events: none;
+      background-color: transparent;
+      transform: scale(1.1); /* Zoom muy ligero, solo lo suficiente para sacar las franjas negras sin cortar la estructura */
+      transform-origin: center center;
+      transition: transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+
+    &:hover .vimeo-crop-iframe {
+      transform: scale(1.15); /* Efecto hover sutil */
+    }
+
     &:hover .servicio-img {
       transform: scale(1.02);
     }
@@ -142,7 +256,7 @@
         width: 60px;
         height: 60px;
         border-radius: 15px;
-        
+
         svg {
           width: 30px;
           height: 30px;
@@ -181,7 +295,7 @@
       margin-bottom: 0.5rem;
       position: relative;
       z-index: 1; /* Asegura que el título siempre esté encima del número */
-      
+
       @media (max-width: 768px) {
         font-size: 1.8rem;
       }
@@ -193,7 +307,7 @@
       font-weight: 600;
       margin-bottom: 1.5rem;
       line-height: 1.6;
-      
+
       @media (max-width: 768px) {
         font-size: 1.1rem;
       }
@@ -241,7 +355,7 @@
 
     .servicio-action {
       display: flex;
-      
+
       .servicio-btn {
         padding: 0.8rem 2.5rem;
         font-size: 1.1rem;
@@ -250,7 +364,7 @@
         text-decoration: none;
         display: inline-block;
         transition: background-color 0.3s;
-        
+
         @media (max-width: 768px) {
           width: 100%;
           text-align: center;

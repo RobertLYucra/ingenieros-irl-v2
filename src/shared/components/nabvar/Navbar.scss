@@ -67,7 +67,7 @@
 /* Navigation Links */
 .links {
   display: flex;
-  gap: 30px;
+  gap: 10px;
   /* Modern spacing using gap */
   margin-right: 0;
   transition: 0.5s ease;
@@ -342,7 +342,7 @@ nav.scrolled {
     }
 
     .nav-ul__panel {
-      padding-top: 80px;
+      padding-top: 60px;
       opacity: 0;
       transform: translateY(-20px);
       transition:
@@ -393,7 +393,7 @@ nav.scrolled {
     .links {
       display: flex;
       flex-direction: column;
-      padding: 0 30px;
+      padding: 0 20px;
       margin: 0;
       align-items: flex-start;
       width: 100%;
@@ -445,14 +445,14 @@ nav.scrolled {
         }
 
         a {
-          font-size: 0.95rem;
+          font-size: 0.9rem;
           /* Slightly smaller for better fit */
           font-weight: 600;
           color: #222;
           text-decoration: none;
           flex: 1;
-          padding: 12px 10px;
-          /* Very compact padding */
+          padding: 4px 5px;
+          /* Extremely compact padding */
           display: flex;
           align-items: center;
           transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -464,10 +464,10 @@ nav.scrolled {
 
         .icon {
           color: var(--primary-color);
-          font-size: 18px;
+          font-size: 16px;
           /* Slightly smaller icon to match */
           display: block;
-          margin-right: 12px;
+          margin-right: 8px;
           transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
           pointer-events: none;
           opacity: 1;
@@ -506,7 +506,7 @@ nav.scrolled {
   .mobile-extra-content {
     margin-top: auto;
     /* Push to bottom, filling empty space */
-    padding: 0 30px 10px;
+    padding: 0 20px 10px;
     display: flex !important;
     /* Override global display: none */
     flex-direction: column;
@@ -589,7 +589,7 @@ nav.scrolled {
 
   .mobile-contact-container {
     display: block;
-    padding: 10px 30px 30px;
+    padding: 10px 20px 20px;
     /* Adjusted padding */
     width: 100%;
     margin-top: 0;

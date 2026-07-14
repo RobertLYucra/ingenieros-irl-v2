@@ -14,31 +14,31 @@ export interface MiembroEquipo {
 export const equipoMock: MiembroEquipo[] = [
   {
     id: 'e1',
-    nombre: 'Romulo Yucra Rodas',
-    cargo: 'Gerente General',
-    descripcion: 'Ingeniero Civil con maestría en Ingeniería Estructural y más de 10 años de experiencia. Especialista en diseño sismorresistente y experto en la gestión y construcción de megaproyectos de infraestructura.',
+    nombre: 'Ing. Rómulo Yucra R.',
+    cargo: 'Gerente General - Ingeniero Estructural',
+    descripcion: 'Especialista en diseño sismorresistente y gestión de megaproyectos.',
     imagen: Team1,
     linkedin: 'https://www.linkedin.com/in/romulo-yucra-rodas/'
   },
   {
     id: 'e2',
-    nombre: 'Sosimo Yucra Rodas',
-    cargo: 'Ingeniero de Proyectos',
-    descripcion: 'Profesional destacado con sólida experiencia en la coordinación, supervisión y control de calidad integral de proyectos de ingeniería civil.',
+    nombre: 'Ing. Sósimo Yucra R.',
+    cargo: 'Gerente de Operaciones',
+    descripcion: 'Coordinación, supervisión y control de calidad de proyectos.',
     imagen: Team2,
   },
   {
     id: 'e3',
-    nombre: 'Wiliam Yucra Rodas',
-    cargo: 'Ingeniero Especialista',
-    descripcion: 'Especialista en planificación, gestión y ejecución de obras civiles, asegurando el cumplimiento estricto de los estándares técnicos y plazos.',
-    imagen: Team3,
+    nombre: 'Ing. Elías Yucra R.',
+    cargo: 'Gerente de Proyectos',
+    descripcion: 'Desarrollo de soluciones estructurales seguras y eficientes.',
+    imagen: Team1,
   },
   {
     id: 'e4',
-    nombre: 'Elias Yucra Rodas',
-    cargo: 'Ingeniero Estructural',
-    descripcion: 'Profesional enfocado en el análisis, modelamiento y desarrollo de soluciones estructurales seguras y eficientes para edificaciones complejas.',
-    imagen: Team1,
+    nombre: 'Ing. William Yucra R.',
+    cargo: 'Gerente Comercial',
+    descripcion: 'Planificación y ejecución de obras civiles bajo estrictos estándares.',
+    imagen: Team3,
   }
 ];

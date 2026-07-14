@@ -21,8 +21,35 @@ const Equipo = () => {
       />
       <div className="content-wrapper section-padding">
 
+        <div className="trayectoria-header leaders-header">
+          <h2>Líderes de Proyecto</h2>
+          <div className="title-underline"></div>
+        </div>
+
+        <div className="equipo-grid">
+          {equipoMock.map((miembro) => (
+            <div className="equipo-card premium-card" key={miembro.id}>
+              <div className="equipo-card-header"></div>
+              <div className="miembro-img-wrapper">
+                <img src={miembro.imagen} alt={miembro.nombre} className="miembro-img" />
+              </div>
+              <div className="miembro-info">
+                <h3>{miembro.nombre}</h3>
+                <h4 className="miembro-cargo">{miembro.cargo}</h4>
+                <div className="title-underline-small"></div>
+                <p>{miembro.descripcion}</p>
+                {miembro.linkedin && (
+                  <a href={miembro.linkedin} target="_blank" rel="noopener noreferrer" className="linkedin-link">
+                    <IonIcon icon={logoLinkedin} /> Conectar
+                  </a>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+
         {/* Sección de Trayectoria/Stats */}
-        <div className="equipo-trayectoria">
+        <div className="equipo-trayectoria" style={{ marginTop: '5rem' }}>
           <div className="trayectoria-header">
             <h2>Trayectoria y Respaldo</h2>
             <div className="title-underline"></div>
@@ -63,32 +90,7 @@ const Equipo = () => {
           </div>
         </div>
 
-        <div className="trayectoria-header leaders-header">
-          <h2>Líderes de Proyecto</h2>
-          <div className="title-underline"></div>
-        </div>
 
-        <div className="equipo-grid">
-          {equipoMock.map((miembro) => (
-            <div className="equipo-card premium-card" key={miembro.id}>
-              <div className="equipo-card-header"></div>
-              <div className="miembro-img-wrapper">
-                <img src={miembro.imagen} alt={miembro.nombre} className="miembro-img" />
-              </div>
-              <div className="miembro-info">
-                <h3>{miembro.nombre}</h3>
-                <h4 className="miembro-cargo">{miembro.cargo}</h4>
-                <div className="title-underline-small"></div>
-                <p>{miembro.descripcion}</p>
-                {miembro.linkedin && (
-                  <a href={miembro.linkedin} target="_blank" rel="noopener noreferrer" className="linkedin-link">
-                    <IonIcon icon={logoLinkedin} /> Conectar
-                  </a>
-                )}
-              </div>
-            </div>
-          ))}
-        </div>
       </div>
     </div>
   );

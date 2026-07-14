@@ -1,8 +1,13 @@
 .equipo-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 3rem;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); /* Reducido de 320px para hacer cards más pequeñas */
+    gap: 2rem; /* Reducido de 3rem */
     margin-top: 3rem;
+
+    @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
 }
 
 .equipo-card {
@@ -25,10 +30,62 @@
             transform: scale(1.05);
         }
     }
+
+    /* Mobile/Tablet Horizontal Layout */
+    @media (max-width: 768px) {
+        flex-direction: row;
+        align-items: center;
+        text-align: left;
+        padding: 1rem !important;
+
+        .equipo-card-header {
+            display: none;
+        }
+
+        .miembro-img-wrapper {
+            width: 100px;
+            height: 100px;
+            margin: 0;
+            margin-right: 1rem;
+            border-width: 3px;
+            flex-shrink: 0;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .miembro-info {
+            padding: 0;
+            align-items: flex-start;
+            justify-content: center;
+
+            h3 {
+                font-size: 1.1rem;
+            }
+
+            .miembro-cargo {
+                font-size: 0.7rem;
+                margin-bottom: 0.5rem;
+            }
+
+            .title-underline-small {
+                margin: 0 0 0.5rem 0;
+            }
+
+            p {
+                font-size: 0.8rem;
+                margin-bottom: 0.8rem;
+                line-height: 1.4;
+            }
+
+            .linkedin-link {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.75rem;
+            }
+        }
+    }
 }
 
 .equipo-card-header {
-    height: 120px;
+    height: 100px; /* Aumentado un poco para la foto grande */
     background: var(--secondary-gradient);
     position: relative;
     
@@ -45,14 +102,14 @@
 }
 
 .miembro-img-wrapper {
-    width: 150px;
+    width: 150px; /* Aumentado de vuelta */
     height: 150px;
-    margin: -75px auto 1.5rem;
+    margin: -75px auto 1.2rem;
     border-radius: 50%;
     overflow: hidden;
-    border: 6px solid white;
+    border: 5px solid white; /* Borde un poco más grueso */
     background: white;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
     position: relative;
     z-index: 2;
 }
@@ -65,39 +122,39 @@
 }
 
 .miembro-info {
-    padding: 0 2rem 2.5rem;
+    padding: 0 1.5rem 2rem; /* Padding reducido */
     flex-grow: 1;
     display: flex;
     flex-direction: column;
 
     h3 {
-        font-size: 1.5rem;
+        font-size: 1.25rem; /* Reducido de 1.5rem */
         color: var(--secondary-color);
         font-weight: 700;
         margin-bottom: 0.2rem;
     }
 
     .miembro-cargo {
-        font-size: 0.95rem;
+        font-size: 0.75rem; /* Reducido de 0.85rem */
         color: var(--primary-color);
         font-weight: 600;
-        margin-bottom: 1.2rem;
+        margin-bottom: 1rem;
         text-transform: uppercase;
-        letter-spacing: 1px;
+        letter-spacing: 0.5px;
     }
 
     .title-underline-small {
-        width: 40px;
-        height: 3px;
+        width: 30px;
+        height: 2px;
         background: var(--secondary-color);
-        margin: 0 auto 1.2rem;
+        margin: 0 auto 1rem;
         border-radius: 2px;
     }
 
     p {
         color: var(--text-secondary-color);
-        line-height: 1.6;
-        font-size: 0.95rem;
+        line-height: 1.5;
+        font-size: 0.85rem; /* Reducido de 0.95rem para ser más resumen */
         flex-grow: 1;
         margin-bottom: 1.5rem;
     }
@@ -106,14 +163,14 @@
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        gap: 8px;
+        gap: 6px;
         background-color: #0077b5;
         color: white;
-        padding: 0.8rem 1.5rem;
+        padding: 0.6rem 1.2rem; /* Botón más pequeño */
         border-radius: 50px;
         text-decoration: none;
         font-weight: 600;
-        font-size: 0.95rem;
+        font-size: 0.85rem; /* Texto más pequeño */
         transition: all 0.3s ease;
         margin-top: auto;
         box-shadow: 0 4px 10px rgba(0, 119, 181, 0.2);

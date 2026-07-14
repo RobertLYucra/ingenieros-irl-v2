@@ -13,6 +13,7 @@ export interface Servicio {
   descripcionCorta: string;
   descripcionLarga: string;
   imagen: string;
+  vimeoId?: string;
   icono: React.ReactNode | string;
 }
 
@@ -23,6 +24,7 @@ export const serviciosMock: Servicio[] = [
     descripcionCorta: 'Estructuración, Análisis, Diseño, Dibujo y Memoria de cálculo.',
     descripcionLarga: 'Nuestra empresa busca lograr la estructura de edificaciones que no fallen en su vida útil. Para ello ofrecemos cumplir con los siguientes elementos de Diseño Estructural: Estructuración, Análisis, Diseño, Dibujo y Memoria de cálculo.',
     imagen: DiseñoEstructural,
+    vimeoId: '1209724622',
     icono: <IconDisenoEstructural size={32} />,
   },
   {

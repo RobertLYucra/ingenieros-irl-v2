@@ -38,6 +38,261 @@ export interface Proyecto {
 
 export const proyectosMock: Proyecto[] = [
   {
+    id: 'np1',
+    titulo: 'Análisis y Diseño Luxury - Hotel FK',
+    categoria: 'Diseño Estructural',
+    cliente: 'Privado',
+    ubicacion: 'Iquitos, Loreto, Perú',
+    estado: 'Completado',
+    descripcion: 'Análisis y diseño estructural del Hotel Luxury FK en Iquitos (Bloque A y B).',
+    imagen: '1209695707',
+    tipoMedia: 'vimeo',
+    galeria: [
+      { url: '1209695707', tipoMedia: 'vimeo' },
+      { url: '1209695710', tipoMedia: 'vimeo' }
+    ]
+  },
+  {
+    id: 'np2',
+    titulo: 'Estadio FK Club Iquitos',
+    categoria: 'Diseño Estructural',
+    cliente: 'Privado',
+    ubicacion: 'Iquitos, Perú',
+    estado: 'Completado',
+    descripcion: 'Análisis y diseño estructural del Estadio FK Club en Iquitos.',
+    imagen: '1209695636',
+    tipoMedia: 'vimeo',
+    galeria: [
+      { url: '1209695636', tipoMedia: 'vimeo' },
+      { url: '1209695630', tipoMedia: 'vimeo' },
+      { url: '1209695634', tipoMedia: 'vimeo' }
+    ]
+  },
+  {
+    id: 'np3',
+    titulo: 'Xtreme Cines Cusco',
+    categoria: 'Diseño Estructural',
+    cliente: 'Privado',
+    ubicacion: 'Cusco, Perú',
+    estado: 'Completado',
+    descripcion: 'Diseño estructural de instalaciones para Xtreme Cines en Cusco.',
+    imagen: '1209695680',
+    tipoMedia: 'vimeo',
+    galeria: [
+      { url: '1209695680', tipoMedia: 'vimeo' },
+      { url: '1209695679', tipoMedia: 'vimeo' },
+      { url: '1209695650', tipoMedia: 'vimeo' }
+    ]
+  },
+  {
+    id: 'np4',
+    titulo: 'Edificio Multifamiliar San Isidro',
+    categoria: 'Diseño Estructural',
+    cliente: 'Privado',
+    ubicacion: 'San Isidro, Lima, Perú',
+    estado: 'Completado',
+    descripcion: 'Análisis y diseño estructural de edificio multifamiliar en San Isidro.',
+    imagen: '1209695433',
+    tipoMedia: 'vimeo',
+    galeria: [
+      { url: '1209695433', tipoMedia: 'vimeo' },
+      { url: '1209695420', tipoMedia: 'vimeo' },
+      { url: '1209695435', tipoMedia: 'vimeo' }
+    ]
+  },
+  {
+    id: 'np5',
+    titulo: 'Edificio Multifamiliar Santa Anita',
+    categoria: 'Diseño Estructural',
+    cliente: 'Privado',
+    ubicacion: 'Santa Anita, Lima, Perú',
+    estado: 'Completado',
+    descripcion: 'Diseño estructural de edificación residencial multifamiliar en Santa Anita.',
+    imagen: '1209695621',
+    tipoMedia: 'vimeo',
+    galeria: [
+      { url: '1209695621', tipoMedia: 'vimeo' },
+      { url: '1209695434', tipoMedia: 'vimeo' }
+    ]
+  },
+  {
+    id: 'np6',
+    titulo: 'Edificio Multifamiliar Surco',
+    categoria: 'Diseño Estructural',
+    cliente: 'Privado',
+    ubicacion: 'Surco, Lima, Perú',
+    estado: 'Completado',
+    descripcion: 'Diseño estructural para edificio multifamiliar en Surco.',
+    imagen: '1209695457',
+    tipoMedia: 'vimeo',
+    galeria: [
+      { url: '1209695457', tipoMedia: 'vimeo' },
+      { url: '1209695455', tipoMedia: 'vimeo' }
+    ]
+  },
+  {
+    id: 'np7',
+    titulo: 'Edificio Multifamiliar JM',
+    categoria: 'Diseño Estructural',
+    cliente: 'Privado',
+    ubicacion: 'Cusco, Perú',
+    estado: 'Completado',
+    descripcion: 'Diseño de edificación multifamiliar JM.',
+    imagen: '1209695392',
+    tipoMedia: 'vimeo',
+    galeria: [
+      { url: '1209695392', tipoMedia: 'vimeo' },
+      { url: '1209695395', tipoMedia: 'vimeo' }
+    ]
+  },
+  {
+    id: 'np8',
+    titulo: 'Edificio Multifamiliar Lima',
+    categoria: 'Diseño Estructural',
+    cliente: 'Privado',
+    ubicacion: 'Lima, Perú',
+    estado: 'Completado',
+    descripcion: 'Diseño estructural de proyecto multifamiliar.',
+    imagen: '1209695393',
+    tipoMedia: 'vimeo',
+    galeria: [
+      { url: '1209695393', tipoMedia: 'vimeo' },
+      { url: '1209695461', tipoMedia: 'vimeo' }
+    ]
+  },
+  {
+    id: 'np9',
+    titulo: 'Refinamiento CCSF',
+    categoria: 'Diseño Estructural',
+    cliente: 'Privado',
+    ubicacion: 'Lima, Perú',
+    estado: 'Completado',
+    descripcion: 'Análisis y diseño de refinamiento CCSF.',
+    imagen: '1209695701',
+    tipoMedia: 'vimeo'
+  },
+  {
+    id: 'np10',
+    titulo: 'Dimensión Estructural de Maquinarias',
+    categoria: 'Diseño Estructural',
+    cliente: 'Privado',
+    ubicacion: 'Perú',
+    estado: 'Completado',
+    descripcion: 'Análisis y dimensión estructural de maquinarias pesadas.',
+    imagen: '1209695688',
+    tipoMedia: 'vimeo'
+  },
+  {
+    id: 'np11',
+    titulo: 'Centro Comercial RP - EEMM',
+    categoria: 'Diseño Estructural',
+    cliente: 'Privado',
+    ubicacion: 'Perú',
+    estado: 'Completado',
+    descripcion: 'Análisis estructural del Centro Comercial RP EEMM.',
+    imagen: '1209695713',
+    tipoMedia: 'vimeo'
+  },
+  {
+    id: 'np12',
+    titulo: 'Muros de Contención HL-93',
+    categoria: 'Diseño Estructural',
+    cliente: 'Privado',
+    ubicacion: 'Lima, Perú',
+    estado: 'Completado',
+    descripcion: 'Diseño de muros de contención HL-93.',
+    imagen: '1209695723',
+    tipoMedia: 'vimeo'
+  },
+  {
+    id: 'np13',
+    titulo: 'Edificio Multifamiliar AC',
+    categoria: 'Diseño Estructural',
+    cliente: 'Privado',
+    ubicacion: 'Lima, Perú',
+    estado: 'Completado',
+    descripcion: 'Diseño para el edificio multifamiliar AC en Lima.',
+    imagen: '1209695728',
+    tipoMedia: 'vimeo'
+  },
+  {
+    id: 'np14',
+    titulo: 'Edificio Multifamiliar SL',
+    categoria: 'Diseño Estructural',
+    cliente: 'Privado',
+    ubicacion: 'Lima, Perú',
+    estado: 'Completado',
+    descripcion: 'Diseño para el edificio multifamiliar SL.',
+    imagen: '1209695452',
+    tipoMedia: 'vimeo'
+  },
+  {
+    id: 'np15',
+    titulo: 'Edificio Multifamiliar San Borja',
+    categoria: 'Diseño Estructural',
+    cliente: 'Privado',
+    ubicacion: 'San Borja, Lima, Perú',
+    estado: 'Completado',
+    descripcion: 'Proyecto estructural de edificio en San Borja.',
+    imagen: '1209695394',
+    tipoMedia: 'vimeo'
+  },
+  {
+    id: 'np16',
+    titulo: 'Puente Compuesto - Arequipa (37m)',
+    categoria: 'Construcción',
+    cliente: 'Privado',
+    ubicacion: 'Arequipa, Perú',
+    estado: 'Completado',
+    descripcion: 'Diseño estructural de puente compuesto de 37 metros.',
+    imagen: '1209695652',
+    tipoMedia: 'vimeo'
+  },
+  {
+    id: 'np17',
+    titulo: 'SF Hotel',
+    categoria: 'Diseño Estructural',
+    cliente: 'Privado',
+    ubicacion: 'Lima, Perú',
+    estado: 'Completado',
+    descripcion: 'Diseño estructural para el SF Hotel.',
+    imagen: '1209695654',
+    tipoMedia: 'vimeo'
+  },
+  {
+    id: 'np18',
+    titulo: 'Simulación Colapso de Edificio ante Sismo',
+    categoria: 'Diseño Estructural',
+    cliente: 'Investigación',
+    ubicacion: 'Perú',
+    estado: 'Completado',
+    descripcion: 'Simulación del comportamiento y colapso de un edificio multifamiliar ante un evento sísmico.',
+    imagen: '1209695657',
+    tipoMedia: 'vimeo'
+  },
+  {
+    id: 'np19',
+    titulo: 'Proyecto Estructural (Video 5)',
+    categoria: 'Diseño Estructural',
+    cliente: 'Privado',
+    ubicacion: 'Perú',
+    estado: 'Completado',
+    descripcion: 'Recorrido estructural del proyecto.',
+    imagen: '1209695666',
+    tipoMedia: 'vimeo'
+  },
+  {
+    id: 'np20',
+    titulo: 'Proyecto Estructural (Video 6)',
+    categoria: 'Diseño Estructural',
+    cliente: 'Privado',
+    ubicacion: 'Perú',
+    estado: 'Completado',
+    descripcion: 'Recorrido estructural del proyecto.',
+    imagen: '1209695674',
+    tipoMedia: 'vimeo'
+  },
+  {
     id: 'v1',
     titulo: 'Diseño Estructural de una Vivienda Multifamiliar',
     categoria: 'Diseño Estructural',
@@ -274,5 +529,5 @@ export const proyectosMock: Proyecto[] = [
     estado: 'Completado',
     descripcion: 'Análisis y diseño estructural de tramoya de un auditorio para el MINEDU.',
     imagen: Img22,
-  }
+  },
 ];

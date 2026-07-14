@@ -6,6 +6,8 @@ import {
   mailOutline,
   logoWhatsapp,
   timeOutline,
+  logoInstagram,
+  logoLinkedin,
 } from "ionicons/icons";
 import { useEffect } from "react";
 
@@ -92,14 +94,40 @@ const Contacto = () => {
                 </div>
               </div>
 
-              <a
-                href="https://wa.me/51987654321"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="whatsapp-btn-large"
-              >
-                <IonIcon icon={logoWhatsapp} /> Escribir al WhatsApp
-              </a>
+              <div className="contact-actions">
+                <a
+                  href="https://wa.me/51987654321"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="whatsapp-btn-large"
+                >
+                  <IonIcon icon={logoWhatsapp} /> Escribir al WhatsApp
+                </a>
+
+                <div className="social-links-contact">
+                  <h4>Síguenos en redes</h4>
+                  <div className="social-icons">
+                    <a
+                      href="https://instagram.com"
+                      target="_blank"
+                      rel="noreferrer"
+                      aria-label="Instagram"
+                      className="instagram-link"
+                    >
+                      <IonIcon icon={logoInstagram} />
+                    </a>
+                    <a
+                      href="https://linkedin.com"
+                      target="_blank"
+                      rel="noreferrer"
+                      aria-label="LinkedIn"
+                      className="linkedin-link"
+                    >
+                      <IonIcon icon={logoLinkedin} />
+                    </a>
+                  </div>
+                </div>
+              </div>
             </div>
 
             {/* Form Column */}

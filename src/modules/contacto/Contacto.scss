@@ -71,27 +71,87 @@
         }
     }
 
-    .whatsapp-btn-large {
-        display: inline-flex;
-        align-items: center;
-        gap: 10px;
-        background-color: #25d366;
-        /* WhatsApp Green */
-        color: white;
-        padding: 1rem 2rem;
-        border-radius: 50px;
-        font-weight: 700;
-        text-decoration: none;
-        box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
-        transition: transform 0.3s ease;
+    .contact-actions {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
 
-        &:hover {
-            transform: translateY(-3px);
-            background-color: #20bd5a;
+        .whatsapp-btn-large {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background-color: #25d366;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 700;
+            text-decoration: none;
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+            transition: transform 0.3s ease;
+            max-width: max-content;
+
+            &:hover {
+                transform: translateY(-3px);
+                background-color: #20bd5a;
+            }
+
+            ion-icon {
+                font-size: 1.5rem;
+            }
         }
 
-        ion-icon {
-            font-size: 1.5rem;
+        .social-links-contact {
+            h4 {
+                font-size: 1.1rem;
+                font-weight: 700;
+                margin-bottom: 1rem;
+                color: var(--text-primary-color);
+            }
+
+            .social-icons {
+                display: flex;
+                gap: 1rem;
+
+                a {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    width: 45px;
+                    height: 45px;
+                    border-radius: 50%;
+                    background-color: white;
+                    color: #777; /* Default color */
+                    font-size: 1.5rem;
+                    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+                    transition: all 0.3s ease;
+                    text-decoration: none;
+
+                    /* Instagram colors */
+                    &.instagram-link {
+                        color: #E1306C;
+                        
+                        &:hover {
+                            transform: translateY(-3px);
+                            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+                            color: white;
+                            box-shadow: 0 8px 15px rgba(225, 48, 108, 0.3);
+                        }
+                    }
+
+                    /* LinkedIn colors */
+                    &.linkedin-link {
+                        color: #0A66C2;
+
+                        &:hover {
+                            transform: translateY(-3px);
+                            background-color: #0A66C2;
+                            color: white;
+                            box-shadow: 0 8px 15px rgba(10, 102, 194, 0.3);
+                        }
+                    }
+                }
+            }
         }
     }
 }

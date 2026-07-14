@@ -99,6 +99,12 @@ const Navbar = () => {
                       <IonIcon className="icon" icon={arrowForward} />
                     </li>
                   ))}
+                  <li className="etiquetas mobile-only-link">
+                    <a href="contacto" onClick={() => setIsOpen(false)}>
+                      Contacto
+                    </a>
+                    <IonIcon className="icon" icon={arrowForward} />
+                  </li>
                 </ul>
 
                 {/* Content to fill empty space */}

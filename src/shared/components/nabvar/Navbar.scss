@@ -67,33 +67,32 @@
 /* Navigation Links */
 .links {
   display: flex;
-  gap: 10px;
-  /* Modern spacing using gap */
+  gap: 2.5rem;
+  /* Increased spacing between links for better breathing room */
   margin-right: 0;
   transition: 0.5s ease;
   justify-content: center;
   align-items: center;
   list-style: none;
-  /* Ensure no bullets */
 
   .etiquetas {
     margin: 0;
-    /* Remove old margins */
     font-family: var(--primary-font);
     display: flex;
     justify-content: center;
     align-items: center;
 
     /* Modern Typography */
-    font-weight: 500;
-    letter-spacing: 0.5px;
-    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.8px;
+    font-size: 1rem;
+    text-transform: capitalize;
 
     a {
       color: inherit;
       text-decoration: none;
       position: relative;
-      padding: 5px 0;
+      padding: 8px 0;
       color: rgba(255, 255, 255, 0.95); /* White on transparent bg */
       transition: color 0.3s ease;
 
@@ -104,7 +103,8 @@
         height: 2px;
         background-color: var(--primary-color);
         bottom: 0;
-        left: 0;
+        left: 50%;
+        transform: translateX(-50%);
         transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       }
 
@@ -120,6 +120,10 @@
     .icon {
       display: none;
     }
+  }
+
+  .mobile-only-link {
+    display: none;
   }
 }
 
@@ -488,6 +492,10 @@ nav.scrolled {
             padding-left: 18px;
           }
         }
+      }
+      
+      .mobile-only-link {
+        display: flex;
       }
     }
   }

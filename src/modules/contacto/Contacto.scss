@@ -1,6 +1,19 @@
 /* Contact Page Styles */
 
 
+.contact-page {
+    &, * {
+        box-sizing: border-box;
+    }
+
+    .contact-content.section-padding {
+        @media (max-width: 768px) {
+            padding-left: 0;
+            padding-right: 0;
+        }
+    }
+}
+
 .contact-content {
     background-color: #f8f9fa;
 }
@@ -28,6 +41,11 @@
         color: var(--text-secondary-color);
         margin-bottom: 3rem;
         line-height: 1.6;
+
+        @media (max-width: 768px) {
+            font-size: 1rem;
+            margin-bottom: 2rem;
+        }
     }
 
     .contact-details {
@@ -35,6 +53,11 @@
         flex-direction: column;
         gap: 2rem;
         margin-bottom: 3rem;
+
+        @media (max-width: 768px) {
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
 
         .detail-item {
             display: flex;
@@ -164,6 +187,11 @@
         box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
         border: 1px solid rgba(0, 0, 0, 0.03);
 
+        @media (max-width: 768px) {
+            padding: 1.5rem;
+            border-radius: 12px;
+        }
+
         h3 {
             font-size: 1.8rem;
             font-weight: 800;
@@ -171,6 +199,11 @@
             color: var(--secondary-color);
             position: relative;
             display: inline-block;
+            
+            @media (max-width: 768px) {
+                font-size: 1.5rem;
+                margin-bottom: 1.5rem;
+            }
             
             &::after {
                 content: '';
@@ -204,6 +237,8 @@
                 input,
                 select,
                 textarea {
+                    width: 100%;
+                    box-sizing: border-box;
                     padding: 1rem 1.2rem;
                     border: 1px solid #e1e5eb;
                     border-radius: 8px;

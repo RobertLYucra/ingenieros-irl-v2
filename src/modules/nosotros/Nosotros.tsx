@@ -3,12 +3,9 @@ import "./Nosotros.scss";
 import { IconMision, IconVision, IconShieldCheck, IconConstruccion, IconDisenoEstructural, IconSupervision } from "../../shared/components/icons/Icons";
 import HeroBg from "../../shared/images/ai-generated/project_3.webp";
 import HistoriaMainImg from "../../shared/images/servicios/supervicion.webp";
-import HistoriaImg2 from "../../shared/images/servicios/diseño-estructural.webp";
+
 
 import PageHero from "../../shared/components/page-hero/PageHero";
-import Team1 from "../../shared/images/ai-generated/team_1.webp";
-import Team2 from "../../shared/images/ai-generated/team_2.webp";
-import Team3 from "../../shared/images/ai-generated/team_3.webp";
 
 const Nosotros = () => {
   useEffect(() => {
@@ -19,7 +16,7 @@ const Nosotros = () => {
     <div className="page-container bg-light nosotros-page">
       <PageHero 
         title="Sobre Nosotros" 
-        subtitle="Más de 9 años construyendo el futuro con bases sólidas y visión innovadora."
+        subtitle="Más de 12 años construyendo el futuro con bases sólidas y visión innovadora."
         bgImage={HeroBg} 
       />
 
@@ -35,7 +32,7 @@ const Nosotros = () => {
               </div>
             </div>
             <div className="img-secondary-wrapper">
-              <img src={HistoriaImg2} alt="Proyecto en construcción" className="historia-img secondary-img" />
+              <img src={HeroBg} alt="Proyecto en construcción" className="historia-img secondary-img" />
               <div className="pattern-dots"></div>
             </div>
           </div>
@@ -126,66 +123,6 @@ const Nosotros = () => {
         </div>
       </section>
 
-      {/* Equipo Section */}
-      <section className="equipo-section section-padding bg-light">
-        <div className="content-wrapper text-center">
-          <h2 className="section-title">Nuestro Equipo Directivo</h2>
-          <div className="title-underline"></div>
-          <p className="section-description">
-            Contamos con especialistas de primer nivel, comprometidos con la excelencia, la seguridad y la innovación en cada proyecto estructural.
-          </p>
-
-          <div className="equipo-grid">
-            <div className="team-card">
-              <div className="team-img-wrapper">
-                <img src={Team1} alt="Ing. Carlos Mendoza" className="team-img" />
-                <div className="team-socials">
-                  <a href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></a>
-                  <a href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg></a>
-                </div>
-              </div>
-              <div className="team-info">
-                <h3>Ing. Carlos Mendoza</h3>
-                <span>Director de Proyectos</span>
-              </div>
-            </div>
-
-            <div className="team-card">
-              <div className="team-img-wrapper">
-                <img src={Team2} alt="Arq. Valeria Ríos" className="team-img" />
-                <div className="team-socials">
-                  <a href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></a>
-                  <a href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg></a>
-                </div>
-              </div>
-              <div className="team-info">
-                <h3>Arq. Valeria Ríos</h3>
-                <span>Jefa de Arquitectura</span>
-              </div>
-            </div>
-
-            <div className="team-card">
-              <div className="team-img-wrapper">
-                <img src={Team3} alt="Ing. Roberto Yucra" className="team-img" />
-                <div className="team-socials">
-                  <a href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></a>
-                  <a href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg></a>
-                </div>
-              </div>
-              <div className="team-info">
-                <h3>Ing. Roberto Yucra</h3>
-                <span>Gerente General</span>
-              </div>
-            </div>
-          </div>
-          
-          <div className="center-btn" style={{ marginTop: '3rem', textAlign: 'center' }}>
-            <a href="/equipo" className="btn-primary">
-              Conoce a nuestro equipo completo
-            </a>
-          </div>
-        </div>
-      </section>
 
       {/* Valores Section */}
       <div className="content-wrapper section-padding">

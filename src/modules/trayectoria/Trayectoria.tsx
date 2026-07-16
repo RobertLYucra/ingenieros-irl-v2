@@ -154,7 +154,7 @@ const Trayectoria = () => {
     <div className="page-container bg-light">
       <PageHero 
         title="Nuestra Trayectoria"
-        subtitle="En los últimos 9 años, hemos participado en una amplia variedad de proyectos de construcción y diseño estructural. Destacamos por haber participado en proyectos emblemáticos como la Línea 1 y 2 del Metro de Lima, el Puente Nanay y los centros comerciales más grandes del Perú."
+        subtitle="En los últimos 12 años, hemos participado en una amplia variedad de proyectos de construcción y diseño estructural. Destacamos por haber participado en proyectos emblemáticos como la Línea 1 y 2 del Metro de Lima, el Puente Nanay y los centros comerciales más grandes del Perú."
         bgImage={BannerImg}
       />
       <div className="content-wrapper section-padding">

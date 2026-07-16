@@ -108,7 +108,7 @@ const Contacto = () => {
                   <h4>Síguenos en redes</h4>
                   <div className="social-icons">
                     <a
-                      href="https://instagram.com"
+                      href="https://instagram.com/ryrodas"
                       target="_blank"
                       rel="noreferrer"
                       aria-label="Instagram"
@@ -117,7 +117,7 @@ const Contacto = () => {
                       <IonIcon icon={logoInstagram} />
                     </a>
                     <a
-                      href="https://linkedin.com"
+                      href="https://www.linkedin.com/in/romulo-yucra-rodas/"
                       target="_blank"
                       rel="noreferrer"
                       aria-label="LinkedIn"

@@ -74,13 +74,13 @@ const Inicio = () => {
 
         {/* Social Sidebar */}
         <motion.div variants={fadeInUp} className="hero-socials" initial="hidden" animate="visible">
-          <a href="#" title="Facebook">
+          <a href="https://www.facebook.com/yucrarodas" target="_blank" rel="noopener noreferrer" title="Facebook">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
           </a>
-          <a href="#" title="LinkedIn">
+          <a href="https://www.linkedin.com/in/romulo-yucra-rodas/" target="_blank" rel="noopener noreferrer" title="LinkedIn">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
           </a>
-          <a href="#" title="Mail">
+          <a href="mailto:[EMAIL_ADDRESS]" title="Mail">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
           </a>
           <div className="social-line"></div>
@@ -111,34 +111,48 @@ const Inicio = () => {
           initial="hidden"
           animate="visible"
         >
-          <motion.div variants={fadeInUp} className="hero-badge">
-            <span style={{ color: 'var(--primary-color)' }}>•</span>
-            <AnimatePresence mode="wait">
-              <motion.span
-                key={currentServiceIndex}
-                initial={{ opacity: 0, y: 15 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -15 }}
-                transition={{ duration: 0.3 }}
-                className="hero-badge-text"
-              >
-                {servicesList[currentServiceIndex].toUpperCase()}
-              </motion.span>
-            </AnimatePresence>
-          </motion.div>
-          <motion.h1 variants={fadeInUp} className="hero-title">
-            YR INGENIEROS E.I.R.L.
-          </motion.h1>
-          <motion.p variants={fadeInUp} className="hero-subtitle">
-            Especialistas en diseño, supervisión y gestión de proyectos con 9 años de experiencia a nivel nacional. Diseñamos tu sueño y construimos tu futuro.
-          </motion.p>
-          <motion.div variants={fadeInUp} className="hero-actions">
-            <a href="/servicios" className="btn-primary hero-btn">
-              Nuestros Servicios
-            </a>
-            <a href="/proyectos" className="btn-secondary hero-btn">
-              Ver Proyectos
-            </a>
+          <div className="hero-text-column">
+            <motion.div variants={fadeInUp} className="hero-badge">
+              <span style={{ color: 'var(--primary-color)' }}>•</span>
+              <AnimatePresence mode="wait">
+                <motion.span
+                  key={currentServiceIndex}
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -15 }}
+                  transition={{ duration: 0.3 }}
+                  className="hero-badge-text"
+                >
+                  {servicesList[currentServiceIndex].toUpperCase()}
+                </motion.span>
+              </AnimatePresence>
+            </motion.div>
+            <motion.h1 variants={fadeInUp} className="hero-title">
+              YR INGENIEROS E.I.R.L.
+            </motion.h1>
+            <motion.p variants={fadeInUp} className="hero-subtitle">
+              Especialistas en diseño, supervisión y gestión de proyectos con mas de 12 años de experiencia a nivel nacional. Diseñamos tu sueño y construimos tu futuro.
+            </motion.p>
+            <motion.div variants={fadeInUp} className="hero-actions">
+              <a href="/servicios" className="btn-primary hero-btn">
+                Nuestros Servicios
+              </a>
+              <a href="/proyectos" className="btn-secondary hero-btn">
+                Ver Proyectos
+              </a>
+            </motion.div>
+          </div>
+
+          <motion.div variants={fadeInUp} className="hero-video-column">
+            <div className="video-wrapper">
+              <iframe 
+                src="https://player.vimeo.com/video/1209736456?background=1&autoplay=1&loop=1&byline=0&title=0&muted=1" 
+                style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }} 
+                frameBorder="0" 
+                allow="autoplay; fullscreen; picture-in-picture" 
+                allowFullScreen>
+              </iframe>
+            </div>
           </motion.div>
         </motion.div>
       </section>
@@ -192,17 +206,19 @@ const Inicio = () => {
             viewport={{ once: true, margin: "-100px" }}
           >
             {serviciosMock.slice(0, 4).map((servicio) => (
-              <motion.div variants={fadeInUp} className="premium-card service-card poster-card" key={servicio.id}>
-                <div className="card-image-wrapper">
+              <motion.div variants={fadeInUp} className="service-card-modern" key={servicio.id}>
+                <div className="card-image-header">
                   <img src={servicio.imagen} alt={servicio.titulo} className="service-img" />
-                  <div className="card-overlay"></div>
                 </div>
-                <div className="card-content">
-                  <div className="card-icon">{servicio.icono}</div>
+                <div className="card-icon-floating">{servicio.icono}</div>
+                <div className="card-content-body">
                   <h3>{servicio.titulo}</h3>
-                  <div className="hover-reveal">
-                    <p>{servicio.descripcionCorta}</p>
-                    <a href="/servicios" className="service-link">Leer más &rarr;</a>
+                  <p>{servicio.descripcionCorta}</p>
+                  <div className="card-footer">
+                    <a href="/servicios" className="service-link-btn">
+                      <span>Leer más</span>
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </a>
                   </div>
                 </div>
               </motion.div>

@@ -254,6 +254,7 @@ nav.scrolled {
 
 @media screen and (max-width: 1400px) {
   .links {
+    gap: 1rem;
     .etiquetas {
       font-size: 14px;
       margin: 10px;
@@ -271,6 +272,7 @@ nav.scrolled {
 
 @media screen and (max-width: 1152px) {
   .links {
+    gap: 0.5rem;
     .etiquetas {
       font-size: 12px;
     }
@@ -286,6 +288,10 @@ nav.scrolled {
 }
 
 @media screen and (max-width: 1006px) {
+  .links {
+    gap: 2px;
+  }
+
   .main-nav {
     .menu {
       display: flex;
@@ -493,7 +499,7 @@ nav.scrolled {
           }
         }
       }
-      
+
       .mobile-only-link {
         display: flex;
       }

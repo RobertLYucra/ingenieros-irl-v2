@@ -33,6 +33,9 @@ const Footer = () => {
               />
             </a>
             <p className="footer-description">
+              <strong style={{ display: 'block', marginBottom: '10px', fontSize: '1.15rem', fontStyle: 'italic', color: 'var(--primary-color)' }}>
+                "Diseñamos tu sueño y construimos tu futuro"
+              </strong>
               Construcción e ingeniería de excelencia para el desarrollo del
               Perú. Brindamos soluciones integrales y sostenibles.
             </p>

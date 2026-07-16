@@ -8,6 +8,7 @@ import Servicios from "./modules/servicios/Servicios";
 import Trayectoria from "./modules/trayectoria/Trayectoria";
 import Equipo from "./modules/equipo/Equipo";
 import Contacto from "./modules/contacto/Contacto";
+import NotFound from "./modules/not-found/NotFound";
 
 function App() {
   return (
@@ -23,6 +24,8 @@ function App() {
             <Route path="/proyectos" element={<Trayectoria />}></Route>
             <Route path="/equipo" element={<Equipo />}></Route>
             <Route path="/contacto" element={<Contacto />}></Route>
+            {/* Rutas no encontradas */}
+            <Route path="*" element={<NotFound />}></Route>
             {/* Temporary mapping just to scroll to footer or similar */}
           </Routes>
         </div>

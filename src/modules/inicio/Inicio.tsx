@@ -130,8 +130,11 @@ const Inicio = () => {
             <motion.h1 variants={fadeInUp} className="hero-title">
               YR INGENIEROS E.I.R.L.
             </motion.h1>
+            <motion.h2 variants={fadeInUp} className="hero-motto">
+              "Diseñamos tu sueño y construimos tu futuro"
+            </motion.h2>
             <motion.p variants={fadeInUp} className="hero-subtitle">
-              Especialistas en diseño, supervisión y gestión de proyectos con mas de 12 años de experiencia a nivel nacional. Diseñamos tu sueño y construimos tu futuro.
+              Especialistas en diseño, supervisión y gestión de proyectos con más de 12 años de experiencia a nivel nacional.
             </motion.p>
             <motion.div variants={fadeInUp} className="hero-actions">
               <a href="/servicios" className="btn-primary hero-btn">

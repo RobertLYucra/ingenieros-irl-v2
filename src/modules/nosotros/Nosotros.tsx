@@ -16,7 +16,7 @@ const Nosotros = () => {
     <div className="page-container bg-light nosotros-page">
       <PageHero 
         title="Sobre Nosotros" 
-        subtitle="Más de 12 años construyendo el futuro con bases sólidas y visión innovadora."
+        subtitle="Más de 18 años construyendo el futuro con bases sólidas y visión innovadora."
         bgImage={HeroBg} 
       />
 

@@ -163,7 +163,7 @@ const Inicio = () => {
               "Diseñamos tu sueño y construimos tu futuro"
             </motion.h2>
             <motion.p variants={fadeInUp} className="hero-subtitle">
-              Especialistas en diseño, supervisión y gestión de proyectos con más de 12 años de experiencia a nivel nacional.
+              Especialistas en diseño, supervisión y gestión de proyectos con más de 18 años de experiencia a nivel nacional.
             </motion.p>
             <motion.div variants={fadeInUp} className="hero-actions">
               <a href="/servicios" className="btn-primary hero-btn">

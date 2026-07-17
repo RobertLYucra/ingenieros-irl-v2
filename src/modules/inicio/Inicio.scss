@@ -1,3 +1,73 @@
+/* Lightbox Modal Styles */
+.video-lightbox-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(10, 15, 30, 0.95);
+  backdrop-filter: blur(10px);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+
+  .lightbox-content {
+    position: relative;
+    width: 100%;
+    max-width: 1000px;
+    background: #000;
+    border-radius: 12px;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+    overflow: visible;
+
+    .close-lightbox-btn {
+      position: absolute;
+      top: -40px;
+      right: -40px;
+      background: rgba(255,255,255,0.1);
+      color: white;
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      &:hover {
+        background: var(--primary-color);
+        transform: scale(1.1);
+      }
+      
+      @media (max-width: 768px) {
+        top: -45px;
+        right: 0;
+      }
+    }
+
+    .lightbox-video-wrapper {
+      position: relative;
+      padding-bottom: 56.25%; /* 16:9 */
+      height: 0;
+      overflow: hidden;
+      border-radius: 12px;
+
+      iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+}
+
 /* Hero Section Styles */
 .hero-section {
   position: relative;
@@ -42,12 +112,13 @@
     margin: 0 auto;
     text-align: left;
     display: flex;
-    align-items: center;
+    align-items: stretch; /* Stretch children to have equal height */
     gap: 4rem;
     justify-content: space-between;
 
     @media (max-width: 992px) {
       flex-direction: column;
+      align-items: center; /* Revert to center for mobile stack */
       gap: 3rem;
       text-align: center;
     }
@@ -65,29 +136,134 @@
     }
 
     .hero-video-column {
-      flex: 0.8;
+      flex: 1;
       width: 100%;
-      max-width: 480px;
+      max-width: 600px;
+      display: flex;
+      align-items: center; /* Center vertically within the stretched column */
+      justify-content: center;
 
       @media (max-width: 992px) {
         max-width: 100%;
         flex: 1;
       }
 
-      .video-wrapper {
+      .video-thumbnail-wrapper {
         position: relative;
         width: 100%;
-        max-width: 400px;
+        max-width: 550px;
         margin: 0 auto;
-        aspect-ratio: 4 / 3.5;
+        border-radius: 20px;
         overflow: hidden;
-        border-radius: 16px;
+        cursor: pointer;
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(15px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
         box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-        border: 1px solid rgba(255,255,255,0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        padding: 1.5rem;
 
-        @media (max-width: 768px) {
-          aspect-ratio: 16 / 10;
+        &:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 25px 50px rgba(0,0,0,0.7);
+
+          .video-card-right .video-thumbnail-img {
+            transform: scale(1.05);
+          }
+
+          .play-button-circle {
+            background: #ff2a2a;
+            transform: scale(1.1);
+          }
+        }
+
+        .video-card-content {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 1.5rem;
+          height: 100%;
+        }
+
+        .video-card-left {
+          flex: 0.45;
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          justify-content: center;
+          gap: 1.5rem;
+          padding-left: 0.5rem;
+
+          .video-card-title {
+            font-size: 1.25rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            color: #ffffff;
+            margin: 0;
+            line-height: 1.2;
+          }
+
+          .play-button-circle {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px rgba(190, 21, 34, 0.4);
+
+            svg {
+              width: 24px;
+              height: 24px;
+              color: #0b1120;
+              margin-left: 4px; /* visually center the play triangle */
+            }
+          }
+        }
+
+        .video-card-right {
+          flex: 0.55;
+          height: 260px;
+          border-radius: 16px;
+          overflow: hidden;
+          position: relative;
+          box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+
+          .video-thumbnail-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+          }
+        }
+
+        @media (max-width: 992px) {
           max-width: 100%;
+          padding: 1.5rem;
+
+          .video-card-content {
+            gap: 1rem;
+          }
+
+          .video-card-right {
+            height: 200px;
+          }
+          
+          .video-card-left {
+            .video-card-title {
+              font-size: 1.1rem;
+            }
+            .play-button-circle {
+              width: 50px;
+              height: 50px;
+              svg {
+                width: 20px;
+                height: 20px;
+              }
+            }
+          }
         }
       }
     }
@@ -278,8 +454,9 @@
 
     .stat-label {
       font-size: 1rem;
-      font-weight: 500;
-      opacity: 0.9;
+      font-weight: 600;
+      color: #ffffff;
+      opacity: 1;
       text-transform: uppercase;
       letter-spacing: 1px;
 

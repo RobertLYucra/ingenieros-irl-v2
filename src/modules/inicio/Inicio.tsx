@@ -3,6 +3,7 @@ import { motion, AnimatePresence, type Variants } from "framer-motion";
 import "./Inicio.scss";
 import HeroImage from "../../shared/images/ai-generated/hero_bg.webp";
 import TechImg from "../../shared/images/ai-generated/bim1.webp";
+import VideoThumb from "../../shared/images/servicios/Obras de construcción en avance.png";
 
 import { serviciosMock } from "../../shared/data/servicios";
 import { IconCheck } from "../../shared/components/icons/Icons";
@@ -38,6 +39,7 @@ const zoomInfinite: Variants = {
 
 const Inicio = () => {
   const [currentServiceIndex, setCurrentServiceIndex] = useState(0);
+  const [isVideoOpen, setIsVideoOpen] = useState(false);
   const servicesList = ["Diseño Estructural", "Supervisión", "Gestión", "Construcción"];
 
   useEffect(() => {
@@ -53,6 +55,33 @@ const Inicio = () => {
 
   return (
     <div className="inicio-container">
+      {/* Lightbox Modal */}
+      <AnimatePresence>
+        {isVideoOpen && (
+          <motion.div 
+            className="video-lightbox-overlay"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setIsVideoOpen(false)}
+          >
+            <div className="lightbox-content" onClick={(e) => e.stopPropagation()}>
+              <button className="close-lightbox-btn" onClick={() => setIsVideoOpen(false)}>
+                ✕
+              </button>
+              <div className="lightbox-video-wrapper">
+                <iframe 
+                  src="https://player.vimeo.com/video/1210751660?autoplay=1&color=be1522&title=0&byline=0&portrait=0" 
+                  frameBorder="0" 
+                  allow="autoplay; fullscreen; picture-in-picture" 
+                  allowFullScreen
+                ></iframe>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* Hero Section */}
       <section className="hero-section" style={{ overflow: 'hidden' }}>
         <motion.div 
@@ -147,14 +176,22 @@ const Inicio = () => {
           </div>
 
           <motion.div variants={fadeInUp} className="hero-video-column">
-            <div className="video-wrapper">
-              <iframe 
-                src="https://player.vimeo.com/video/1209736456?background=1&autoplay=1&loop=1&byline=0&title=0&muted=1" 
-                style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }} 
-                frameBorder="0" 
-                allow="autoplay; fullscreen; picture-in-picture" 
-                allowFullScreen>
-              </iframe>
+            <div className="video-thumbnail-wrapper" onClick={() => setIsVideoOpen(true)}>
+              <div className="video-card-content">
+                <div className="video-card-left">
+                  <h3 className="video-card-title">MIRA EL VIDEO</h3>
+                  <div className="play-button-circle">
+                    <svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                  </div>
+                </div>
+                <div className="video-card-right">
+                  <img 
+                    src={VideoThumb} 
+                    alt="Presentación 3D" 
+                    className="video-thumbnail-img" 
+                  />
+                </div>
+              </div>
             </div>
           </motion.div>
         </motion.div>

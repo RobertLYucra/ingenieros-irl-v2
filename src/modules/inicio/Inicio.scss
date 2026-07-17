@@ -172,7 +172,8 @@
           }
 
           .play-button-circle {
-            background: #ff2a2a;
+            background: var(--primary-color);
+            filter: brightness(1.2);
             transform: scale(1.1);
           }
         }

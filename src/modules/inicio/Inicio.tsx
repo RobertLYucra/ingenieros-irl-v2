@@ -71,7 +71,7 @@ const Inicio = () => {
               </button>
               <div className="lightbox-video-wrapper">
                 <iframe 
-                  src="https://player.vimeo.com/video/1210751660?autoplay=1&color=be1522&title=0&byline=0&portrait=0" 
+                  src="https://player.vimeo.com/video/1210936572?autoplay=1&color=be1522&title=0&byline=0&portrait=0" 
                   frameBorder="0" 
                   allow="autoplay; fullscreen; picture-in-picture" 
                   allowFullScreen

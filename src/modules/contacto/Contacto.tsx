@@ -68,7 +68,7 @@ const Contacto = () => {
                   </div>
                   <div className="info-text">
                     <h4>Teléfonos</h4>
-                    <p>+51 954 185 870</p>
+                    <p>++51 932 711 516</p>
                   </div>
                 </div>
 

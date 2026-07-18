@@ -1,4 +1,6 @@
 import "./App.scss";
+import { IonIcon } from "@ionic/react";
+import { logoWhatsapp } from "ionicons/icons";
 import Navbar from "./shared/components/nabvar/Navbar";
 import { Route, Routes } from "react-router-dom";
 import Footer from "./shared/components/footer/Footer";
@@ -30,6 +32,15 @@ function App() {
           </Routes>
         </div>
       </div>
+      <a
+        href="https://wa.me/51932711516"
+        className="whatsapp-float-btn"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Contáctanos por WhatsApp"
+      >
+        <IonIcon icon={logoWhatsapp} />
+      </a>
       <Footer />
     </>
   );

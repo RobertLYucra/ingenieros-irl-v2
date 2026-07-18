@@ -9,7 +9,7 @@ import {
   logoInstagram,
   logoLinkedin,
 } from "ionicons/icons";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import PageHero from "../../shared/components/page-hero/PageHero";
 import BannerImg from "../../shared/images/trabajos/IMG_1445.webp";
@@ -19,10 +19,50 @@ const Contacto = () => {
     document.title = "Contáctanos - YR INGENIEROS E.I.R.L.";
   }, []);
 
-  const sendMessage = (e: React.FormEvent) => {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    serviceType: "",
+    message: ""
+  });
+  const [isLoading, setIsLoading] = useState(false);
+  const [feedback, setFeedback] = useState<{ type: 'success' | 'error', text: string } | null>(null);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+    const { id, value } = e.target;
+    const key = id === 'service' ? 'serviceType' : id;
+    setFormData(prev => ({ ...prev, [key]: value }));
+  };
+
+  const sendMessage = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Here you would implement the actual email sending logic
-    alert("Gracias por su mensaje. Nos pondremos en contacto a la brevedad.");
+    setIsLoading(true);
+    setFeedback(null);
+
+    try {
+      const response = await fetch("https://i94peifbw6.execute-api.us-east-2.amazonaws.com/test/api-email-sender/email-sender/quote", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(formData)
+      });
+
+      const data = await response.json();
+
+      if (response.ok && data.success) {
+        setFeedback({ type: 'success', text: data.message || "Cotización enviada correctamente" });
+        setFormData({ name: "", email: "", phone: "", serviceType: "", message: "" });
+      } else {
+        setFeedback({ type: 'error', text: data.message || "Hubo un error al enviar el mensaje. Por favor, intente nuevamente." });
+      }
+    } catch (error) {
+      console.error("Error enviando correo:", error);
+      setFeedback({ type: 'error', text: "Hubo un error de conexión. Por favor, verifique su internet e intente nuevamente." });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -96,7 +136,7 @@ const Contacto = () => {
 
               <div className="contact-actions">
                 <a
-                  href="https://wa.me/51987654321"
+                  href="https://wa.me/+51932711516"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="whatsapp-btn-large"
@@ -135,11 +175,19 @@ const Contacto = () => {
               <div className="form-card">
                 <h3>Solicitar Cotización</h3>
                 <form onSubmit={sendMessage}>
+                  {feedback && (
+                    <div className={`feedback-message ${feedback.type}`} style={{ padding: '10px', marginBottom: '15px', borderRadius: '5px', backgroundColor: feedback.type === 'success' ? '#d4edda' : '#f8d7da', color: feedback.type === 'success' ? '#155724' : '#721c24' }}>
+                      {feedback.text}
+                    </div>
+                  )}
+
                   <div className="form-group">
                     <label htmlFor="name">Nombre Completo</label>
                     <input
                       type="text"
                       id="name"
+                      value={formData.name}
+                      onChange={handleChange}
                       placeholder="Ingrese su nombre"
                       required
                     />
@@ -151,6 +199,8 @@ const Contacto = () => {
                       <input
                         type="email"
                         id="email"
+                        value={formData.email}
+                        onChange={handleChange}
                         placeholder="ejemplo@correo.com"
                         required
                       />
@@ -160,6 +210,8 @@ const Contacto = () => {
                       <input
                         type="tel"
                         id="phone"
+                        value={formData.phone}
+                        onChange={handleChange}
                         placeholder="+51 999 999 999"
                         required
                       />
@@ -168,17 +220,17 @@ const Contacto = () => {
 
                   <div className="form-group">
                     <label htmlFor="service">Tipo de Servicio</label>
-                    <select id="service" required>
+                    <select id="service" value={formData.serviceType} onChange={handleChange} required>
                       <option value="">Seleccione una opción</option>
-                      <option value="ingenieria">
+                      <option value="Diseño e Ingeniería Estructural">
                         Diseño e Ingeniería Estructural
                       </option>
-                      <option value="supervision">Supervisión de Obra</option>
-                      <option value="gerencia">Gerencia de Proyectos</option>
-                      <option value="construccion">
+                      <option value="Supervisión de Obra">Supervisión de Obra</option>
+                      <option value="Gerencia de Proyectos">Gerencia de Proyectos</option>
+                      <option value="Construcción y Ejecución">
                         Construcción y Ejecución
                       </option>
-                      <option value="otros">Otros</option>
+                      <option value="Otros">Otros</option>
                     </select>
                   </div>
 
@@ -189,13 +241,15 @@ const Contacto = () => {
                     <textarea
                       id="message"
                       rows={5}
+                      value={formData.message}
+                      onChange={handleChange}
                       placeholder="Cuéntenos más sobre su proyecto (ubicación, área aprox, uso)..."
                       required
                     ></textarea>
                   </div>
 
-                  <button type="submit" className="submit-btn">
-                    Enviar Mensaje
+                  <button type="submit" className="submit-btn" disabled={isLoading} style={{ opacity: isLoading ? 0.7 : 1 }}>
+                    {isLoading ? "Enviando..." : "Enviar Mensaje"}
                   </button>
                 </form>
               </div>

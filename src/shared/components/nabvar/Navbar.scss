@@ -332,11 +332,13 @@ nav.scrolled {
       right: -100%;
       width: 80%;
       max-width: 400px;
-      height: 100vh;
+      height: 100vh; /* Fallback for older browsers */
+      height: 100dvh;
       background-color: var(--bg-color);
       z-index: 9;
       transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      overflow: hidden;
+      overflow-y: auto;
+      overflow-x: hidden;
       box-shadow: -5px 0 25px rgba(0, 0, 0, 0.15);
       /* Lively Background: Subtle gradient + Glass */
       background: linear-gradient(
@@ -353,13 +355,14 @@ nav.scrolled {
 
     .nav-ul__panel {
       padding-top: 60px;
+      padding-bottom: 40px; /* Added to ensure bottom items aren't cut off */
       opacity: 0;
       transform: translateY(-20px);
       transition:
         opacity 0.3s ease 0.1s,
         transform 0.3s ease 0.1s;
       position: relative;
-      height: 100%;
+      min-height: 100%;
       display: flex;
       flex-direction: column;
 

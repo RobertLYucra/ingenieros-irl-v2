@@ -1,122 +1,92 @@
 import Logo from "../../../assets/logo.png";
-import { IonIcon } from "@ionic/react";
 import {
-  logoFacebook,
-  logoInstagram,
-  logoLinkedin,
-  logoYoutube,
-  arrowForward,
-} from "ionicons/icons";
+  ArrowUpRight,
+  Mail,
+  MapPin,
+  Phone,
+} from "lucide-react";
+import { IconFacebook, IconInstagram, IconLinkedin } from "../icons/Icons";
+import { Link } from "react-router-dom";
+import { mapsUrl, siteConfig } from "../../data/site";
 import "./Footer.scss";
 
 const Footer = () => {
   const footerLinks = [
     { href: "/", label: "Inicio" },
-    { href: "quienes-somos", label: "Quiénes Somos" },
-    { href: "servicios", label: "Servicios" },
-    { href: "proyectos", label: "Proyectos" },
-    { href: "equipo", label: "Equipo" },
+    { href: "/quienes-somos", label: "Quiénes Somos" },
+    { href: "/proyectos", label: "Proyectos" },
+    { href: "/equipo", label: "Equipo" },
   ];
 
   const currentYear = new Date().getFullYear();
 
   return (
     <footer className="footer">
-      <div className="footer-container">
-        <div className="footer-main">
-          <div className="footer-logo-section">
-            <a href="/">
-              <img
-                src={Logo}
-                alt="Ingenieros EIRL Logo"
-                className="footer-logo"
-              />
-            </a>
-            <p className="footer-description">
-              <strong style={{ display: 'block', marginBottom: '10px', fontSize: '1.15rem', fontStyle: 'italic', color: 'var(--primary-color)' }}>
-                "Diseñamos tu sueño y construimos tu futuro"
-              </strong>
-              Construcción e ingeniería de excelencia para el desarrollo del
-              Perú. Brindamos soluciones integrales y sostenibles.
-            </p>
-            <div className="footer-social">
+      <div className="footer-container footer-v2">
+        <div className="footer-v2__topbar">
+          <Link to="/" className="footer-v2__brand" aria-label="Ir al inicio de YR Ingenieros">
+            <img src={Logo} alt="YR Ingenieros E.I.R.L." width="512" height="155" />
+          </Link>
+
+          <nav className="footer-v2__nav" aria-label="Navegación del pie de página">
+            {footerLinks.map((link) => <Link key={link.href} to={link.href}>{link.label}</Link>)}
+          </nav>
+
+          <div className="footer-v2__social">
               <a
-                href="https://facebook.com"
+                href={siteConfig.social.facebook}
                 target="_blank"
                 rel="noreferrer"
                 aria-label="Facebook"
               >
-                <IonIcon icon={logoFacebook} />
+                <IconFacebook aria-hidden="true" />
               </a>
               <a
-                href="https://instagram.com"
+                href={siteConfig.social.instagram}
                 target="_blank"
                 rel="noreferrer"
                 aria-label="Instagram"
               >
-                <IonIcon icon={logoInstagram} />
+                <IconInstagram aria-hidden="true" />
               </a>
               <a
-                href="https://linkedin.com"
+                href={siteConfig.social.linkedin}
                 target="_blank"
                 rel="noreferrer"
                 aria-label="LinkedIn"
               >
-                <IonIcon icon={logoLinkedin} />
+                <IconLinkedin aria-hidden="true" />
               </a>
-              <a
-                href="https://youtube.com"
-                target="_blank"
-                rel="noreferrer"
-                aria-label="YouTube"
-              >
-                <IonIcon icon={logoYoutube} />
-              </a>
-            </div>
+          </div>
+        </div>
+
+        <div className="footer-v2__statement">
+          <div className="footer-v2__copy">
+            <span>Ingeniería que acompaña tus decisiones</span>
+            <h2>
+              Diseñamos tu sueño
+              <em>y construimos tu futuro.</em>
+            </h2>
           </div>
 
-          <div className="footer-links-section">
-            <h3>Navegación</h3>
-            <ul className="links-list">
-              {footerLinks.map((link) => (
-                <li key={link.href} className="footer-link-item">
-                  <a href={link.href}>{link.label}</a>
-                  <IonIcon className="icon" icon={arrowForward} />
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="footer-contact-section">
-            <h3>Contacto</h3>
-            <div className="contact-info">
-              <p>Av. Francisco de Cuéllar #600</p>
-              <p>Lima, Perú</p>
-              <p className="phone">
-                <a
-                  href="tel:+51954185870"
-                  style={{ textDecoration: "none", color: "inherit" }}
-                >
-                  +51 954 185 870
-                </a>
-              </p>
-              <p className="email">
-                <a
-                  href="mailto:contacto@yringenieroseirl.com"
-                  style={{ textDecoration: "none", color: "inherit" }}
-                >
-                  contacto@yringenieroseirl.com
-                </a>
-              </p>
+          <div className="footer-v2__contact-card">
+            <p>¿Tienes un proyecto en mente?</p>
+            <Link to="/contacto" className="footer-v2__action">
+              Conversemos <ArrowUpRight aria-hidden="true" />
+            </Link>
+            <div className="footer-v2__direct">
+              <a href={`tel:${siteConfig.phoneInternational}`}><Phone aria-hidden="true" />{siteConfig.phoneDisplay}</a>
+              <a href={`mailto:${siteConfig.email}`}><Mail aria-hidden="true" />{siteConfig.email}</a>
             </div>
           </div>
         </div>
 
-        <div className="footer-bottom">
-          <p>
-            © {currentYear} YR Ingenieros EIRL. Todos los derechos reservados.
-          </p>
-          <p>Diseñado con excelencia.</p>
+        <div className="footer-v2__bottom">
+          <a href={mapsUrl} target="_blank" rel="noreferrer" className="footer-v2__address">
+            <MapPin aria-hidden="true" /><span>{siteConfig.address}</span>
+          </a>
+          <p>© {currentYear} {siteConfig.name}</p>
+          <Link to="/privacidad">Privacidad</Link>
         </div>
       </div>
     </footer>

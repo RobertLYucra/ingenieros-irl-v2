@@ -1,10 +1,36 @@
-@import "./index.css";
-
 #root {
   max-width: 100%;
   margin: 0;
   padding: 0;
   text-align: left;
+}
+
+.skip-link {
+  position: fixed;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 10000;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  background: white;
+  color: var(--secondary-color);
+  font-weight: 700;
+  text-decoration: none;
+  transform: translateY(-150%);
+  transition: transform 0.2s ease;
+
+  &:focus {
+    transform: translateY(0);
+  }
+}
+
+.route-loading {
+  min-height: 65vh;
+  display: grid;
+  place-items: center;
+  padding-top: 7rem;
+  color: var(--secondary-color);
+  font-weight: 600;
 }
 
 .page-container {
@@ -19,7 +45,6 @@
 .content-wrapper {
   max-width: 1200px;
   margin: 0 auto;
-  margin-top: 5rem;
   position: relative;
   z-index: 1;
 }
@@ -129,7 +154,7 @@
   height: 60px;
   bottom: 40px;
   right: 40px;
-  background-color: #25d366;
+  background-color: #128c7e;
   color: #fff;
   border-radius: 50px;
   text-align: center;
@@ -141,11 +166,16 @@
   justify-content: center;
   text-decoration: none;
   transition: all 0.3s ease;
-  animation: pulse-whatsapp 2s infinite;
+  animation: pulse-whatsapp 3s 3;
+
+  svg {
+    width: 30px;
+    height: 30px;
+  }
 }
 
 .whatsapp-float-btn:hover {
-  background-color: #128c7e;
+    background-color: #0d6f65;
   color: #fff;
   transform: scale(1.1);
   box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.3);

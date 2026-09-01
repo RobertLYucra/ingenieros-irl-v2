@@ -4,7 +4,8 @@ import { proyectosMock } from "../../shared/data/proyectos";
 import type { Proyecto } from "../../shared/data/proyectos";
 import BannerImg from "../../shared/images/ai-generated/hero_bg.webp";
 import PageHero from "../../shared/components/page-hero/PageHero";
-import { X, PlayCircle, MapPin, User, CheckCircle2, Clock } from 'lucide-react';
+import { X, PlayCircle, MapPin, User, CheckCircle2, Clock, ArrowUpRight } from 'lucide-react';
+import { Link } from "react-router-dom";
 
 const ProyectoCard = ({ proyecto, onClick }: { proyecto: Proyecto, onClick: () => void }) => {
   const [isHovered, setIsHovered] = useState(false);
@@ -31,20 +32,31 @@ const ProyectoCard = ({ proyecto, onClick }: { proyecto: Proyecto, onClick: () =
     }
   };
 
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      onClick();
+    }
+  };
+
   return (
     <div 
       className="proyecto-card" 
       onClick={onClick}
+      onKeyDown={handleKeyDown}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
+      role="button"
+      tabIndex={0}
+      aria-label={`Ver proyecto: ${proyecto.titulo}`}
     >
       <div className="proyecto-img-container">
         
         {/* Ambient Blurred Background to fix mixed aspect ratios (vertical/horizontal) */}
         {proyecto.tipoMedia === 'vimeo' ? (
-          <img src={`https://vumbnail.com/${proyecto.imagen}.jpg`} className="ambient-background" alt="" />
+          <img src={`https://vumbnail.com/${proyecto.imagen}.jpg`} className="ambient-background" alt="" loading="lazy" decoding="async" />
         ) : (
-          proyecto.tipoMedia !== 'video' && <img src={proyecto.imagen} className="ambient-background" alt="" />
+          proyecto.tipoMedia !== 'video' && <img src={proyecto.imagen} className="ambient-background" alt="" loading="lazy" decoding="async" />
         )}
 
         {proyecto.tipoMedia === 'video' ? (
@@ -64,6 +76,8 @@ const ProyectoCard = ({ proyecto, onClick }: { proyecto: Proyecto, onClick: () =
                 className="proyecto-img" 
                 allow="autoplay; fullscreen" 
                 style={{ pointerEvents: 'none', border: 'none' }}
+                title={`Vista previa de ${proyecto.titulo}`}
+                loading="lazy"
               />
             ) : (
               <img 
@@ -71,6 +85,8 @@ const ProyectoCard = ({ proyecto, onClick }: { proyecto: Proyecto, onClick: () =
                 alt={proyecto.titulo} 
                 className="proyecto-img" 
                 style={{ objectFit: 'contain' }}
+                loading="lazy"
+                decoding="async"
               />
             )}
             {!isHovered && (
@@ -80,7 +96,7 @@ const ProyectoCard = ({ proyecto, onClick }: { proyecto: Proyecto, onClick: () =
             )}
           </>
         ) : (
-          <img src={proyecto.imagen} alt={proyecto.titulo} className="proyecto-img" style={{ objectFit: 'contain' }} />
+          <img src={proyecto.imagen} alt={proyecto.titulo} className="proyecto-img" style={{ objectFit: 'contain' }} loading="lazy" decoding="async" />
         )}
         <span className="badge-categoria">{proyecto.categoria}</span>
         <div className="proyecto-overlay">
@@ -120,12 +136,10 @@ const Trayectoria = () => {
   const [visibleCount, setVisibleCount] = useState<number>(6);
   const [proyectoSeleccionado, setProyectoSeleccionado] = useState<Proyecto | null>(null);
   const [activeMedia, setActiveMedia] = useState<{ url: string, tipoMedia: 'imagen' | 'video' | 'vimeo' } | null>(null);
+  const modalCloseRef = useRef<HTMLButtonElement>(null);
+  const lastFocusedRef = useRef<HTMLElement | null>(null);
 
-  useEffect(() => {
-    document.title = "Proyectos - YR INGENIEROS E.I.R.L.";
-  }, []);
-
-  const categorias = ['Todos', 'Diseño Estructural', 'Supervisión', 'Construcción', 'Gestión'];
+  const categorias = ['Todos', ...Array.from(new Set(proyectosMock.map((proyecto) => proyecto.categoria)))];
 
   const handleFilter = (categoria: string) => {
     setFiltro(categoria);
@@ -144,20 +158,42 @@ const Trayectoria = () => {
   // Prevenir scroll cuando el modal está abierto
   useEffect(() => {
     if (proyectoSeleccionado) {
+      const previousOverflow = document.body.style.overflow;
       document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'auto';
+      const handleKeyDown = (event: KeyboardEvent) => {
+        if (event.key === "Escape") {
+          setProyectoSeleccionado(null);
+          setActiveMedia(null);
+        }
+      };
+      window.addEventListener("keydown", handleKeyDown);
+      window.requestAnimationFrame(() => modalCloseRef.current?.focus());
+      return () => {
+        document.body.style.overflow = previousOverflow;
+        window.removeEventListener("keydown", handleKeyDown);
+        lastFocusedRef.current?.focus();
+      };
     }
   }, [proyectoSeleccionado]);
 
   return (
-    <div className="page-container bg-light">
+    <div className="page-container projects-page">
       <PageHero 
-        title="Nuestra Trayectoria"
-        subtitle="En los últimos 18 años, hemos participado en una amplia variedad de proyectos de construcción y diseño estructural. Destacamos por haber participado en proyectos emblemáticos como la Línea 1 y 2 del Metro de Lima, el Puente Nanay y los centros comerciales más grandes del Perú."
+        eyebrow="Proyectos"
+        title="Trabajo construido. Experiencia comprobable."
+        subtitle="Una selección de proyectos de diseño estructural y construcción desarrollados para distintos usos, escalas y ciudades del Perú."
         bgImage={BannerImg}
       />
-      <div className="content-wrapper section-padding">
+      <section className="projects-catalog">
+      <div className="content-wrapper">
+
+        <div className="projects-heading">
+          <div>
+            <span className="projects-heading__kicker">Portafolio seleccionado</span>
+            <h2>Proyectos que explican cómo trabajamos.</h2>
+          </div>
+          <p>Explora los casos por especialidad y abre cada ficha para ver sus datos y recursos disponibles.</p>
+        </div>
 
         {/* Filtros */}
         <div className="filtros-container">
@@ -166,6 +202,7 @@ const Trayectoria = () => {
               key={cat}
               className={`filtro-btn ${filtro === cat ? 'active' : ''}`}
               onClick={() => handleFilter(cat)}
+              aria-pressed={filtro === cat}
             >
               {cat}
             </button>
@@ -179,6 +216,7 @@ const Trayectoria = () => {
               key={proyecto.id} 
               proyecto={proyecto} 
               onClick={() => {
+                lastFocusedRef.current = document.activeElement as HTMLElement;
                 setProyectoSeleccionado(proyecto);
                 setActiveMedia({ url: proyecto.imagen, tipoMedia: proyecto.tipoMedia || 'imagen' });
               }} 
@@ -195,12 +233,24 @@ const Trayectoria = () => {
           </div>
         )}
       </div>
+      </section>
+
+      <section className="projects-cta">
+        <div className="content-wrapper projects-cta__inner">
+          <span className="projects-cta__number">40+</span>
+          <div>
+            <p>Proyectos documentados</p>
+            <h2>El próximo puede comenzar con una conversación.</h2>
+          </div>
+          <Link to="/contacto" className="projects-cta__link">Hablar de mi proyecto <ArrowUpRight size={20} /></Link>
+        </div>
+      </section>
 
       {/* Modal de Proyecto */}
       {proyectoSeleccionado && (
-        <div className="proyecto-modal-overlay" onClick={() => { setProyectoSeleccionado(null); setActiveMedia(null); }}>
-          <div className="proyecto-modal-content" onClick={e => e.stopPropagation()}>
-            <button className="modal-close" onClick={() => { setProyectoSeleccionado(null); setActiveMedia(null); }}>
+        <div className="proyecto-modal-overlay" onMouseDown={(event) => { if (event.target === event.currentTarget) { setProyectoSeleccionado(null); setActiveMedia(null); } }}>
+          <div className="proyecto-modal-content" role="dialog" aria-modal="true" aria-labelledby="project-modal-title">
+            <button ref={modalCloseRef} type="button" className="modal-close" aria-label="Cerrar proyecto" onClick={() => { setProyectoSeleccionado(null); setActiveMedia(null); }}>
               <X size={28} strokeWidth={2.5} />
             </button>
             
@@ -214,6 +264,7 @@ const Trayectoria = () => {
                    allow="autoplay; fullscreen" 
                    style={{ border: 'none', width: '100%', height: '100%' }}
                    key={activeMedia.url}
+                   title={`Video de ${proyectoSeleccionado.titulo}`}
                  />
                ) : (
                  <img src={activeMedia?.url || ''} alt={proyectoSeleccionado.titulo} key={activeMedia?.url || 'img'} />
@@ -224,7 +275,7 @@ const Trayectoria = () => {
             
             <div className="modal-info-col">
                <div className="modal-info-content">
-                 <h2>{proyectoSeleccionado.titulo}</h2>
+                 <h2 id="project-modal-title">{proyectoSeleccionado.titulo}</h2>
                  
                  <div className={`modal-badge-estado ${proyectoSeleccionado.estado.replace(' ', '-').toLowerCase()}`}>
                     {proyectoSeleccionado.estado === 'Completado' ? (
@@ -260,10 +311,12 @@ const Trayectoria = () => {
                    <h4 className="galeria-title">Galería del Proyecto</h4>
                    <div className="modal-galeria">
                      {proyectoSeleccionado.galeria.map((item, idx) => (
-                       <div 
+                       <button
+                         type="button"
                          key={idx} 
                          className={`modal-thumbnail ${activeMedia?.url === item.url ? 'active' : ''}`}
                          onClick={() => setActiveMedia(item)}
+                         aria-label={`Mostrar recurso ${idx + 1} de ${proyectoSeleccionado.titulo}`}
                        >
                          {item.tipoMedia === 'video' ? (
                            <video src={item.url} />
@@ -277,7 +330,7 @@ const Trayectoria = () => {
                              <PlayCircle size={20} color="white" />
                            </div>
                          )}
-                       </div>
+                       </button>
                      ))}
                    </div>
                  </div>

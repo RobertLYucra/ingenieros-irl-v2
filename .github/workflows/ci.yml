@@ -1,0 +1,25 @@
+name: Validar sitio
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar código
+        uses: actions/checkout@v4
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Instalar dependencias
+        run: npm ci
+      - name: Revisar código
+        run: npm run lint
+      - name: Compilar sitio
+        run: npm run build
+      - name: Auditar dependencias publicadas
+        run: npm audit --omit=dev

@@ -1,12 +1,10 @@
 /* index.css */
 
-@import "tailwindcss";
-
 :root {
   /* Premium Minimalist Color Palette (Based on YR Ingenieros Brand) */
   --primary-color: #be1522; /* Brand Red */
   /* Mantiene un toque cálido/naranja vibrante que se funde con tu rojo corporativo */
-  --primary-gradient: linear-gradient(135deg, #ff4e50 0%, #be1522 100%);
+  --primary-gradient: linear-gradient(135deg, #d02432 0%, #a90f1b 100%);
   --secondary-color: #16284c; /* Deep Dark blue requested by user */
   --secondary-gradient: linear-gradient(135deg, #1f3764 0%, #16284c 100%);
   --text-primary-color: #16284c; /* Deep Dark blue for text on light bg */
@@ -29,18 +27,52 @@
 
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
   font-family: var(--primary-font) !important;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
 body {
   background-color: var(--bg-color);
   color: var(--text-primary-color);
+  margin: 0;
 }
 
 html {
   scroll-behavior: smooth;
   font-size: clamp(14px, 0.5vw + 12px, 16px); /* Responsive base font size for the entire app */
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid #f5a3aa;
+  outline-offset: 3px;
+}
+
+.sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
 }
 
 /* Estilo de la barra de scroll */
@@ -71,4 +103,23 @@ html {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 2rem;
+}
+
+.pb-0 {
+  padding-bottom: 0 !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
 }

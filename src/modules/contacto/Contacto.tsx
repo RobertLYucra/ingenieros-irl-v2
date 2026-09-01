@@ -1,23 +1,27 @@
 import "./Contacto.scss";
-import { IonIcon } from "@ionic/react";
 import {
-  locationOutline,
-  callOutline,
-  mailOutline,
-  logoWhatsapp,
-  timeOutline,
-  logoInstagram,
-  logoLinkedin,
-} from "ionicons/icons";
+  Clock,
+  Mail,
+  MapPin,
+  MessageCircle,
+  Phone,
+  ArrowUpRight,
+} from "lucide-react";
+import { IconInstagram, IconLinkedin } from "../../shared/components/icons/Icons";
 import { useEffect, useState } from "react";
+import { Link, useSearchParams } from "react-router-dom";
 
 import PageHero from "../../shared/components/page-hero/PageHero";
 import BannerImg from "../../shared/images/trabajos/IMG_1445.webp";
+import { mapsEmbedUrl, mapsUrl, siteConfig, whatsappUrl } from "../../shared/data/site";
+import { serviciosMock } from "../../shared/data/servicios";
+
+const CONTACT_API_URL =
+  import.meta.env.VITE_CONTACT_API_URL ||
+  "https://i94peifbw6.execute-api.us-east-2.amazonaws.com/test/api-email-sender/email-sender/quote";
 
 const Contacto = () => {
-  useEffect(() => {
-    document.title = "Contáctanos - YR INGENIEROS E.I.R.L.";
-  }, []);
+  const [searchParams] = useSearchParams();
 
   const [formData, setFormData] = useState({
     name: "",
@@ -28,6 +32,14 @@ const Contacto = () => {
   });
   const [isLoading, setIsLoading] = useState(false);
   const [feedback, setFeedback] = useState<{ type: 'success' | 'error', text: string } | null>(null);
+  const [website, setWebsite] = useState("");
+
+  useEffect(() => {
+    const requestedService = searchParams.get("servicio");
+    if (requestedService) {
+      setFormData((current) => ({ ...current, serviceType: requestedService }));
+    }
+  }, [searchParams]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { id, value } = e.target;
@@ -37,19 +49,31 @@ const Contacto = () => {
 
   const sendMessage = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (website) return;
     setIsLoading(true);
     setFeedback(null);
 
+    const controller = new AbortController();
+    const timeoutId = window.setTimeout(() => controller.abort(), 15000);
+
     try {
-      const response = await fetch("https://i94peifbw6.execute-api.us-east-2.amazonaws.com/test/api-email-sender/email-sender/quote", {
+      const response = await fetch(CONTACT_API_URL, {
         method: "POST",
+        signal: controller.signal,
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify(formData)
+        body: JSON.stringify({
+          ...formData,
+          name: formData.name.trim(),
+          email: formData.email.trim(),
+          phone: formData.phone.trim(),
+          message: formData.message.trim(),
+        })
       });
 
-      const data = await response.json();
+      const isJson = response.headers.get("content-type")?.includes("application/json");
+      const data = isJson ? await response.json() : {};
 
       if (response.ok && data.success) {
         setFeedback({ type: 'success', text: data.message || "Cotización enviada correctamente" });
@@ -59,8 +83,14 @@ const Contacto = () => {
       }
     } catch (error) {
       console.error("Error enviando correo:", error);
-      setFeedback({ type: 'error', text: "Hubo un error de conexión. Por favor, verifique su internet e intente nuevamente." });
+      setFeedback({
+        type: 'error',
+        text: error instanceof DOMException && error.name === "AbortError"
+          ? "La solicitud tardó demasiado. Intenta nuevamente o escríbenos por WhatsApp."
+          : "No pudimos conectar con el servicio. Intenta nuevamente o escríbenos por WhatsApp.",
+      });
     } finally {
+      window.clearTimeout(timeoutId);
       setIsLoading(false);
     }
   };
@@ -68,8 +98,9 @@ const Contacto = () => {
   return (
     <div className="page-container contact-page">
       <PageHero 
-        title="Contáctanos"
-        subtitle="Estamos listos para hacer realidad su próximo proyecto de construcción. Póngase en contacto con nuestro equipo."
+        eyebrow="Contacto"
+        title="Conversemos sobre tu proyecto"
+        subtitle="Cuéntanos qué necesitas, en qué etapa estás y dónde se desarrollará el proyecto. Nuestro equipo revisará la información para orientarte."
         bgImage={BannerImg}
       />
 
@@ -79,91 +110,84 @@ const Contacto = () => {
           <div className="contact-grid">
             {/* Information Column */}
             <div className="info-column">
-              <h2 className="section-title text-left">
-                Información de Contacto
-              </h2>
+              <span className="contact-kicker">Canales directos</span>
+              <h2>Hablemos con información concreta desde el inicio.</h2>
               <p className="intro-text">
-                Póngase en contacto con nuestro equipo comercial para solicitar
-                una cotización o agendar una visita técnica.
+                Escríbenos para solicitar una evaluación, cotización o coordinar una conversación técnica.
               </p>
 
               <div className="contact-details">
                 <div className="detail-item">
                   <div className="icon-box">
-                    <IonIcon icon={locationOutline} />
+                    <MapPin aria-hidden="true" />
                   </div>
                   <div className="info-text">
-                    <h4>Oficina Principal</h4>
-                    <p>
-                      Av. Francisco de Cuéllar #600
-                      <br />
-                      Lima, Perú
-                    </p>
+                    <h4>Oficina</h4>
+                    <p><a href={mapsUrl} target="_blank" rel="noreferrer">{siteConfig.address}</a></p>
                   </div>
                 </div>
 
                 <div className="detail-item">
                   <div className="icon-box">
-                    <IonIcon icon={callOutline} />
+                    <Phone aria-hidden="true" />
                   </div>
                   <div className="info-text">
-                    <h4>Teléfonos</h4>
-                    <p>++51 932 711 516</p>
+                    <h4>Teléfono</h4>
+                    <p><a href={`tel:${siteConfig.phoneInternational}`}>{siteConfig.phoneDisplay}</a></p>
                   </div>
                 </div>
 
                 <div className="detail-item">
                   <div className="icon-box">
-                    <IonIcon icon={mailOutline} />
+                    <Mail aria-hidden="true" />
                   </div>
                   <div className="info-text">
-                    <h4>Correo Electrónico</h4>
-                    <p>contacto@yringenieroseirl.com</p>
+                    <h4>Correo</h4>
+                    <p><a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a></p>
                   </div>
                 </div>
 
                 <div className="detail-item">
                   <div className="icon-box">
-                    <IonIcon icon={timeOutline} />
+                    <Clock aria-hidden="true" />
                   </div>
                   <div className="info-text">
-                    <h4>Horario de Atención</h4>
-                    <p>Lunes - Viernes: 9:00 AM - 6:00 PM</p>
-                    <p>Sábados: 9:00 AM - 1:00 PM</p>
+                    <h4>Atención</h4>
+                    <p>Visitas y reuniones previa coordinación.</p>
                   </div>
                 </div>
               </div>
 
               <div className="contact-actions">
                 <a
-                  href="https://wa.me/+51932711516"
+                  href={whatsappUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="whatsapp-btn-large"
                 >
-                  <IonIcon icon={logoWhatsapp} /> Escribir al WhatsApp
+                  <MessageCircle aria-hidden="true" /> Escribir por WhatsApp <ArrowUpRight size={17} />
                 </a>
 
                 <div className="social-links-contact">
                   <h4>Síguenos en redes</h4>
                   <div className="social-icons">
                     <a
-                      href="https://instagram.com/ryrodas"
+                      href={siteConfig.social.instagram}
                       target="_blank"
                       rel="noreferrer"
                       aria-label="Instagram"
                       className="instagram-link"
                     >
-                      <IonIcon icon={logoInstagram} />
+                      <IconInstagram aria-hidden="true" />
                     </a>
                     <a
-                      href="https://www.linkedin.com/in/romulo-yucra-rodas/"
+                      href={siteConfig.social.linkedin}
                       target="_blank"
                       rel="noreferrer"
                       aria-label="LinkedIn"
                       className="linkedin-link"
                     >
-                      <IonIcon icon={logoLinkedin} />
+                      <IconLinkedin aria-hidden="true" />
                     </a>
                   </div>
                 </div>
@@ -173,13 +197,20 @@ const Contacto = () => {
             {/* Form Column */}
             <div className="form-column">
               <div className="form-card">
-                <h3>Solicitar Cotización</h3>
-                <form onSubmit={sendMessage}>
+                <span className="form-kicker">Cuéntanos lo esencial</span>
+                <h3>Solicitar una evaluación</h3>
+                <p className="form-intro">Completa los datos y describe brevemente el proyecto. Mientras más contexto tengamos, mejor podremos orientarte.</p>
+                <form onSubmit={sendMessage} aria-busy={isLoading}>
                   {feedback && (
-                    <div className={`feedback-message ${feedback.type}`} style={{ padding: '10px', marginBottom: '15px', borderRadius: '5px', backgroundColor: feedback.type === 'success' ? '#d4edda' : '#f8d7da', color: feedback.type === 'success' ? '#155724' : '#721c24' }}>
+                    <div className={`feedback-message ${feedback.type}`} role={feedback.type === "error" ? "alert" : "status"} aria-live="polite">
                       {feedback.text}
                     </div>
                   )}
+
+                  <div className="form-honeypot" aria-hidden="true">
+                    <label htmlFor="website">Sitio web</label>
+                    <input id="website" name="website" type="text" value={website} onChange={(event) => setWebsite(event.target.value)} tabIndex={-1} autoComplete="off" />
+                  </div>
 
                   <div className="form-group">
                     <label htmlFor="name">Nombre Completo</label>
@@ -189,6 +220,8 @@ const Contacto = () => {
                       value={formData.name}
                       onChange={handleChange}
                       placeholder="Ingrese su nombre"
+                      autoComplete="name"
+                      maxLength={100}
                       required
                     />
                   </div>
@@ -202,6 +235,8 @@ const Contacto = () => {
                         value={formData.email}
                         onChange={handleChange}
                         placeholder="ejemplo@correo.com"
+                        autoComplete="email"
+                        maxLength={160}
                         required
                       />
                     </div>
@@ -213,6 +248,10 @@ const Contacto = () => {
                         value={formData.phone}
                         onChange={handleChange}
                         placeholder="+51 999 999 999"
+                        autoComplete="tel"
+                        inputMode="tel"
+                        pattern="[+0-9 ()-]{7,20}"
+                        maxLength={20}
                         required
                       />
                     </div>
@@ -222,14 +261,9 @@ const Contacto = () => {
                     <label htmlFor="service">Tipo de Servicio</label>
                     <select id="service" value={formData.serviceType} onChange={handleChange} required>
                       <option value="">Seleccione una opción</option>
-                      <option value="Diseño e Ingeniería Estructural">
-                        Diseño e Ingeniería Estructural
-                      </option>
-                      <option value="Supervisión de Obra">Supervisión de Obra</option>
-                      <option value="Gerencia de Proyectos">Gerencia de Proyectos</option>
-                      <option value="Construcción y Ejecución">
-                        Construcción y Ejecución
-                      </option>
+                      {serviciosMock.map((servicio) => (
+                        <option key={servicio.id} value={servicio.titulo}>{servicio.titulo}</option>
+                      ))}
                       <option value="Otros">Otros</option>
                     </select>
                   </div>
@@ -245,11 +279,17 @@ const Contacto = () => {
                       onChange={handleChange}
                       placeholder="Cuéntenos más sobre su proyecto (ubicación, área aprox, uso)..."
                       required
+                      maxLength={1500}
                     ></textarea>
                   </div>
 
+                  <label className="privacy-consent">
+                    <input type="checkbox" required />
+                    <span>He leído y acepto la <Link to="/privacidad">política de privacidad</Link>.</span>
+                  </label>
+
                   <button type="submit" className="submit-btn" disabled={isLoading} style={{ opacity: isLoading ? 0.7 : 1 }}>
-                    {isLoading ? "Enviando..." : "Enviar Mensaje"}
+                    {isLoading ? "Enviando..." : <>Enviar solicitud <ArrowUpRight size={19} aria-hidden="true" /></>}
                   </button>
                 </form>
               </div>
@@ -260,16 +300,22 @@ const Contacto = () => {
 
       {/* Map Section */}
       <section className="map-section">
-        <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3901.668749830507!2d-77.03159192415668!3d-12.066318942263445!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105c8ea8813bc37%3A0xb3280c68417c91a4!2sEstadio%20Nacional%20del%20Per%C3%BA!5e0!3m2!1ses!2spe!4v1700000000000!5m2!1ses!2spe"
-          width="100%"
-          height="450"
-          style={{ border: 0 }}
-          allowFullScreen
-          loading="lazy"
-          referrerPolicy="no-referrer-when-downgrade"
-          title="Ubicación YR Ingenieros"
-        ></iframe>
+        <div className="content-wrapper map-section__heading">
+          <div><span>Ubicación</span><h2>Encuéntranos en Lima.</h2></div>
+          <a href={mapsUrl} target="_blank" rel="noreferrer">Abrir en Google Maps <ArrowUpRight size={18} /></a>
+        </div>
+        <div className="map-frame">
+          <iframe
+            src={mapsEmbedUrl}
+            width="100%"
+            height="520"
+            style={{ border: 0 }}
+            allowFullScreen
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            title="Ubicación YR Ingenieros"
+          ></iframe>
+        </div>
       </section>
     </div>
   );

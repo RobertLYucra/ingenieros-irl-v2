@@ -10,15 +10,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@ionic/react": "^8.7.9",
-    "@tailwindcss/vite": "^4.1.17",
     "framer-motion": "^12.42.2",
     "lucide-react": "^1.23.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-router-dom": "^7.9.5",
-    "sass-embedded": "^1.93.3",
-    "tailwindcss": "^4.1.17"
+    "sass-embedded": "^1.93.3"
   },
   "devDependencies": {
     "@eslint/js": "^9.36.0",

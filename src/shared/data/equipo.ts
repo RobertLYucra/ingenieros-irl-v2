@@ -1,7 +1,7 @@
-import RomuloImg from '../images/equipo/Romulo.png';
-import SosimoImg from '../images/equipo/sosimo.png';
-import EliasImg from '../images/equipo/Elias.png';
-import WilliamImg from '../images/equipo/william.png';
+import RomuloImg from '../images/equipo/Romulo.webp';
+import SosimoImg from '../images/equipo/sosimo.webp';
+import EliasImg from '../images/equipo/Elias.webp';
+import WilliamImg from '../images/equipo/william.webp';
 
 export interface MiembroEquipo {
   id: string;
@@ -35,7 +35,6 @@ export const equipoMock: MiembroEquipo[] = [
     cargo: 'Gerente de Proyectos',
     descripcion: 'Desarrollo de soluciones estructurales seguras y eficientes.',
     imagen: EliasImg,
-    linkedin:'#'
   },
   {
     id: 'e4',
@@ -43,6 +42,5 @@ export const equipoMock: MiembroEquipo[] = [
     cargo: 'Gerente Comercial',
     descripcion: 'Planificación y ejecución de obras civiles bajo estrictos estándares.',
     imagen: WilliamImg,
-    linkedin:'#'
   }
 ];

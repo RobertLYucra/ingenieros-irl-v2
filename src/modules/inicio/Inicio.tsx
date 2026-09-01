@@ -1,11 +1,13 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence, type Variants } from "framer-motion";
 import "./Inicio.scss";
-import HeroImage from "../../shared/images/ai-generated/hero_bg.webp";
 import TechImg from "../../shared/images/ai-generated/bim1.webp";
-import VideoThumb from "../../shared/images/servicios/Obras de construcción en avance.png";
+import SupervisionImg from "../../shared/images/servicios/supervicion.webp";
+import { Link } from "react-router-dom";
+import { ArrowUpRight, Play } from "lucide-react";
 
 import { serviciosMock } from "../../shared/data/servicios";
+import { proyectosMock } from "../../shared/data/proyectos";
 import { IconCheck } from "../../shared/components/icons/Icons";
 
 // Animation Variants
@@ -24,34 +26,30 @@ const staggerContainer: Variants = {
   }
 };
 
-const zoomInfinite: Variants = {
-  hidden: { scale: 1 },
-  visible: { 
-    scale: 1.15, 
-    transition: { 
-      duration: 30, 
-      ease: "linear", 
-      repeat: Infinity,
-      repeatType: "reverse"
-    } 
-  }
-};
-
 const Inicio = () => {
-  const [currentServiceIndex, setCurrentServiceIndex] = useState(0);
   const [isVideoOpen, setIsVideoOpen] = useState(false);
-  const servicesList = ["Diseño Estructural", "Supervisión", "Gestión", "Construcción"];
+  const videoTriggerRef = useRef<HTMLButtonElement>(null);
+  const videoCloseRef = useRef<HTMLButtonElement>(null);
+  const featuredProjects = proyectosMock
+    .filter((project) => project.tipoMedia !== "vimeo")
+    .slice(0, 3);
 
   useEffect(() => {
-    document.title = "Inicio - YR INGENIEROS E.I.R.L.";
-    
-    // Rotating text interval
-    const interval = setInterval(() => {
-      setCurrentServiceIndex((prev) => (prev + 1) % servicesList.length);
-    }, 2500);
-    
-    return () => clearInterval(interval);
-  }, [servicesList.length]);
+    if (!isVideoOpen) return;
+    const previousOverflow = document.body.style.overflow;
+    const videoTrigger = videoTriggerRef.current;
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setIsVideoOpen(false);
+    };
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", handleKeyDown);
+    window.requestAnimationFrame(() => videoCloseRef.current?.focus());
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", handleKeyDown);
+      videoTrigger?.focus();
+    };
+  }, [isVideoOpen]);
 
   return (
     <div className="inicio-container">
@@ -63,10 +61,13 @@ const Inicio = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            onClick={() => setIsVideoOpen(false)}
+            onMouseDown={(event) => {
+              if (event.target === event.currentTarget) setIsVideoOpen(false);
+            }}
           >
-            <div className="lightbox-content" onClick={(e) => e.stopPropagation()}>
-              <button className="close-lightbox-btn" onClick={() => setIsVideoOpen(false)}>
+            <div className="lightbox-content" role="dialog" aria-modal="true" aria-labelledby="video-dialog-title">
+              <h2 id="video-dialog-title" className="sr-only">Video de presentación de YR Ingenieros</h2>
+              <button ref={videoCloseRef} type="button" className="close-lightbox-btn" onClick={() => setIsVideoOpen(false)} aria-label="Cerrar video">
                 ✕
               </button>
               <div className="lightbox-video-wrapper">
@@ -75,6 +76,7 @@ const Inicio = () => {
                   frameBorder="0" 
                   allow="autoplay; fullscreen; picture-in-picture" 
                   allowFullScreen
+                  title="Presentación de YR Ingenieros"
                 ></iframe>
               </div>
             </div>
@@ -82,118 +84,61 @@ const Inicio = () => {
         )}
       </AnimatePresence>
 
-      {/* Hero Section */}
-      <section className="hero-section" style={{ overflow: 'hidden' }}>
-        <motion.div 
-          className="hero-bg-animated"
-          variants={zoomInfinite}
-          initial="hidden"
-          animate="visible"
-          style={{ 
-            backgroundImage: `url(${HeroImage})`,
-            position: 'absolute',
-            inset: 0,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            zIndex: 0
-          }}
-        />
-        <div className="hero-overlay"></div>
-        <div className="architectural-grid"></div>
-
-        {/* Social Sidebar */}
-        <motion.div variants={fadeInUp} className="hero-socials" initial="hidden" animate="visible">
-          <a href="https://www.facebook.com/yucrarodas" target="_blank" rel="noopener noreferrer" title="Facebook">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
-          </a>
-          <a href="https://www.linkedin.com/in/romulo-yucra-rodas/" target="_blank" rel="noopener noreferrer" title="LinkedIn">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
-          </a>
-          <a href="mailto:[EMAIL_ADDRESS]" title="Mail">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-          </a>
-          <div className="social-line"></div>
-        </motion.div>
-
-        {/* Scroll Indicator */}
-        <motion.div variants={fadeInUp} className="scroll-indicator" initial="hidden" animate="visible">
-          <div className="mouse">
-            <div className="wheel"></div>
-          </div>
-          <span>Explorar</span>
-        </motion.div>
-
-        {/* Floating Trust Badge */}
-        <motion.div variants={fadeInUp} className="hero-trust-badge" initial="hidden" animate="visible">
-          <div className="trust-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ width: '20px', height: '20px' }}><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><polyline points="9 12 12 15 16 9"></polyline></svg>
-          </div>
-          <div className="trust-text">
-            <strong>Calidad ISO</strong>
-            <span>Estándares Globales</span>
-          </div>
-        </motion.div>
-
-        <motion.div 
-          className="hero-content"
-          variants={staggerContainer}
-          initial="hidden"
-          animate="visible"
-        >
-          <div className="hero-text-column">
-            <motion.div variants={fadeInUp} className="hero-badge">
-              <span style={{ color: 'var(--primary-color)' }}>•</span>
-              <AnimatePresence mode="wait">
-                <motion.span
-                  key={currentServiceIndex}
-                  initial={{ opacity: 0, y: 15 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -15 }}
-                  transition={{ duration: 0.3 }}
-                  className="hero-badge-text"
-                >
-                  {servicesList[currentServiceIndex].toUpperCase()}
-                </motion.span>
-              </AnimatePresence>
-            </motion.div>
-            <motion.h1 variants={fadeInUp} className="hero-title">
-              YR INGENIEROS E.I.R.L.
-            </motion.h1>
-            <motion.h2 variants={fadeInUp} className="hero-motto">
-              "Diseñamos tu sueño y construimos tu futuro"
-            </motion.h2>
-            <motion.p variants={fadeInUp} className="hero-subtitle">
-              Especialistas en diseño, supervisión y gestión de proyectos con más de 18 años de experiencia a nivel nacional.
+      <section className="hero-section hero-redesign">
+        <div className="hero-blueprint" aria-hidden="true"></div>
+        <motion.div className="hero-shell" variants={staggerContainer} initial="hidden" animate="visible">
+          <div className="hero-copy">
+            <motion.p variants={fadeInUp} className="hero-eyebrow">
+              Ingeniería estructural · Supervisión · Construcción
             </motion.p>
-            <motion.div variants={fadeInUp} className="hero-actions">
-              <a href="/servicios" className="btn-primary hero-btn">
-                Nuestros Servicios
-              </a>
-              <a href="/proyectos" className="btn-secondary hero-btn">
-                Ver Proyectos
-              </a>
+            <motion.h1 variants={fadeInUp}>
+              Estructuras seguras.
+              <span> Proyectos que avanzan.</span>
+            </motion.h1>
+            <motion.p variants={fadeInUp} className="hero-lead">
+              Convertimos necesidades complejas en soluciones técnicas claras,
+              coordinadas y listas para construir en todo el Perú.
+            </motion.p>
+            <motion.p variants={fadeInUp} className="hero-brand-slogan">
+              Diseñamos tu sueño y construimos tu futuro
+            </motion.p>
+            <motion.div variants={fadeInUp} className="hero-actions-new">
+              <Link to="/contacto" className="hero-primary-action">
+                Evaluar mi proyecto <ArrowUpRight aria-hidden="true" />
+              </Link>
+              <Link to="/proyectos" className="hero-secondary-action">
+                Ver proyectos
+              </Link>
             </motion.div>
+            <motion.ul variants={fadeInUp} className="hero-assurances" aria-label="Nuestro enfoque">
+              <li><IconCheck size={17} aria-hidden="true" /> Normativa técnica vigente</li>
+              <li><IconCheck size={17} aria-hidden="true" /> Atención a nivel nacional</li>
+            </motion.ul>
           </div>
 
-          <motion.div variants={fadeInUp} className="hero-video-column">
-            <div className="video-thumbnail-wrapper" onClick={() => setIsVideoOpen(true)}>
-              <div className="video-card-content">
-                <div className="video-card-left">
-                  <h3 className="video-card-title">MIRA EL VIDEO</h3>
-                  <div className="play-button-circle">
-                    <svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-                  </div>
-                </div>
-                <div className="video-card-right">
-                  <img 
-                    src={VideoThumb} 
-                    alt="Presentación 3D" 
-                    className="video-thumbnail-img" 
-                  />
-                </div>
-              </div>
-            </div>
-          </motion.div>
+          <motion.figure variants={fadeInUp} className="hero-field-photo">
+            <img
+              src={SupervisionImg}
+              alt="Supervisión técnica de infraestructura en campo"
+              width="900"
+              height="1200"
+              fetchPriority="high"
+            />
+            <figcaption>
+              <span>Trabajo en campo</span>
+              <strong>Ingeniería que acompaña la ejecución</strong>
+            </figcaption>
+            <button
+              ref={videoTriggerRef}
+              type="button"
+              className="hero-play-button"
+              onClick={() => setIsVideoOpen(true)}
+              aria-haspopup="dialog"
+            >
+              <Play aria-hidden="true" fill="currentColor" />
+              <span>Ver presentación</span>
+            </button>
+          </motion.figure>
         </motion.div>
       </section>
 
@@ -207,20 +152,20 @@ const Inicio = () => {
           viewport={{ once: true, margin: "-50px" }}
         >
           <motion.div variants={fadeInUp} className="stat-item">
-            <span className="stat-number">18+</span>
-            <span className="stat-label">Años de Experiencia</span>
+            <span className="stat-number">40+</span>
+            <span className="stat-label">Proyectos documentados</span>
           </motion.div>
           <motion.div variants={fadeInUp} className="stat-item">
-            <span className="stat-number">ISO</span>
-            <span className="stat-label">Calidad Certificada</span>
+            <span className="stat-number">4</span>
+            <span className="stat-label">Líneas de servicio</span>
           </motion.div>
           <motion.div variants={fadeInUp} className="stat-item">
-            <span className="stat-number">100%</span>
-            <span className="stat-label">Proyectos Exitosos</span>
+            <span className="stat-number">BIM</span>
+            <span className="stat-label">Diseño coordinado</span>
           </motion.div>
           <motion.div variants={fadeInUp} className="stat-item">
-            <span className="stat-number">+50</span>
-            <span className="stat-label">Obras Ejecutadas</span>
+            <span className="stat-number">Perú</span>
+            <span className="stat-label">Cobertura nacional</span>
           </motion.div>
         </motion.div>
       </section>
@@ -228,13 +173,17 @@ const Inicio = () => {
       {/* Services Highlight */}
       <section className="services-highlight section-padding">
         <div className="content-wrapper">
-          <motion.div 
+          <motion.div
+            className="home-services-heading"
             initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp}
           >
-            <h2 className="section-title">Soluciones Integrales</h2>
-            <p className="section-description">
-              Abarcamos todas las etapas de tu proyecto, desde la concepción
-              estructural hasta la ejecución y supervisión con los más altos estándares.
+            <div>
+              <p className="services-kicker">Servicios integrales</p>
+              <h2>Una respuesta técnica para cada etapa</h2>
+            </div>
+            <p>
+              Desde el primer cálculo hasta la ejecución, coordinamos las decisiones
+              que hacen que un proyecto sea seguro, viable y construible.
             </p>
           </motion.div>
 
@@ -245,33 +194,60 @@ const Inicio = () => {
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
           >
-            {serviciosMock.slice(0, 4).map((servicio) => (
-              <motion.div variants={fadeInUp} className="service-card-modern" key={servicio.id}>
+            {serviciosMock.slice(0, 4).map((servicio, index) => (
+              <motion.article variants={fadeInUp} className="service-card-modern" key={servicio.id}>
                 <div className="card-image-header">
-                  <img src={servicio.imagen} alt={servicio.titulo} className="service-img" />
+                  <img src={servicio.imagen} alt={servicio.titulo} className="service-img" loading="lazy" decoding="async" />
+                  <span className="service-card-number">0{index + 1}</span>
                 </div>
-                <div className="card-icon-floating">{servicio.icono}</div>
                 <div className="card-content-body">
+                  <div className="service-card-label">
+                    <span>{servicio.icono}</span>
+                    <small>Servicio especializado</small>
+                  </div>
                   <h3>{servicio.titulo}</h3>
                   <p>{servicio.descripcionCorta}</p>
                   <div className="card-footer">
-                    <a href="/servicios" className="service-link-btn">
-                      <span>Leer más</span>
+                    <Link to="/servicios" className="service-link-btn">
+                      <span>Ver alcance</span>
                       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                    </a>
+                    </Link>
                   </div>
                 </div>
-              </motion.div>
+              </motion.article>
             ))}
           </motion.div>
-          <motion.div 
-            initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp}
-            className="center-btn" style={{ marginTop: '3rem', textAlign: 'center' }}
-          >
-            <a href="/servicios" className="btn-primary">
-              Ver todos los servicios
-            </a>
-          </motion.div>
+        </div>
+      </section>
+
+      <section className="home-projects section-padding">
+        <div className="content-wrapper">
+          <div className="home-section-heading">
+            <div>
+              <span className="section-kicker">Portafolio seleccionado</span>
+              <h2>Proyectos que respaldan nuestro trabajo</h2>
+            </div>
+            <Link to="/proyectos" className="projects-all-link">
+              Explorar portafolio <ArrowUpRight aria-hidden="true" />
+            </Link>
+          </div>
+          <div className="home-projects-grid">
+            {featuredProjects.map((project) => (
+              <article className="home-project-card" key={project.id}>
+                <Link to="/proyectos" aria-label={`Ver ${project.titulo}`}>
+                  <div className="home-project-image">
+                    <img src={project.imagen} alt={project.titulo} loading="lazy" decoding="async" />
+                    <span>{project.categoria}</span>
+                  </div>
+                  <div className="home-project-info">
+                    <p>{project.ubicacion}</p>
+                    <h3>{project.titulo}</h3>
+                    <ArrowUpRight aria-hidden="true" />
+                  </div>
+                </Link>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -314,10 +290,10 @@ const Inicio = () => {
           >
             <div className="tech-image-container">
               <div className="tech-glow"></div>
-              <img src={TechImg} alt="Metodología BIM" className="tech-img" />
+              <img src={TechImg} alt="Metodología BIM" className="tech-img" loading="lazy" decoding="async" />
               <div className="tech-glass-badge">
                 <span className="badge-title">BIM</span>
-                <span className="badge-subtitle">CERTIFIED</span>
+                <span className="badge-subtitle">METODOLOGÍA</span>
               </div>
             </div>
           </motion.div>
@@ -331,14 +307,13 @@ const Inicio = () => {
           className="content-wrapper cta-content"
           initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp}
         >
-          <h2>¿Listo para iniciar tu próximo gran proyecto?</h2>
+          <h2>Tomemos buenas decisiones antes de llegar a obra</h2>
           <p>
-            Confía en la experiencia de YR Ingenieros para materializar tu
-            visión con seguridad, innovación y eficiencia.
+            Cuéntanos qué necesitas y revisaremos el mejor punto de partida para tu proyecto.
           </p>
-          <a href="/contacto" className="btn-primary cta-btn">
-            Solicitar Cotización Ahora
-          </a>
+          <Link to="/contacto" className="btn-primary cta-btn">
+            Revisar mi proyecto
+          </Link>
         </motion.div>
       </section>
     </div>

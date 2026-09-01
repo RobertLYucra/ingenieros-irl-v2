@@ -147,3 +147,23 @@ export const IconCheck: React.FC<IconProps> = ({ size = 24, className = '', ...p
     <polyline points="20 6 9 17 4 12"></polyline>
   </svg>
 );
+
+export const IconFacebook: React.FC<IconProps> = ({ size = 24, className = '', ...props }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" className={className} {...props}>
+    <path d="M14 8.5V6.8c0-.8.5-1 1-1h2.8V2h-3.7C10.5 2 9.5 4.3 9.5 6.4v2.1H7v4h2.5V22H14v-9.5h3.4l.6-4H14Z" />
+  </svg>
+);
+
+export const IconInstagram: React.FC<IconProps> = ({ size = 24, className = '', ...props }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={className} {...props}>
+    <rect x="3" y="3" width="18" height="18" rx="5" />
+    <circle cx="12" cy="12" r="4" />
+    <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+  </svg>
+);
+
+export const IconLinkedin: React.FC<IconProps> = ({ size = 24, className = '', ...props }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" className={className} {...props}>
+    <path d="M6.5 8.5H3V21h3.5V8.5ZM4.75 3A2.1 2.1 0 1 0 4.75 7.2 2.1 2.1 0 0 0 4.75 3ZM21 14.1c0-3.8-2-5.8-4.8-5.8-2.2 0-3.2 1.2-3.8 2.1V8.5H9V21h3.5v-6.2c0-1.6.3-3.2 2.3-3.2s2 1.8 2 3.3V21H21v-6.9Z" />
+  </svg>
+);

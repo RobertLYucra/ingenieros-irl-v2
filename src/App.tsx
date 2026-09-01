@@ -1,45 +1,54 @@
 import "./App.scss";
-import { IonIcon } from "@ionic/react";
-import { logoWhatsapp } from "ionicons/icons";
+import { lazy, Suspense } from "react";
+import { MessageCircle } from "lucide-react";
 import Navbar from "./shared/components/nabvar/Navbar";
 import { Route, Routes } from "react-router-dom";
 import Footer from "./shared/components/footer/Footer";
-import Inicio from "./modules/inicio/Inicio";
-import Nosotros from "./modules/nosotros/Nosotros";
-import Servicios from "./modules/servicios/Servicios";
-import Trayectoria from "./modules/trayectoria/Trayectoria";
-import Equipo from "./modules/equipo/Equipo";
-import Contacto from "./modules/contacto/Contacto";
-import NotFound from "./modules/not-found/NotFound";
+import SeoManager from "./shared/components/SeoManager";
+import ScrollToTop from "./shared/components/ScrollToTop";
+import { whatsappUrl } from "./shared/data/site";
+
+const Inicio = lazy(() => import("./modules/inicio/Inicio"));
+const Nosotros = lazy(() => import("./modules/nosotros/Nosotros"));
+const Servicios = lazy(() => import("./modules/servicios/Servicios"));
+const Trayectoria = lazy(() => import("./modules/trayectoria/Trayectoria"));
+const Equipo = lazy(() => import("./modules/equipo/Equipo"));
+const Contacto = lazy(() => import("./modules/contacto/Contacto"));
+const Privacidad = lazy(() => import("./modules/Privacidad"));
+const NotFound = lazy(() => import("./modules/not-found/NotFound"));
 
 function App() {
   return (
     <>
+      <a className="skip-link" href="#contenido-principal">
+        Saltar al contenido principal
+      </a>
+      <SeoManager />
+      <ScrollToTop />
       <Navbar />
 
-      <div className="routes-main">
-        <div className="routes">
+      <main id="contenido-principal" className="routes-main" tabIndex={-1}>
+        <Suspense fallback={<div className="route-loading" role="status">Cargando contenido…</div>}>
           <Routes>
-            <Route path="/" element={<Inicio />}></Route>
-            <Route path="/quienes-somos" element={<Nosotros />}></Route>
-            <Route path="/servicios" element={<Servicios />}></Route>
-            <Route path="/proyectos" element={<Trayectoria />}></Route>
-            <Route path="/equipo" element={<Equipo />}></Route>
-            <Route path="/contacto" element={<Contacto />}></Route>
-            {/* Rutas no encontradas */}
-            <Route path="*" element={<NotFound />}></Route>
-            {/* Temporary mapping just to scroll to footer or similar */}
+            <Route path="/" element={<Inicio />} />
+            <Route path="/quienes-somos" element={<Nosotros />} />
+            <Route path="/servicios" element={<Servicios />} />
+            <Route path="/proyectos" element={<Trayectoria />} />
+            <Route path="/equipo" element={<Equipo />} />
+            <Route path="/contacto" element={<Contacto />} />
+            <Route path="/privacidad" element={<Privacidad />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
-        </div>
-      </div>
+        </Suspense>
+      </main>
       <a
-        href="https://wa.me/51932711516"
+        href={whatsappUrl}
         className="whatsapp-float-btn"
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Contáctanos por WhatsApp"
       >
-        <IonIcon icon={logoWhatsapp} />
+        <MessageCircle aria-hidden="true" />
       </a>
       <Footer />
     </>

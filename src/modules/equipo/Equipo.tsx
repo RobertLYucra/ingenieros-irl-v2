@@ -1,97 +1,80 @@
-import { useEffect } from "react";
 import "./Equipo.scss";
 import { equipoMock } from "../../shared/data/equipo";
 import BannerImg from "../../shared/images/trabajos/IMG_E6912.webp";
-import { IonIcon } from "@ionic/react";
-import { logoLinkedin, timeOutline, constructOutline, shieldCheckmarkOutline, peopleOutline } from "ionicons/icons";
+import { ArrowUpRight } from "lucide-react";
+import { IconLinkedin } from "../../shared/components/icons/Icons";
+import { Link } from "react-router-dom";
 
 import PageHero from "../../shared/components/page-hero/PageHero";
 
 const Equipo = () => {
-  useEffect(() => {
-    document.title = "Nuestro Equipo - YR INGENIEROS E.I.R.L.";
-  }, []);
-
   return (
-    <div className="page-container bg-light">
+    <div className="page-container team-page">
       <PageHero 
-        title="Nuestros Profesionales"
-        subtitle="Contamos con un equipo multidisciplinario de ingenieros y especialistas altamente capacitados y comprometidos con la excelencia en cada proyecto."
+        eyebrow="Equipo"
+        title="Personas responsables de cada decisión"
+        subtitle="Ingenieros y gestores que conectan especialidad técnica, coordinación y ejecución para acompañar cada proyecto de principio a fin."
         bgImage={BannerImg}
       />
-      <div className="content-wrapper section-padding">
+      <section className="team-directory">
+      <div className="content-wrapper">
 
-        <div className="trayectoria-header leaders-header">
-          <h2>Líderes de Proyecto</h2>
-          <div className="title-underline"></div>
+        <div className="team-heading">
+          <div>
+            <span>Liderazgo técnico</span>
+            <h2>Un equipo visible. Una responsabilidad clara.</h2>
+          </div>
+          <p>Presentamos a quienes lideran la dirección técnica, operativa, de proyectos y comercial de YR Ingenieros.</p>
         </div>
 
         <div className="equipo-grid">
-          {equipoMock.map((miembro) => (
-            <div className="equipo-card premium-card" key={miembro.id}>
-              <div className="equipo-card-header"></div>
+          {equipoMock.map((miembro, index) => (
+            <article className="equipo-card" key={miembro.id}>
               <div className="miembro-img-wrapper">
-                <img src={miembro.imagen} alt={miembro.nombre} className="miembro-img" />
+                <img src={miembro.imagen} alt={miembro.nombre} className="miembro-img" width="720" height="720" loading="lazy" />
+                <span className="member-number">0{index + 1}</span>
               </div>
               <div className="miembro-info">
                 <h3>{miembro.nombre}</h3>
                 <h4 className="miembro-cargo">{miembro.cargo}</h4>
-                <div className="title-underline-small"></div>
                 <p>{miembro.descripcion}</p>
                 {miembro.linkedin && (
-                  <a href={miembro.linkedin} target="_blank" rel="noopener noreferrer" className="linkedin-link">
-                    <IonIcon icon={logoLinkedin} /> Conectar
+                  <a href={miembro.linkedin} target="_blank" rel="noopener noreferrer" className="linkedin-link" aria-label={`Ver LinkedIn de ${miembro.nombre}`}>
+                    <IconLinkedin aria-hidden="true" />
                   </a>
                 )}
               </div>
-            </div>
+            </article>
           ))}
         </div>
+      </div>
+      </section>
 
-        {/* Sección de Trayectoria/Stats */}
-        <div className="equipo-trayectoria" style={{ marginTop: '5rem' }}>
-          <div className="trayectoria-header">
-            <h2>Trayectoria y Respaldo</h2>
-            <div className="title-underline"></div>
+      <section className="team-principles">
+        <div className="content-wrapper team-principles__grid">
+          <div className="team-principles__copy">
+            <span>Nuestra forma de colaborar</span>
+            <h2>La especialidad importa. La coordinación también.</h2>
             <p>
-              Nuestro equipo suma décadas de experiencia combinada, garantizando soluciones técnicas de primer nivel y resultados excepcionales en cada desafío estructural e ingenieril.
+              Cada responsable aporta una mirada distinta, pero las decisiones se trabajan como un solo equipo para mantener alineados alcance, técnica y ejecución.
             </p>
           </div>
           
-          <div className="stats-grid">
-            <div className="stat-card">
-              <div className="stat-icon-wrapper">
-                <IonIcon icon={timeOutline} />
-              </div>
-              <h3 className="stat-number">+18</h3>
-              <p className="stat-label">Años de Experiencia</p>
-            </div>
-            <div className="stat-card">
-              <div className="stat-icon-wrapper">
-                <IonIcon icon={constructOutline} />
-              </div>
-              <h3 className="stat-number">+50</h3>
-              <p className="stat-label">Obras Ejecutadas</p>
-            </div>
-            <div className="stat-card">
-              <div className="stat-icon-wrapper">
-                <IonIcon icon={peopleOutline} />
-              </div>
-              <h3 className="stat-number">+20</h3>
-              <p className="stat-label">Profesionales de Primer Nivel</p>
-            </div>
-            <div className="stat-card">
-              <div className="stat-icon-wrapper">
-                <IonIcon icon={shieldCheckmarkOutline} />
-              </div>
-              <h3 className="stat-number">100%</h3>
-              <p className="stat-label">Compromiso y Calidad</p>
-            </div>
+          <div className="team-facts">
+            <div><strong>40+</strong><span>Proyectos documentados</span></div>
+            <div><strong>04</strong><span>Líderes presentados</span></div>
+            <div><strong>04</strong><span>Líneas de servicio</span></div>
+            <div><strong>PE</strong><span>Cobertura nacional</span></div>
           </div>
         </div>
+      </section>
 
-
-      </div>
+      <section className="team-cta">
+        <div className="content-wrapper team-cta__inner">
+          <div><span>Trabajemos juntos</span><h2>Háblanos del reto técnico de tu proyecto.</h2></div>
+          <Link to="/contacto" className="team-cta__link">Contactar al equipo <ArrowUpRight size={20} /></Link>
+        </div>
+      </section>
     </div>
   );
 };

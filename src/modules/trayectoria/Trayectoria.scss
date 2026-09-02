@@ -828,7 +828,28 @@
     .projects-page .filtros-container {
         flex-wrap: nowrap;
         overflow-x: auto;
+        overflow-y: hidden;
         justify-content: flex-start;
+        padding-bottom: 0.35rem;
+        scroll-behavior: auto;
+        scrollbar-width: thin;
+        scrollbar-color: rgba(22, 40, 76, 0.28) transparent;
+        overscroll-behavior-x: contain;
+        touch-action: pan-x pan-y;
+        -webkit-overflow-scrolling: touch;
+
+        &::-webkit-scrollbar {
+            height: 4px;
+        }
+
+        &::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background: rgba(22, 40, 76, 0.28);
+            border-radius: 999px;
+        }
     }
 
     .projects-page .filtro-btn { flex: 0 0 auto; }

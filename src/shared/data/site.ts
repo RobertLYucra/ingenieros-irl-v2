@@ -11,7 +11,8 @@ export const siteConfig = {
   address: "Av. Francisco de Cuéllar 600, Lima, Perú",
   social: {
     facebook: "https://www.facebook.com/yucrarodas",
-    instagram: "https://instagram.com/ryrodas",
+    instagram: "https://www.instagram.com/ryrodas/",
+    tiktok: "https://www.tiktok.com/@ryucra.r",
     linkedin: "https://www.linkedin.com/in/romulo-yucra-rodas/",
   },
 } as const;

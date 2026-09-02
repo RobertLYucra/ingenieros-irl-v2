@@ -97,7 +97,7 @@ const Inicio = () => {
         <motion.div className="hero-shell" variants={staggerContainer} initial="hidden" animate="visible">
           <div className="hero-copy">
             <motion.p variants={fadeInUp} className="hero-eyebrow">
-              Ingeniería estructural · Supervisión · Construcción
+              Ingeniería estructural · Supervisión · Gestión · Construcción
             </motion.p>
             <motion.h1 variants={fadeInUp}>
               Estructuras seguras.
@@ -168,8 +168,8 @@ const Inicio = () => {
           viewport={{ once: true, margin: "-50px" }}
         >
           <motion.div variants={fadeInUp} className="stat-item">
-            <span className="stat-number">40+</span>
-            <span className="stat-label">Proyectos documentados</span>
+            <span className="stat-number">250+</span>
+            <span className="stat-label">Proyectos desarrollados</span>
           </motion.div>
           <motion.div variants={fadeInUp} className="stat-item">
             <span className="stat-number">4</span>
@@ -180,8 +180,8 @@ const Inicio = () => {
             <span className="stat-label">Diseño coordinado</span>
           </motion.div>
           <motion.div variants={fadeInUp} className="stat-item">
-            <span className="stat-number">Perú</span>
-            <span className="stat-label">Cobertura nacional</span>
+            <span className="stat-number stat-number--coverage">Perú · América Latina · Europa</span>
+            <span className="stat-label">Cobertura nacional e internacional</span>
           </motion.div>
         </motion.div>
       </section>

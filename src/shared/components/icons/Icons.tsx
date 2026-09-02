@@ -162,6 +162,12 @@ export const IconInstagram: React.FC<IconProps> = ({ size = 24, className = '', 
   </svg>
 );
 
+export const IconTikTok: React.FC<IconProps> = ({ size = 24, className = '', ...props }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" className={className} {...props}>
+    <path d="M16.6 5.82a4.28 4.28 0 0 1-1.01-2.47h-3.2v12.84a2.7 2.7 0 1 1-2.34-2.68V10.3a5.91 5.91 0 1 0 5.54 5.89V9.68a7.5 7.5 0 0 0 4.38 1.4V7.9a4.32 4.32 0 0 1-3.37-2.08Z" />
+  </svg>
+);
+
 export const IconLinkedin: React.FC<IconProps> = ({ size = 24, className = '', ...props }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" className={className} {...props}>
     <path d="M6.5 8.5H3V21h3.5V8.5ZM4.75 3A2.1 2.1 0 1 0 4.75 7.2 2.1 2.1 0 0 0 4.75 3ZM21 14.1c0-3.8-2-5.8-4.8-5.8-2.2 0-3.2 1.2-3.8 2.1V8.5H9V21h3.5v-6.2c0-1.6.3-3.2 2.3-3.2s2 1.8 2 3.3V21H21v-6.9Z" />

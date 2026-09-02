@@ -1232,6 +1232,13 @@
         letter-spacing: -0.04em;
       }
 
+      .stat-number--coverage {
+        max-width: 230px;
+        font-size: clamp(1rem, 1.55vw, 1.35rem);
+        line-height: 1.22;
+        letter-spacing: -0.02em;
+      }
+
       .stat-label {
         color: var(--text-secondary-color);
         font-size: 0.75rem;
@@ -1482,6 +1489,11 @@
 
         &:nth-last-child(-n + 2) {
           border-bottom: 0;
+        }
+
+        .stat-number--coverage {
+          max-width: 150px;
+          font-size: 0.92rem;
         }
       }
     }

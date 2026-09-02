@@ -6,7 +6,7 @@ import {
   Menu,
   X,
 } from "lucide-react";
-import { IconFacebook, IconInstagram, IconLinkedin } from "../icons/Icons";
+import { IconFacebook, IconInstagram, IconLinkedin, IconTikTok } from "../icons/Icons";
 import { useState, useEffect, useRef } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { siteConfig } from "../../data/site";
@@ -199,6 +199,14 @@ const Navbar = () => {
                       aria-label="Instagram"
                     >
                       <IconInstagram aria-hidden="true" />
+                    </a>
+                    <a
+                      href={siteConfig.social.tiktok}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="TikTok"
+                    >
+                      <IconTikTok aria-hidden="true" />
                     </a>
                     <a
                       href={siteConfig.social.linkedin}

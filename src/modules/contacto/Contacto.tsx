@@ -7,7 +7,7 @@ import {
   Phone,
   ArrowUpRight,
 } from "lucide-react";
-import { IconInstagram, IconLinkedin } from "../../shared/components/icons/Icons";
+import { IconFacebook, IconInstagram, IconLinkedin, IconTikTok } from "../../shared/components/icons/Icons";
 import { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 
@@ -172,18 +172,36 @@ const Contacto = () => {
                   <h4>Síguenos en redes</h4>
                   <div className="social-icons">
                     <a
+                      href={siteConfig.social.facebook}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="Facebook"
+                      className="facebook-link"
+                    >
+                      <IconFacebook aria-hidden="true" />
+                    </a>
+                    <a
                       href={siteConfig.social.instagram}
                       target="_blank"
-                      rel="noreferrer"
+                      rel="noopener noreferrer"
                       aria-label="Instagram"
                       className="instagram-link"
                     >
                       <IconInstagram aria-hidden="true" />
                     </a>
                     <a
+                      href={siteConfig.social.tiktok}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="TikTok"
+                      className="tiktok-link"
+                    >
+                      <IconTikTok aria-hidden="true" />
+                    </a>
+                    <a
                       href={siteConfig.social.linkedin}
                       target="_blank"
-                      rel="noreferrer"
+                      rel="noopener noreferrer"
                       aria-label="LinkedIn"
                       className="linkedin-link"
                     >

@@ -5,7 +5,7 @@ import {
   MapPin,
   Phone,
 } from "lucide-react";
-import { IconFacebook, IconInstagram, IconLinkedin } from "../icons/Icons";
+import { IconFacebook, IconInstagram, IconLinkedin, IconTikTok } from "../icons/Icons";
 import { Link } from "react-router-dom";
 import { mapsUrl, siteConfig } from "../../data/site";
 import "./Footer.scss";
@@ -48,6 +48,14 @@ const Footer = () => {
                 aria-label="Instagram"
               >
                 <IconInstagram aria-hidden="true" />
+              </a>
+              <a
+                href={siteConfig.social.tiktok}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="TikTok"
+              >
+                <IconTikTok aria-hidden="true" />
               </a>
               <a
                 href={siteConfig.social.linkedin}

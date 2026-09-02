@@ -16,6 +16,7 @@ const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const menuPanelRef = useRef<HTMLDivElement>(null);
   const { pathname } = useLocation();
 
   const navLinks = [
@@ -31,31 +32,86 @@ const Navbar = () => {
   };
 
   const toggleNavbar = () => {
-    setIsOpen(!isOpen);
+    setIsOpen((current) => !current);
+  };
+
+  const closeNavbar = (restoreFocus = false) => {
+    setIsOpen(false);
+    if (restoreFocus) {
+      window.requestAnimationFrame(() => menuButtonRef.current?.focus());
+    }
+  };
+
+  const handleNavigation = () => {
+    setIsOpen(false);
+    window.requestAnimationFrame(() => {
+      document.getElementById("contenido-principal")?.focus();
+    });
   };
 
   // Bloquea scroll del body cuando está abierto
   useEffect(() => {
-    document.body.style.overflow = isOpen ? "hidden" : "";
-    if (isOpen) {
-      window.requestAnimationFrame(() => closeButtonRef.current?.focus());
-    }
+    if (!isOpen) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    window.requestAnimationFrame(() => closeButtonRef.current?.focus());
     return () => {
-      document.body.style.overflow = "";
+      document.body.style.overflow = previousOverflow;
     };
   }, [isOpen]);
 
-  // Cierra con tecla Escape
+  // Mantiene el foco dentro del panel y permite cerrarlo con Escape.
   useEffect(() => {
-    const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === "Escape" && isOpen) {
+    if (!isOpen) return;
+
+    const handleMenuKeyboard = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        event.preventDefault();
         setIsOpen(false);
-        menuButtonRef.current?.focus();
+        window.requestAnimationFrame(() => menuButtonRef.current?.focus());
+        return;
+      }
+
+      if (event.key !== "Tab" || !menuPanelRef.current) return;
+
+      const focusableElements = Array.from(
+        menuPanelRef.current.querySelectorAll<HTMLElement>(
+          'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
+        ),
+      ).filter((element) => element.offsetParent !== null);
+
+      const firstElement = focusableElements[0];
+      const lastElement = focusableElements[focusableElements.length - 1];
+      if (!firstElement || !lastElement) return;
+
+      if (!menuPanelRef.current.contains(document.activeElement)) {
+        event.preventDefault();
+        (event.shiftKey ? lastElement : firstElement).focus();
+        return;
+      }
+
+      if (event.shiftKey && document.activeElement === firstElement) {
+        event.preventDefault();
+        lastElement.focus();
+      } else if (!event.shiftKey && document.activeElement === lastElement) {
+        event.preventDefault();
+        firstElement.focus();
       }
     };
-    window.addEventListener("keydown", handleEscape);
-    return () => window.removeEventListener("keydown", handleEscape);
+
+    document.addEventListener("keydown", handleMenuKeyboard);
+    return () => document.removeEventListener("keydown", handleMenuKeyboard);
   }, [isOpen]);
+
+  // Cierra el panel si una tablet cambia a una vista de escritorio.
+  useEffect(() => {
+    const mobileQuery = window.matchMedia("(max-width: 1240px)");
+    const handleBreakpointChange = (event: MediaQueryListEvent) => {
+      if (!event.matches) setIsOpen(false);
+    };
+    mobileQuery.addEventListener("change", handleBreakpointChange);
+    return () => mobileQuery.removeEventListener("change", handleBreakpointChange);
+  }, []);
 
   useEffect(() => {
     setIsOpen(false);
@@ -74,10 +130,10 @@ const Navbar = () => {
       <button
         type="button"
         aria-label="Cerrar menú de navegación"
-        aria-hidden={!isOpen}
-        tabIndex={isOpen ? 0 : -1}
+        aria-hidden="true"
+        tabIndex={-1}
         className={`backdrop ${isOpen ? "show" : ""}`}
-        onClick={() => setIsOpen(false)}
+        onClick={() => closeNavbar(true)}
       />
 
       <nav
@@ -94,13 +150,13 @@ const Navbar = () => {
           </div>
 
           <div className="right">
-            <div id="mobile-navigation" className={`nav-ul ${isOpen ? "open" : ""}`} aria-hidden={!isOpen && window.innerWidth <= 1240}>
-              <div className={`nav-ul__panel ${isOpen ? "open" : ""}`}>
+            <div id="mobile-navigation" className={`nav-ul ${isOpen ? "open" : ""}`}>
+              <div ref={menuPanelRef} className={`nav-ul__panel ${isOpen ? "open" : ""}`}>
                 {/* Botón cerrar dentro del panel */}
                 <button
                   ref={closeButtonRef}
                   type="button"
-                  onClick={() => setIsOpen(false)}
+                  onClick={() => closeNavbar(true)}
                   className="close-button"
                   aria-label="Cerrar menú"
                 >
@@ -110,14 +166,14 @@ const Navbar = () => {
                 <ul className="links">
                   {navLinks.map((link) => (
                     <li key={link.href} className="etiquetas">
-                      <NavLink to={link.href} onClick={() => setIsOpen(false)}>
+                      <NavLink to={link.href} onClick={handleNavigation}>
                         {link.label}
                       </NavLink>
                       <ArrowRight className="icon" aria-hidden="true" />
                     </li>
                   ))}
                   <li className="etiquetas mobile-only-link">
-                    <NavLink to="/contacto" onClick={() => setIsOpen(false)}>
+                    <NavLink to="/contacto" onClick={handleNavigation}>
                       Contacto
                     </NavLink>
                     <ArrowRight className="icon" aria-hidden="true" />
@@ -163,7 +219,7 @@ const Navbar = () => {
                   <Link
                     to="/contacto"
                     className="mobile-contacto-btn"
-                    onClick={() => setIsOpen(false)}
+                    onClick={handleNavigation}
                   >
                     SOLICITAR COTIZACIÓN
                   </Link>
@@ -183,8 +239,10 @@ const Navbar = () => {
               aria-label={isOpen ? "Cerrar menú" : "Abrir menú"}
               aria-expanded={isOpen}
               aria-controls="mobile-navigation"
+              aria-hidden={isOpen}
+              tabIndex={isOpen ? -1 : 0}
             >
-              {isOpen ? <X className="menu-icon" aria-hidden="true" /> : <Menu className="menu-icon" aria-hidden="true" />}
+              <Menu className="menu-icon" aria-hidden="true" />
             </button>
           </div>
         </div>

@@ -8,6 +8,7 @@ import { ArrowUpRight, Play } from "lucide-react";
 
 import { serviciosMock } from "../../shared/data/servicios";
 import { proyectosMock } from "../../shared/data/proyectos";
+import { clientes } from "../../shared/data/clientes";
 import { IconCheck } from "../../shared/components/icons/Icons";
 
 // Animation Variants
@@ -28,6 +29,7 @@ const staggerContainer: Variants = {
 
 const Inicio = () => {
   const [isVideoOpen, setIsVideoOpen] = useState(false);
+  const [showAllClients, setShowAllClients] = useState(false);
   const videoTriggerRef = useRef<HTMLButtonElement>(null);
   const lastVideoTriggerRef = useRef<HTMLButtonElement | null>(null);
   const videoCloseRef = useRef<HTMLButtonElement>(null);
@@ -182,6 +184,50 @@ const Inicio = () => {
             <span className="stat-label">Cobertura nacional</span>
           </motion.div>
         </motion.div>
+      </section>
+
+      <section className="clients-section" aria-labelledby="clients-title">
+        <div className="content-wrapper">
+          <div className="clients-heading">
+            <span>Experiencia compartida</span>
+            <h2 id="clients-title">Clientes que han confiado en nuestro trabajo</h2>
+            <p>Organizaciones públicas y privadas con las que hemos participado en proyectos de ingeniería, infraestructura y construcción.</p>
+          </div>
+
+          <ul id="clients-list" className="clients-grid">
+            {(showAllClients ? clientes : clientes.slice(0, 12)).map((cliente) => (
+              <li
+                key={cliente.nombre}
+                className={cliente.logo ? "client-card" : "client-card client-card--text"}
+              >
+                {cliente.logo && (
+                  <div className="client-logo" aria-hidden="true">
+                    <img
+                      src={cliente.logo}
+                      alt=""
+                      loading="lazy"
+                      decoding="async"
+                      width="260"
+                      height="110"
+                    />
+                  </div>
+                )}
+                <span>{cliente.nombre}</span>
+              </li>
+            ))}
+          </ul>
+
+          <div className="clients-actions">
+            <button
+              type="button"
+              aria-expanded={showAllClients}
+              aria-controls="clients-list"
+              onClick={() => setShowAllClients((current) => !current)}
+            >
+              {showAllClients ? "Mostrar menos" : "Ver todos los clientes"}
+            </button>
+          </div>
+        </div>
       </section>
 
       {/* Services Highlight */}

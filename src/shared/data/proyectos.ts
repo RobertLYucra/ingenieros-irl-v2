@@ -19,6 +19,13 @@ import Img19 from '../images/proyectos/RUEO5418.webp';
 import Img20 from '../images/proyectos/RYAM2296.webp';
 import Img21 from '../images/proyectos/VPYG7349.webp';
 import Img22 from '../images/proyectos/VVMI3184.webp';
+import CineplanetLaCurvaImg from '../images/proyectos/cineplanet-la-curva.webp';
+import CinepolisSantaAnitaImg from '../images/proyectos/cinepolis-mall-santa-anita.webp';
+import ColegioGranBretanaImg from '../images/proyectos/colegio-gran-bretana-pronied.webp';
+import ColegioSangararImg from '../images/proyectos/colegio-sangarar-pronied.webp';
+import ParisBritanicoImg from '../images/proyectos/paris-mall-britanico.webp';
+import YanacochaImg from '../images/proyectos/minera-yanacocha-pad-lixiviacion.webp';
+import MetroLinea2Img from '../images/proyectos/supervision-linea-2-metro-lima.webp';
 
 
 
@@ -37,6 +44,76 @@ export interface Proyecto {
 } 
 
 export const proyectosMock: Proyecto[] = [
+  {
+    id: 'c1',
+    titulo: '8 Salas de Cineplanet La Curva',
+    categoria: 'Construcción',
+    cliente: 'Cineplanet',
+    ubicacion: 'Villa María del Triunfo, Lima, Perú',
+    estado: 'Completado',
+    descripcion: 'Ejecución de ocho salas de cine y sus áreas de atención en el complejo Cineplanet La Curva.',
+    imagen: CineplanetLaCurvaImg,
+  },
+  {
+    id: 'g1',
+    titulo: 'Pad de Lixiviación - Minera Yanacocha',
+    categoria: 'Gestión de Proyectos',
+    cliente: 'Minera Yanacocha',
+    ubicacion: 'Cajamarca, Perú',
+    estado: 'Completado',
+    descripcion: 'Gestión del proyecto para la ejecución del pad de lixiviación en la operación minera Yanacocha.',
+    imagen: YanacochaImg,
+  },
+  {
+    id: 's1',
+    titulo: 'Línea 2 del Metro de Lima',
+    categoria: 'Supervisión',
+    cliente: 'Proyecto Línea 2 del Metro de Lima',
+    ubicacion: 'Lima, Perú',
+    estado: 'Completado',
+    descripcion: 'Supervisión técnica en campo durante la ejecución de la Línea 2 del Metro de Lima y Callao.',
+    imagen: MetroLinea2Img,
+  },
+  {
+    id: 'c2',
+    titulo: 'Ampliación Mall Santa Anita - Cinépolis',
+    categoria: 'Construcción',
+    cliente: 'Cinépolis',
+    ubicacion: 'Ate, Lima, Perú',
+    estado: 'Completado',
+    descripcion: 'Ejecución de la ampliación del centro comercial para la implementación de las salas Cinépolis.',
+    imagen: CinepolisSantaAnitaImg,
+  },
+  {
+    id: 'c3',
+    titulo: 'Colegio Gran Bretaña - PRONIED',
+    categoria: 'Construcción',
+    cliente: 'PRONIED',
+    ubicacion: 'San Martín de Porres, Lima, Perú',
+    estado: 'Completado',
+    descripcion: 'Ejecución de infraestructura educativa y espacios complementarios del colegio Gran Bretaña.',
+    imagen: ColegioGranBretanaImg,
+  },
+  {
+    id: 'c4',
+    titulo: 'Colegio Sangarar - PRONIED',
+    categoria: 'Construcción',
+    cliente: 'PRONIED',
+    ubicacion: 'Comas, Lima, Perú',
+    estado: 'Completado',
+    descripcion: 'Ejecución de infraestructura educativa y áreas exteriores para el colegio Sangarar.',
+    imagen: ColegioSangararImg,
+  },
+  {
+    id: 'c5',
+    titulo: 'París Mall Aventura Bellavista y Británico S.M.P.',
+    categoria: 'Construcción',
+    cliente: 'París / Británico',
+    ubicacion: 'Callao y San Martín de Porres, Lima, Perú',
+    estado: 'Completado',
+    descripcion: 'Participación en la ejecución de las instalaciones de París en Mall Aventura Bellavista y del Británico en San Martín de Porres.',
+    imagen: ParisBritanicoImg,
+  },
   {
     id: 'np1',
     titulo: 'Análisis y Diseño Luxury - Hotel FK',

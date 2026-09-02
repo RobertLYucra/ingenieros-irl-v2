@@ -29,15 +29,21 @@ const staggerContainer: Variants = {
 const Inicio = () => {
   const [isVideoOpen, setIsVideoOpen] = useState(false);
   const videoTriggerRef = useRef<HTMLButtonElement>(null);
+  const lastVideoTriggerRef = useRef<HTMLButtonElement | null>(null);
   const videoCloseRef = useRef<HTMLButtonElement>(null);
   const featuredProjects = proyectosMock
-    .filter((project) => project.tipoMedia !== "vimeo")
+    .filter((project) => project.categoria === "Diseño Estructural" && project.tipoMedia !== "vimeo")
     .slice(0, 3);
+
+  const openPresentationVideo = (trigger: HTMLButtonElement) => {
+    lastVideoTriggerRef.current = trigger;
+    setIsVideoOpen(true);
+  };
 
   useEffect(() => {
     if (!isVideoOpen) return;
     const previousOverflow = document.body.style.overflow;
-    const videoTrigger = videoTriggerRef.current;
+    const videoTrigger = lastVideoTriggerRef.current ?? videoTriggerRef.current;
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") setIsVideoOpen(false);
     };
@@ -72,7 +78,7 @@ const Inicio = () => {
               </button>
               <div className="lightbox-video-wrapper">
                 <iframe 
-                  src="https://player.vimeo.com/video/1210936572?autoplay=1&color=be1522&title=0&byline=0&portrait=0" 
+                  src="https://player.vimeo.com/video/1223243945?autoplay=1&color=be1522&title=0&byline=0&portrait=0"
                   frameBorder="0" 
                   allow="autoplay; fullscreen; picture-in-picture" 
                   allowFullScreen
@@ -117,13 +123,21 @@ const Inicio = () => {
           </div>
 
           <motion.figure variants={fadeInUp} className="hero-field-photo">
-            <img
-              src={SupervisionImg}
-              alt="Supervisión técnica de infraestructura en campo"
-              width="900"
-              height="1200"
-              fetchPriority="high"
-            />
+            <button
+              type="button"
+              className="hero-image-video-trigger"
+              onClick={(event) => openPresentationVideo(event.currentTarget)}
+              aria-label="Reproducir video de presentación"
+              aria-haspopup="dialog"
+            >
+              <img
+                src={SupervisionImg}
+                alt="Supervisión técnica de infraestructura en campo"
+                width="900"
+                height="1200"
+                fetchPriority="high"
+              />
+            </button>
             <figcaption>
               <span>Trabajo en campo</span>
               <strong>Ingeniería que acompaña la ejecución</strong>
@@ -132,7 +146,7 @@ const Inicio = () => {
               ref={videoTriggerRef}
               type="button"
               className="hero-play-button"
-              onClick={() => setIsVideoOpen(true)}
+              onClick={(event) => openPresentationVideo(event.currentTarget)}
               aria-haspopup="dialog"
             >
               <Play aria-hidden="true" fill="currentColor" />
@@ -321,4 +335,3 @@ const Inicio = () => {
 };
 
 export default Inicio;
-

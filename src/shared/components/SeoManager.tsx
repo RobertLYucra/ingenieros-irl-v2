@@ -21,7 +21,7 @@ const pageMetadata: Record<string, { title: string; description: string }> = {
   "/proyectos": {
     title: "Proyectos de ingeniería y construcción",
     description:
-      "Revisa una selección de proyectos de diseño estructural y construcción desarrollados por YR Ingenieros en el Perú.",
+      "Revisa proyectos de diseño estructural, construcción, gestión y supervisión desarrollados por YR Ingenieros en el Perú.",
   },
   "/equipo": {
     title: "Nuestro equipo",
@@ -118,4 +118,3 @@ const SeoManager = () => {
 };
 
 export default SeoManager;
-

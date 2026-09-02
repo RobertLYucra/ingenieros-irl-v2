@@ -1110,14 +1110,30 @@
         background: #d02432;
       }
 
-      > img {
+      .hero-image-video-trigger {
         width: 100%;
         height: 100%;
         display: block;
+        padding: 0;
+        overflow: hidden;
+        border: 0;
         border-radius: inherit;
-        object-fit: cover;
-        object-position: 52% center;
-        filter: saturate(0.86) contrast(1.05);
+        background: transparent;
+        cursor: pointer;
+
+        &:focus-visible {
+          outline: 3px solid white;
+          outline-offset: 4px;
+        }
+
+        img {
+          width: 100%;
+          height: 100%;
+          display: block;
+          object-fit: cover;
+          object-position: 52% center;
+          filter: saturate(0.86) contrast(1.05);
+        }
       }
 
       figcaption {
@@ -1133,6 +1149,7 @@
         background: rgba(8, 20, 43, 0.88);
         color: white;
         backdrop-filter: blur(12px);
+        pointer-events: none;
 
         span {
           color: rgba(255, 255, 255, 0.63);
@@ -1401,7 +1418,7 @@
         max-width: none;
         height: 480px;
 
-        > img {
+        .hero-image-video-trigger img {
           object-position: center 42%;
         }
       }

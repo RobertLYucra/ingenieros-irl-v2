@@ -7,6 +7,20 @@ import PageHero from "../../shared/components/page-hero/PageHero";
 import { X, PlayCircle, MapPin, User, CheckCircle2, Clock, ArrowUpRight } from 'lucide-react';
 import { Link } from "react-router-dom";
 
+const ORDEN_CATEGORIAS = [
+  'Diseño Estructural',
+  'Construcción',
+  'Gestión de Proyectos',
+  'Supervisión',
+];
+
+const proyectosOrdenados = [...proyectosMock].sort((a, b) => {
+  const posicionA = ORDEN_CATEGORIAS.indexOf(a.categoria);
+  const posicionB = ORDEN_CATEGORIAS.indexOf(b.categoria);
+  return (posicionA === -1 ? ORDEN_CATEGORIAS.length : posicionA)
+    - (posicionB === -1 ? ORDEN_CATEGORIAS.length : posicionB);
+});
+
 const ProyectoCard = ({ proyecto, onClick }: { proyecto: Proyecto, onClick: () => void }) => {
   const [isHovered, setIsHovered] = useState(false);
   const hoverTimeoutRef = useRef<number | null>(null);
@@ -132,22 +146,23 @@ const ProyectoCard = ({ proyecto, onClick }: { proyecto: Proyecto, onClick: () =
 
 const Trayectoria = () => {
   const [filtro, setFiltro] = useState<string>('Todos');
-  const [proyectos, setProyectos] = useState<Proyecto[]>(proyectosMock);
+  const [proyectos, setProyectos] = useState<Proyecto[]>(proyectosOrdenados);
   const [visibleCount, setVisibleCount] = useState<number>(6);
   const [proyectoSeleccionado, setProyectoSeleccionado] = useState<Proyecto | null>(null);
   const [activeMedia, setActiveMedia] = useState<{ url: string, tipoMedia: 'imagen' | 'video' | 'vimeo' } | null>(null);
   const modalCloseRef = useRef<HTMLButtonElement>(null);
   const lastFocusedRef = useRef<HTMLElement | null>(null);
 
-  const categorias = ['Todos', ...Array.from(new Set(proyectosMock.map((proyecto) => proyecto.categoria)))];
+  const categoriasDisponibles = new Set(proyectosMock.map((proyecto) => proyecto.categoria));
+  const categorias = ['Todos', ...ORDEN_CATEGORIAS.filter((categoria) => categoriasDisponibles.has(categoria))];
 
   const handleFilter = (categoria: string) => {
     setFiltro(categoria);
     setVisibleCount(4); // Reset pagination on filter change
     if (categoria === 'Todos') {
-      setProyectos(proyectosMock);
+      setProyectos(proyectosOrdenados);
     } else {
-      setProyectos(proyectosMock.filter(p => p.categoria === categoria));
+      setProyectos(proyectosOrdenados.filter(p => p.categoria === categoria));
     }
   };
 
@@ -181,7 +196,7 @@ const Trayectoria = () => {
       <PageHero 
         eyebrow="Proyectos"
         title="Trabajo construido. Experiencia comprobable."
-        subtitle="Una selección de proyectos de diseño estructural y construcción desarrollados para distintos usos, escalas y ciudades del Perú."
+        subtitle="Una selección de proyectos de diseño estructural, construcción, gestión y supervisión desarrollados para distintos usos, escalas y ciudades del Perú."
         bgImage={BannerImg}
       />
       <section className="projects-catalog">

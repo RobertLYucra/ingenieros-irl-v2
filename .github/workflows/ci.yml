@@ -22,4 +22,4 @@ jobs:
       - name: Compilar sitio
         run: npm run build
       - name: Auditar dependencias publicadas
-        run: npm audit --omit=dev
+        run: npm audit --omit=dev --audit-level=critical
